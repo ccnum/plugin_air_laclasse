@@ -1,0 +1,9 @@
+<BOUCLE_descriptif_article(ARTICLES){id_article}>
+
+	#SET{ma_regexp, [[:alpha:]]}
+	<div class="texte-courant-lecture">
+		<span class="texte-masque">[(#DESCRIPTIF|replace{#GET{ma_regexp}, x})]</span>
+		<span>[(#DESCRIPTIF|cleanCut)]</span>
+	</div>
+
+</BOUCLE_descriptif_article>

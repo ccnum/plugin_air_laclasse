@@ -1,0 +1,32 @@
+<BOUCLE_article_verrouille(ARTICLES){id_article}>
+<div class="ecriture-chapitre">
+
+	<div class="ecriture-chapitre-picto">
+    <img src="#CHEMIN{img/ecriture/picto-verrou.png}" width="50" height="50" />
+    </div>
+    
+    <div class="ecriture-chapitre-texte">
+    	<div class="ecriture-chapitre-surtitre bleu-opacity"></div>
+        <div class="ecriture-chapitre-titre gris">#TITRE</div> 
+    </div>
+    
+    <div class="ecriture-chapitre-auteur">
+       <BOUCLE_auteur_article(AUTEURS){id_auteur IN 1,2,60,71,80,28,70,73}{par hasard}{0,1}{tout}>
+		    <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+        </BOUCLE_auteur_article>
+       <div class="ecriture-chapitre-nom">[(#SURTITRE|sinon{Auteur Anonyme})]</div>
+
+   </div>
+
+</div>
+
+<!-- TEXTE  -->
+<div class="texte_courant">
+  <!-- LONGUEUR DE L' ARTICLE-->
+    #SET{ma_regexp, [[:alpha:]]}
+   <span class="texte-masque">[(#TEXTE|couper{[(#TEXTE|textebrut|strlen|moins{200})], ''}|replace{#GET{ma_regexp}, x})]</span>
+   <span class="gris">[(#TEXTE|cleanCut)]</span>   
+</div>
+
+</BOUCLE_article_verrouille>
+<hr/>

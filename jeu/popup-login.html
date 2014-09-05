@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+
+<INCLURE{fond=inclure/head} />
+<script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
+
+
+</head>
+
+<body>
+<div id="login">
+
+<!-- FORMULAIRE DE CONNEXION -->
+#LOGIN_PUBLIC
+
+<!-- UTILISATEUR DEJA CONNECTE-->
+[(#SESSION{id_auteur}|oui)
+    
+    <div id="formulaire-logged-title">
+    Vous êtes connecté
+    </div>
+    
+    <div id="formulaire-logged-texte">
+    Bonjour #SESSION{nom}
+    </div>
+    
+    <div id="formulaire-logged-bt">
+	<a href="#">Continuer</a>
+    </div>
+    
+]
+
+
+</div>
+</body>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+// NICESCROLL
+	$("#login").niceScroll({cursorcolor:"#FFF", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
+// COLORBOX CLOSE
+	$("#formulaire-logged-bt a").click(function() {
+	window.parent.location.reload(true);
+});
+
+
+});
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,83 @@
+#CACHE{0}
+
+[(#REM)RUBRIQUE DE JEU : argument / cookie /derniere rubrique ]
+
+    [(#RUB_JEU|oui) [(#VAL{rub_jeu}|cookie{#RUB_JEU})] ]
+
+    #SET{rub_jeu,#EVAL{$_COOKIE['rub_jeu']}}
+
+    <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{tout}>
+      <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{tout}>
+        #SET{rub_jeu,#ID_RUBRIQUE}
+        [(#VAL{rub_jeu}|cookie{#ID_RUBRIQUE})]
+      </BOUCLE_j1>
+    </BOUCLE_jeu>
+
+[(#REM)RUBRIQUE D'HISTOIRE : argument / cookie / création ]
+    [(#RUB_HIST|oui) [(#VAL{rub_hist}|cookie{#RUB_HIST})] ]
+    #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
+      <BOUCLE_test(RUBRIQUES){id_rubrique=#GET{rub_hist}}{tout}>
+      </BOUCLE_test>
+      </B_test>
+      #SET{rub_hist,''}
+      <//B_test>
+    [(#GET{rub_hist}|=={''}|oui)
+        [(#SET{rub_hist,[(#GET{rub_jeu}|creer_histoire)]})]
+    ]
+
+
+[(#REM)Validation des articles]
+
+    #SET{chapitres, 0}
+    <BOUCLE_max_cadavres(ARTICLES){id_rubrique=#GET{rub_hist}}{par date}{statut IN prepa,publie}>
+      #SET{chapitres, #TOTAL_BOUCLE}
+    </BOUCLE_max_cadavres>
+
+    <BOUCLE_publie(ARTICLES){id_article}{statut==prepa}>
+      [(#GET{chapitres}|<{5}|oui)
+        #SET{info,Félicitations : vous avez rempli votre chapitre.}
+       [(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]
+      ]
+      [(#GET{chapitres}|>={5}|oui)
+        #SET{info,Félicitations : vous avez terminé l'histoire.}
+        [(#SET{rub_hist,[(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]})]
+      ]
+    </BOUCLE_publie>
+    #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
+
+[(#REM)INCLUSION]
+
+<INCLURE{fond=layout_init}{ecriture=oui}{rub_hist=#GET{rub_hist}}{nb_chap=#GET{chapitres}}>
+
+  <!-- BOOK -->
+  <div id="global-ecriture">
+
+      <div id="global-spacer"></div>
+          
+      <div class="global-content">
+            
+        <div class="content">
+             <div class="content-left-small">
+              <div id="titre_site">
+                <a href="http://air.laclasse.com" title="Accueil" ><strong class="rouge3">air</strong></a><span class="rouge4">.laclasse.com</span>
+              </div>
+              <BOUCLE_article(ARTICLES){id_rubrique=#GET{rub_jeu}}{titre LIKE presentation}{tout}{0,1}>
+                [<div id="image-presentation">(#LOGO_ARTICLE||image_reduire{100})</div>]
+                <div id="texte-presentation" class="#EDIT{texte}">
+                  [(#TEXTE|nl2br|image_reduire{210,1000})]
+                </div>
+              </BOUCLE_article>
+        </div>
+          
+          <div class="content-right-large">
+                #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
+
+              <INCLURE{fond=rubrique}{id_rubrique=#GET{rub_hist}}{id_art=#ID_ARTICLE}{info=#GET{info}}>
+
+          </div>
+        </div>
+      </div>
+  </div>
+
+
+<INCLURE{fond=layout_end}{ecriture=oui}{rub_hist=#GET{rub_hist}}>

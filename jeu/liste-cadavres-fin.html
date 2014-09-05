@@ -1,0 +1,47 @@
+<!--
+SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
+ -->
+
+    <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
+    #CACHE{0}
+      
+    <!-- ID et nom de l'auteur connecté -->
+    #SET{var_id_auteur,#SESSION{id_auteur}}
+    #SET{var_nom_auteur,#SESSION{nom}}
+    
+<div id="liste-fin">
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{tout}>
+    	#SET{voir,nok}
+        <BOUCLE_test(ARTICLES){id_rubrique}>
+        </BOUCLE_test>
+            [(#COMPTEUR_BOUCLE|>={5}|oui)#SET{voir,ok}]
+        </B_test>
+        <//B_test>
+        	<div class="liste-fin-rubrique [(#GET{voir}|=={ok}|non)cache]">
+
+                <!--<div class="liste-title">#ID_RUBRIQUE</div>-->
+ 
+                <div class="liste-fin-book">
+                    <!-- COUVERTURE LIVRE -->
+                    <a href="#URL_SITE_SPIP/?scenario=jeu&page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
+                    [(#LOGO_RUBRIQUE|image_reduire{175,0})]
+                    </a>
+                </div>
+
+                <!-- BOUTON TELECHARGEMENT -->
+                <div class="liste-book-bt">
+                <div class="ecriture-chapitre-titre #EDIT{titre}">#TITRE</div>
+                 <BOUCLE_doc(DOCUMENTS){id_rubrique = #ID_RUBRIQUE}{mode=document}{doublons}>
+                 <a href="#URL_DOCUMENT">#TYPE_DOCUMENT</a>
+                 </BOUCLE_doc>
+                </div>
+
+                [(#SESSION{login}|oui)
+                <span class="#EDIT{logo}">
+                    logo
+                </span>
+                ]
+
+            </div>
+</BOUCLE_rubriques_toutes>
+</div>

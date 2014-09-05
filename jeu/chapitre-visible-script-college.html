@@ -1,0 +1,24 @@
+<!--
+
+RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML > CHAPITRE-VISIBLE-SCRIPT-COLLEGE.HTML
+(affichage du script college)
+ 
+ -->
+
+
+<BOUCLE_chapitre_visible_script_college(ARTICLES){id_article}>
+
+<!-- AUTEUR DE L'ARTICLE -->
+<BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
+         #SET{var_auteur_article, #NOM}
+</BOUCLE_auteur_article>
+
+
+<!-- SCRIPT COLLEGE -->
+<div class="script-college">
+	<div class="script-open-close" id="open-script-college"></div>
+    <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
+    <div class="script-texte script-texte-hide" id="slideup-script-college">#PS</div>
+</div>
+
+</BOUCLE_chapitre_visible_script_college>

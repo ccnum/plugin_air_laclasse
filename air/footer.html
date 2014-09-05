@@ -1,0 +1,62 @@
+#CACHE{0}
+
+<script>
+    function reload_cookie(url,cookie_nom,cookie_valeur) {  
+      if (cookie_valeur <= 2011)
+        url = 'http://airchive.laclasse.com/?annee_scolaire='+cookie_valeur; 
+      else  
+        document.cookie = cookie_nom + "=" + escape(cookie_valeur); 
+      reload(url);
+    }
+
+    function reload(url) {
+      if (url == 'self')  {
+        location.reload( true );
+        window.location.reload();
+      }
+      else window.location.href = url;
+    }
+</script>
+
+<div id="footer">
+    <div id="footer-inner">
+        
+        <div id="footer-nav-left">
+            [(#SESSION{id_auteur}|oui)Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>&nbsp;&nbsp;|<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>] 
+            [(#SESSION{id_auteur}|non)<a href="page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
+        </div>
+        
+        <div id="footer-nav">
+            <BOUCLE_page_footer(ARTICLES){id_rubrique=12}{id_article !=49}>
+                <a href="#URL_SITE_SPIP/?page=page&id_article=#ID_ARTICLE">#TITRE</a>&nbsp;&nbsp;|
+            </BOUCLE_page_footer>
+            <a href="http://www.laclasse.com/">Laclasse.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <span id="annee_scolaire" title="Choisir l'année scolaire">
+                Année scolaire :
+                <form name="annee_scolaire" style="display:inline;"> 
+                    <select onchange="reload_cookie('','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
+                        <option value="#" style="display:inline;">---</option>
+                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000}{0,1}{tout}>
+                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]
+                        </BOUCLE_vieux>
+                        <option style="display:inline;" value="2011">2011/2012</option>                        
+                        <option style="display:inline;" value="2010">2010/2011</option>
+            		</select>
+                </form>
+            </span>
+        </div>
+
+    </div>
+</div>
+
+
+<!-- Xiti -->
+[<script type="text/javascript" src="http://www.laclasse.com/v25/js/marqueur_men/xtfirst_ENT.js"></script>
+<script type="text/javascript" src="http://www.laclasse.com/pls/public/xiti_men.get_marqueur_thema?plogin=(#SESSION{login})"></script>]
+
+<!-- Marqueur Google Analytics -->
+<script src="https://www.google-analytics.com/urchin.js" type="text/javascript"></script>
+<script type="text/javascript">
+_uacct = "UA-910479-6";
+urchinTracker();
+</script>

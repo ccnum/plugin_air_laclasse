@@ -2,9 +2,12 @@
 
 [(#REM)RUBRIQUE DE JEU : argument / cookie /derniere rubrique ]
 
-    [(#RUB_JEU|oui) [(#VAL{rub_jeu}|cookie{#RUB_JEU})] ]
-
     #SET{rub_jeu,#EVAL{$_COOKIE['rub_jeu']}}
+
+    [(#RUB_JEU|oui) 
+      [(#VAL{rub_jeu}|cookie{#RUB_JEU})]
+      #SET{rub_jeu,#RUB_JEU}
+    ]
 
     <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{tout}>
       <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{tout}>
@@ -14,8 +17,13 @@
     </BOUCLE_jeu>
 
 [(#REM)RUBRIQUE D'HISTOIRE : argument / cookie / création ]
-    [(#RUB_HIST|oui) [(#VAL{rub_hist}|cookie{#RUB_HIST})] ]
     #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
+
+    [(#RUB_HIST|oui) 
+      [(#VAL{rub_hist}|cookie{#RUB_HIST})] 
+      #SET{rub_hist,#RUB_HIST}
+    ]
+
       <BOUCLE_test(RUBRIQUES){id_rubrique=#GET{rub_hist}}{tout}>
       </BOUCLE_test>
       </B_test>
@@ -43,7 +51,6 @@
         [(#SET{rub_hist,[(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]})]
       ]
     </BOUCLE_publie>
-    #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
 
 [(#REM)INCLUSION]
 
@@ -70,7 +77,6 @@
         </div>
           
           <div class="content-right-large">
-                #SET{rub_hist,#EVAL{$_COOKIE['rub_hist']}}
 
               <INCLURE{fond=rubrique}{id_rubrique=#GET{rub_hist}}{id_art=#ID_ARTICLE}{info=#GET{info}}>
 

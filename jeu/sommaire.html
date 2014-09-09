@@ -1,8 +1,11 @@
 [(#REM)RUBRIQUE DE JEU : argument / cookie /derniere rubrique ]
 
-    [(#RUB_JEU|oui) [(#VAL{rub_jeu}|cookie{#RUB_JEU})] ]
-
     #SET{rub_jeu,#EVAL{$_COOKIE['rub_jeu']}}
+
+    [(#RUB_JEU|oui) 
+      [(#VAL{rub_jeu}|cookie{#RUB_JEU})] 
+      #SET{rub_jeu,#RUB_JEU}
+    ]
 
     <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{tout}>
       <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{tout}>

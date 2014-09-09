@@ -40,16 +40,14 @@
 	    <li class="editer editer_ps[ (#ENV**{erreurs}|table_valeur{ps}|oui)erreur]">
 			<label for="ps">Numéro de téléphone (pour être contacté pour l'édition)</label>[
 			<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{ps})</span>
-			]<textarea placeholder="Numéro de téléphone (pour être contacté pour l'édition)" class='cadre2 bleu2' name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
+			]<textarea placeholder="Indices" class='cadre2 bleu2' name='ps' id='ps'[ lang='(#LANGUE)'] rows='5' cols='40'>[(#ENV**{ps})]</textarea>
 	    </li>]
-
-
 		
 	  	[(#ENV**{config}|table_valeur{articles_descriptif}|=={non}|?{#ENV**{descriptif,''},' '}|oui)
 	    <li class="cache editer editer_descriptif[ (#ENV**{erreurs}|table_valeur{descriptif}|oui)erreur]">
-		<label for="descriptif">Indices<em class="aide">#AIDER{descriptif}</em></label>[
+		<label for="descriptif">Indices</label>[
 		<span class='erreur_message'>(#ENV**{erreurs}|table_valeur{descriptif})</span>
-		]<textarea name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40'>[(#ENV**{descriptif})]</textarea>
+		]<textarea placeholder="Indices" name='descriptif' id='descriptif'[ lang='(#LANGUE)'] rows='2' cols='40' class='cadre2 bleu2'>[(#ENV**{descriptif})]</textarea>
 	    </li>]
 
 		[<li class="cache editer editer_parent[ (#ENV**{erreurs}|table_valeur{id_parent}|oui)erreur]">

@@ -24,15 +24,21 @@
       #SET{rub_hist,#RUB_HIST}
     ]
 
-      <BOUCLE_test(RUBRIQUES){id_rubrique=#GET{rub_hist}}{tout}>
-      </BOUCLE_test>
-      </B_test>
-      #SET{rub_hist,''}
-      <//B_test>
+    <BOUCLE_test1(RUBRIQUES){id_rubrique=#GET{rub_hist}}{id_parent=#GET{rub_jeu}}{tout}>
+    </BOUCLE_test1>
+    </B_test1>
+    #SET{rub_hist,''}
+    <//B_test1>
+
+    <BOUCLE_test(RUBRIQUES){id_rubrique=#GET{rub_hist}}{tout}>
+    </BOUCLE_test>
+    </B_test>
+    #SET{rub_hist,''}
+    <//B_test>
+
     [(#GET{rub_hist}|=={''}|oui)
         [(#SET{rub_hist,[(#GET{rub_jeu}|creer_histoire)]})]
     ]
-
 
 [(#REM)Validation des articles]
 
@@ -42,11 +48,11 @@
     </BOUCLE_max_cadavres>
 
     <BOUCLE_publie(ARTICLES){id_article}{statut==prepa}>
-      [(#GET{chapitres}|<{5}|oui)
+      [(#GET{chapitres}|<{4}|oui)
         #SET{info,Félicitations : vous avez rempli votre chapitre.}
        [(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]
       ]
-      [(#GET{chapitres}|>={5}|oui)
+      [(#GET{chapitres}|>={4}|oui)
         #SET{info,Félicitations : vous avez terminé l'histoire.}
         [(#SET{rub_hist,[(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]})]
       ]

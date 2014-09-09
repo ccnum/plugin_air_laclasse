@@ -119,7 +119,7 @@ function valider_chapitre($id_article,$id_rubrique){
         if ($res = sql_select("titre", "spip_articles", "`statut` LIKE 'publie' AND id_rubrique=".$id_rubrique)) 
         $n = sql_count($res);
         
-        if ($n>=5) {
+        if ($n>=4) {
           $id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
           $rub_hist = creer_histoire($id_parent);
 
@@ -133,8 +133,8 @@ function valider_chapitre($id_article,$id_rubrique){
           $subject = 'Votre histoire AIR !';
           $message = "Bonjour à tous,\r\n\r\nFélicitations votre cadavre exquis est terminé.\r\n Discutez de l'édition de votre histoire avec vos co-auteurs par retour de mail : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique."\r\n\r\nA très bientôt\r\n\r\nL'équipe d'Erasme et de la Villa Gillet.";
           $headers = "From: thematiques@laclasse.com" . "\r\n" .
-          "Reply-To: alienor.fernandez@live.fr,pvincent@erasme.org" . "\r\n" .
-          "Bcc: pvincent@erasme.org,alienor.fernandez@live.fr" . "\r\n" .
+          "Reply-To: pvincent@erasme.org" . "\r\n" .
+          "Bcc: pvincent@erasme.org" . "\r\n" .
           "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
           "X-Mailer: PHP/" . phpversion();
           if (isset($to)&&($to != "")) mail($to, $subject, $message,$headers);

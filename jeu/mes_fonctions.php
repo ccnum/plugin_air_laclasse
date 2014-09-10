@@ -112,8 +112,7 @@ function valider_chapitre($id_article,$id_rubrique){
          "Bcc: pvincent@erasme.org" . "\r\n" .
          "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
          "X-Mailer: PHP/" . phpversion();
-         if (isset($to)&&($to != "")) mail($to, $subject, $message,$headers);
-
+         if (isset($to)&&($to != "")&&(filter_var($to, FILTER_VALIDATE_EMAIL))) mail($to, $subject, $message,$headers);
       
       //Si 5ème chapitre
         if ($res = sql_select("titre", "spip_articles", "`statut` LIKE 'publie' AND id_rubrique=".$id_rubrique)) 
@@ -137,7 +136,7 @@ function valider_chapitre($id_article,$id_rubrique){
           "Bcc: pvincent@erasme.org" . "\r\n" .
           "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
           "X-Mailer: PHP/" . phpversion();
-          if (isset($to)&&($to != "")) mail($to, $subject, $message,$headers);
+          if (isset($to)&&($to != "")&&(filter_var($to, FILTER_VALIDATE_EMAIL))) mail($to, $subject, $message,$headers);
         }
 
       //return if last chapitre

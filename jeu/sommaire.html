@@ -27,17 +27,7 @@
            <div class="content">
            
            <div class="content-left-small">
-              <div id="titre_site" class="rouge3">
-                <a href="http://air.laclasse.com" title="Accueil" class="rouge3"><strong class="rouge3">air</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com" >.laclasse.com</a>
-              </div>
-
-              <!--PRESENTATION-->
-              <BOUCLE_article(ARTICLES){id_rubrique=#GET{rub_jeu}}{titre LIKE presentation}{tout}{0,1}>
-                [<div id="image-presentation">(#LOGO_ARTICLE||image_reduire{100})</div>]
-                <div id="texte-presentation" class="#EDIT{texte}">
-                  [(#TEXTE|nl2br|image_reduire{210,1000})]
-                </div>
-              </BOUCLE_article>
+              <INCLURE{fond=colonne_gauche}{id_rubrique=#GET{rub_jeu}} />
            </div>
  
            <div class="content-right-large">

@@ -70,17 +70,9 @@
       <div class="global-content">
             
         <div class="content">
-             <div class="content-left-small">
-              <div id="titre_site">
-                <a href="http://air.laclasse.com" title="Accueil" ><strong class="rouge3">air</strong></a><span class="rouge4">.laclasse.com</span>
-              </div>
-              <BOUCLE_article(ARTICLES){id_rubrique=#GET{rub_jeu}}{titre LIKE presentation}{tout}{0,1}>
-                [<div id="image-presentation">(#LOGO_ARTICLE||image_reduire{100})</div>]
-                <div id="texte-presentation" class="#EDIT{texte}">
-                  [(#TEXTE|nl2br|image_reduire{210,1000})]
-                </div>
-              </BOUCLE_article>
-        </div>
+          <div class="content-left-small">
+            <INCLURE{fond=colonne_gauche}{id_rubrique=#GET{rub_jeu}} />
+          </div>
           
           <div class="content-right-large">
 

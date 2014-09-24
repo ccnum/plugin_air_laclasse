@@ -48,11 +48,11 @@
     </BOUCLE_max_cadavres>
 
     <BOUCLE_publie(ARTICLES){id_article}{statut==prepa}>
-      [(#GET{chapitres}|<{4}|oui)
+      [(#GET{chapitres}|<{5}|oui)
         #SET{info,Félicitations : vous avez rempli votre chapitre.}
        [(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]
       ]
-      [(#GET{chapitres}|>={4}|oui)
+      [(#GET{chapitres}|>={5}|oui)
         #SET{info,Félicitations : vous avez terminé l'histoire.}
         [(#SET{rub_hist,[(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]})]
       ]

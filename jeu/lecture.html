@@ -12,7 +12,7 @@
     </BOUCLE_nb>
       #SET{n,#COMPTEUR_BOUCLE}
       #SET{visible,cache}
-      [(#GET{n}|>={4}|oui) #SET{visible,visible} ]
+      [(#GET{n}|>={5}|oui) #SET{visible,visible} ]
       [(#SESSION{login}|oui) #SET{visible,visible} ]
     </B_nb>
     <//B_nb>

@@ -21,7 +21,7 @@
 <!-- BOUTON CONNEXION -->
 [(#ECRITURE|oui)<div id="bouton-connexion"><span id="bouton-connexion-texte">]
 <BOUCLE_titre(RUBRIQUES){id_rubrique=#RUB_HIST}{tout}>#TITRE[ ((#NB_CHAP|plus{1}))]</BOUCLE_titre>
-</B_titre>[(#ECRITURE|oui)<a href="#URL_SITE_SPIP/spip.php?page=ecriture">JOUER</a>]<//B_titre>
+</B_titre>[(#ECRITURE|oui|et{#SESSION{login}|oui}|oui)<a href="#URL_SITE_SPIP/spip.php?page=ecriture">JOUER</a>]<//B_titre>
 [(#ECRITURE|oui)</span><span id="bouton-connexion-picto"><img src="#CHEMIN{img/global/picto-login.png}" width="17" height="18" /></span></div>]
 
 <!-- ELEMENTS GRAPHIQUES-->

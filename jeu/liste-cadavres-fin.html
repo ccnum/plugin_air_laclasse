@@ -14,7 +14,7 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
     	#SET{voir,nok}
         <BOUCLE_test(ARTICLES){id_rubrique}>
         </BOUCLE_test>
-            [(#COMPTEUR_BOUCLE|>={4}|oui)#SET{voir,ok}]
+            [(#COMPTEUR_BOUCLE|>={5}|oui)#SET{voir,ok}]
         </B_test>
         <//B_test>
         	<div class="liste-fin-rubrique [(#GET{voir}|=={ok}|non)cache]">

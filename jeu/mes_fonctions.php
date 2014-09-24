@@ -118,7 +118,7 @@ function valider_chapitre($id_article,$id_rubrique){
         if ($res = sql_select("titre", "spip_articles", "`statut` LIKE 'publie' AND id_rubrique=".$id_rubrique)) 
         $n = sql_count($res);
         
-        if ($n>=4) {
+        if ($n>=5) {
           $id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
           $rub_hist = creer_histoire($id_parent);
 

@@ -23,7 +23,7 @@
         
         <div id="footer-nav-left">
             [(#SESSION{id_auteur}|oui)Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>&nbsp;&nbsp;|<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>] 
-            [(#SESSION{id_auteur}|non)<a href="page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
+            [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
         </div>
         
         <div id="footer-nav">

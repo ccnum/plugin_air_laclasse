@@ -1,5 +1,6 @@
 <div id="bouton-connexion">
-    [(#SESSION{id_auteur}|non)<span id="bouton-connexion-texte"><a href="page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">se connecter</a></span>]
+    [(#SESSION{id_auteur}|non)<span id="bouton-connexion-texte"><a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">se connecter</a></span>]
     [(#SESSION{id_auteur}|oui)<span id="bouton-connexion-texte"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
     <span id="bouton-connexion-picto"><img src="#CHEMIN{img/global/picto-login.png}" width="17" height="18" /></span>
 </div>
+<div style="display:none;">#FORMULAIRE_LOGIN</div>

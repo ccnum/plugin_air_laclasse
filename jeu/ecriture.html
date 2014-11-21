@@ -55,6 +55,7 @@
       [(#GET{chapitres}|>={5}|oui)
         #SET{info,Félicitations : vous avez terminé l'histoire.}
         [(#SET{rub_hist,[(#ID_ARTICLE|valider_chapitre{#ID_RUBRIQUE})]})]
+        #SET{chapitres,0}
       ]
     </BOUCLE_publie>
 

@@ -109,7 +109,7 @@ function valider_chapitre($id_article,$id_rubrique){
          $message = "Bonjour,\r\n\r\nFélicitations pour votre participation au cadavre exquis #air2014.\r\n Accédez dès maintenant à votre chapitre en ligne : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique.". Vous serez prévenus par un prochain mail lorsque votre histoire écrite à 5 mains sera disponible.\r\n\r\nA très bientôt\r\n\r\nL'équipe d'Erasme et de la Villa Gillet.";
          $headers = "From: thematiques@laclasse.com" . "\r\n" .
          "Reply-To: thematiques@laclasse.com" . "\r\n" .
-         "Bcc: pvincent@erasme.org" . "\r\n" .
+         "Bcc: pvincent@erasme.org, kcharnay@villetassinlademilune.fr, evalette@villetassinlademilune.fr" . "\r\n" .
          "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
          "X-Mailer: PHP/" . phpversion();
          if (isset($to)&&($to != "")&&(filter_var($to, FILTER_VALIDATE_EMAIL))) mail($to, $subject, $message,$headers);
@@ -121,22 +121,23 @@ function valider_chapitre($id_article,$id_rubrique){
         if ($n>=5) {
           $id_parent = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rubrique));
           $rub_hist = creer_histoire($id_parent);
-
+          $to = '';
           if ($resultats = sql_select("soustitre", "spip_articles", "id_rubrique = ". intval($id_rubrique))) {
             // boucler sur les resultats
               while ($res = sql_fetch($resultats)) {
-                $to .= $res['soustitre'].",";
+                if (filter_var($res['soustitre'], FILTER_VALIDATE_EMAIL)) $to .= $res['soustitre'].",";
               }
           }
 
           $subject = 'Votre histoire AIR !';
           $message = "Bonjour à tous,\r\n\r\nFélicitations votre cadavre exquis est terminé.\r\n Discutez de l'édition de votre histoire avec vos co-auteurs par retour de mail : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique."\r\n\r\nA très bientôt\r\n\r\nL'équipe d'Erasme et de la Villa Gillet.";
           $headers = "From: thematiques@laclasse.com" . "\r\n" .
-          "Reply-To: pvincent@erasme.org" . "\r\n" .
-          "Bcc: pvincent@erasme.org" . "\r\n" .
+          "Reply-To: thematiques@laclasse.com" . "\r\n" .
+          "Bcc: pvincent@erasme.org, kcharnay@villetassinlademilune.fr, evalette@villetassinlademilune.fr" . "\r\n" .
           "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
           "X-Mailer: PHP/" . phpversion();
-          if (isset($to)&&($to != "")&&(filter_var($to, FILTER_VALIDATE_EMAIL))) mail($to, $subject, $message,$headers);
+          //$to = "pvincent@erasme.org";
+          if ((isset($to))&&($to != "")) mail($to, $subject, $message,$headers);
         }
 
       //return if last chapitre

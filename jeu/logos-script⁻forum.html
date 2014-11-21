@@ -14,6 +14,8 @@
   </B_forum>
   <//B_forum>
 
+
+
   <div class="#CLASS">
     <!-- SCRIPT -->
      [(#GET{script}|oui)
@@ -22,13 +24,14 @@
      [(#GET{script}|non)
      <a href="#URL_SITE_SPIP/?page=lecture-script&id_article=#ID_ARTICLE"  class="mediabox boxIframe boxWidth-520px boxHeight-80pc"><img src="[(#CHEMIN{img/lecture/bt_script.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_script_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_script.png})]';" width="30" height="30" /></a>
      ]
-    <!-- FORUM -->
+    <!-- FORUM 
      [(#GET{forum}|oui)
      <a href="#URL_SITE_SPIP/?page=[(#SESSION{id_auteur}|non|?{'lecture-',''})]forum&id_article=#ID_ARTICLE" class="mediabox boxIframe boxWidth-730px boxHeight-97pc"><img src="[(#CHEMIN{img/lecture/bt_forum_hover.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum_hover.png})]';" width="30" height="30" /></a>
      ]
      [(#GET{forum}|non)
      <a href="#URL_SITE_SPIP/?page=[(#SESSION{id_auteur}|non|?{'lecture-',''})]forum&id_article=#ID_ARTICLE" class="mediabox boxIframe boxWidth-730px boxHeight-97pc"><img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="30" height="30" /></a>
      ]
+     -->
   </div>
 
 </BOUCLE_art>

@@ -1,16 +1,16 @@
 [(#REM)
 SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
-(grille des cadavres affiché dans le cas ou un utilisateur est connecté)
+(grille des cadavres affichÃ© dans le cas ou un utilisateur est connectÃ©)
 
 ID / NOM AUTEUR 
 ]
-
 #CACHE{0}
 
 #SET{var_nom_auteur,#SESSION{nom}}
 #SET{i,0}
+
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par titre}>
 	#SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
 	<div class="liste-title">#GET{i}</div>
@@ -40,7 +40,7 @@ ID / NOM AUTEUR
         	#SET{var_oui, oui}
             <B_auteur_actif>
             	<BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
-           		<a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
+           		<a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single auteur [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
                 </BOUCLE_auteur_actif>
             </B_auteur_actif>
                 <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>

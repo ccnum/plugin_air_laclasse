@@ -15,7 +15,7 @@
 <body>
 
 <!-- ID/NOM AUTEUR-->
- 	
+  
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
     #CACHE{0}
       
@@ -62,38 +62,38 @@
 <!-- BOOK -->
 <div id="global">
 
-		<div id="global-spacer">
+    <div id="global-spacer">
         </div>
         
-		<div class="global-content">
-        	
+    <div class="global-content">
+          
            <div class="content">
            
                <!-- PAGE GAUCHE -->
                <div class="content-left">
                
-               		<!-- PPROLOGUE -->
+                  <!-- PPROLOGUE -->
                     <div class="lecture-page" id="page-gauche-1" data-num="1">
-                     	
+                      
                         <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-						              <span class="lecture-titre-cadavre">#TITRE</span>
+                          <span class="lecture-titre-cadavre">#TITRE</span>
                         </BOUCLE_lecture_titre_rubrique_prologue>
                         
                         <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
                         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>                            
                           <h1 class="prologue">#TITRE</h1>
                         <h2></h2>
-                        	<div class="texte-courant-lecture texte-prologue ">
+                          <div class="texte-courant-lecture texte-prologue">
                             #TEXTE
                             </div>
                         </BOUCLE_article>
                         </BOUCLE_annee>    
                     </div>
-				
+        
                    <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>               
                    
                    <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-               			
+                    
                         <!-- BOUTONS OPTIONS GAUCHE-->
                         <div class="lecture-options">
                             <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
@@ -107,13 +107,16 @@
                                   <div class="ecriture-chapitre-nom">#NOM</div>
                              </BOUCLE_auteur_article2>
 
-                             
+                             [(#ENV{fin}|=={oui}|non)
+                                <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                             ]
+
                             </div>
                          </div>
                         
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
-                    	 <h2 #EDIT{titre}>#TITRE</h2>
+                       <h2>#TITRE</h2>
                         #SET{var_lecture, false}
                         [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
@@ -134,11 +137,11 @@
                    <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
                    
                    <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-               		
+                  
                         <!-- BOUTONS OPTIONS GAUCHE-->
                         <div class="lecture-options">
                             <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-    						            <span class="lecture-titre-cadavre">#TITRE</span>
+                            <span class="lecture-titre-cadavre">#TITRE</span>
                             </BOUCLE_lecture_titre_rubrique_droite>
                             
                             <div class="lecture-chapitre-auteur">
@@ -148,13 +151,16 @@
                                   <div class="ecriture-chapitre-nom">#NOM</div>
                              </BOUCLE_auteur_article>
 
-                            
+                             [(#ENV{fin}|=={oui}|non)
+                                <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                             ]
+
                             </div>
                          </div>
                        
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
-                    	   <h2 #EDIT{titre}>#TITRE</h2>
+                         <h2>#TITRE</h2>
                         [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
@@ -182,95 +188,95 @@
 $(document).ready(function() {
 
 // RESIZE
- 	window.onresize = resize_global_content;
-	resize_global_content();
+  window.onresize = resize_global_content;
+  resize_global_content();
 
 // NICESCROLL
-	$(".global-content").niceScroll({cursorcolor:"#ff6b6b", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
-	$('#ascrail2000').css({'cursor':'pointer'});
+  $(".global-content").niceScroll({cursorcolor:"#ff6b6b", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
+  $('#ascrail2000').css({'cursor':'pointer'});
 
 // AFFICHAGES DES PAGES
-	var compteur = '#ENV{compteur}';
-	compteur = parseFloat(compteur);
-	var num_page_gauche;
-	var num_page_droite;
-	var num_page_limite = $('.content-left > div').size();
+  var compteur = '#ENV{compteur}';
+  compteur = parseFloat(compteur);
+  var num_page_gauche;
+  var num_page_droite;
+  var num_page_limite = $('.content-left > div').size();
 
-	$('.lecture-page').hide();
-	pagination(compteur);
-	next_prev(compteur,num_page_limite);
+  $('.lecture-page').hide();
+  pagination(compteur);
+  next_prev(compteur,num_page_limite);
 
 
 // BOUTON PAGE SUIVANTE
 $('#bt-prev').click(function(event) {
-		event.preventDefault();
-		compteur -= 2;
-		pagination(compteur);
-		next_prev(compteur,num_page_limite);
+    event.preventDefault();
+    compteur -= 2;
+    pagination(compteur);
+    next_prev(compteur,num_page_limite);
 });
 $('#bt-next').click(function(event) {
-		event.preventDefault();
-		compteur += 2;
-		pagination(compteur);
-		next_prev(compteur,num_page_limite);
+    event.preventDefault();
+    compteur += 2;
+    pagination(compteur);
+    next_prev(compteur,num_page_limite);
 });
 
 // ROLLOVER AUTEUR
 $('.lecture-tooltip').mouseover(function() {
-	var offset = $(this).offset();
-	var content_tooltip = $(this).prev().html();
-	$('#liste-tooltip').show();
-	$('#liste-tooltip').html(content_tooltip);
-	var hauteur_tooltip = $('#liste-tooltip-content').height();
-	$('#liste-tooltip').height(hauteur_tooltip);
-	var toptooltip = Math.round(offset.top);
-	toptooltip = toptooltip - hauteur_tooltip;
-	var lefttooltip = Math.round(offset.left);
-	lefttooltip -= 100; 
-	$('#liste-tooltip').css('top', 75);
-	$('#liste-tooltip').css('left', lefttooltip + 2);
+  var offset = $(this).offset();
+  var content_tooltip = $(this).prev().html();
+  $('#liste-tooltip').show();
+  $('#liste-tooltip').html(content_tooltip);
+  var hauteur_tooltip = $('#liste-tooltip-content').height();
+  $('#liste-tooltip').height(hauteur_tooltip);
+  var toptooltip = Math.round(offset.top);
+  toptooltip = toptooltip - hauteur_tooltip;
+  var lefttooltip = Math.round(offset.left);
+  lefttooltip -= 100; 
+  $('#liste-tooltip').css('top', 75);
+  $('#liste-tooltip').css('left', lefttooltip + 2);
 });
 $('.lecture-tooltip').mouseout(function() {
-	$('#liste-tooltip').hide();
+  $('#liste-tooltip').hide();
 });
 
 });
 
 // RESIZE
 function resize_global_content() {
-	h = $(window).height();
-	h -=61;
-	$('.global-content').height(h);
-	stitches_margin = ((h-60) - 258)/4;
-	$(".stitches-inner").css({'margin-top':stitches_margin});
+  h = $(window).height();
+  h -=61;
+  $('.global-content').height(h);
+  stitches_margin = ((h-60) - 258)/4;
+  $(".stitches-inner").css({'margin-top':stitches_margin});
 }
 
 //PAGINATION & AFFICHAGE DES PAGES
 
 function pagination(var_compteur) {
-	if(var_compteur%2 == 0) {
-		num_page_gauche = var_compteur-1;
-		num_page_droite = var_compteur;
-	}
-	else {
-		num_page_gauche = var_compteur;
-		num_page_droite = var_compteur+1;
-	}
-	$('.lecture-page').hide();
-	$('#page-gauche-'+num_page_gauche).show();
-	$('#page-droite-'+num_page_droite).show();
+  if(var_compteur%2 == 0) {
+    num_page_gauche = var_compteur-1;
+    num_page_droite = var_compteur;
+  }
+  else {
+    num_page_gauche = var_compteur;
+    num_page_droite = var_compteur+1;
+  }
+  $('.lecture-page').hide();
+  $('#page-gauche-'+num_page_gauche).show();
+  $('#page-droite-'+num_page_droite).show();
 }
 
 // AFFICHAGE DES BOUTONS
 function next_prev(var_compteur, var_limite) {
-	$('#bt-next').show();
-	$('#bt-prev').show();
-	if(var_compteur >= var_limite-1){
-		$('#bt-next').hide();
-	}
-	else {};
-	
-	if(var_compteur == 1 || var_compteur == 2){$('#bt-prev').hide();} else {};
+  $('#bt-next').show();
+  $('#bt-prev').show();
+  if(var_compteur >= var_limite-1){
+    $('#bt-next').hide();
+  }
+  else {};
+  
+  if(var_compteur == 1 || var_compteur == 2){$('#bt-prev').hide();} else {};
 }
 </script>
 

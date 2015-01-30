@@ -9,13 +9,13 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
 #SET{i,0}
 
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
     #SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>
     
     <!-- LISTE CADAVRES -->
-    <BOUCLE_articles_tous(ARTICLES){id_rubrique}>
+    <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
 
     <div class="liste-link">
     <!-- TOOL TIP CONTENT -->

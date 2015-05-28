@@ -1117,20 +1117,25 @@ background-color:#aab0b7;
 	width:400px;
 }
 
-	.session_qui {
+	.session_qui, .saisie_qui, .saisie_titre {
 	display:none;	
 	}
-	
-	.saisie_titre {
-	display:none;	
-	}
+
 
 .formulaire_spip textarea.markItUpEditor, .formulaire_spip li.editer_texte textarea {
 width:620px;
 }
 
+.formulaire_forum legend {
+	text-align: left;
+	font-weight:bold;
+}
+.formulaire_forum fieldset, .formulaire_forum p.boutons {
+	padding-bottom: 10px;
+}
+
 #formulaire_forum {
-margin:0px 0px 20px 0px;	
+margin:0px 0px 20px 0px;
 }
 
 #formulaire_forum .explication {

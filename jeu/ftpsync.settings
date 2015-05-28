@@ -47,7 +47,7 @@
 		//"passive": true,
 
 		// true = upload on save, false = upload only manually
-		"upload_on_save": true,
+		"upload_on_save": false,
 
 		// how long until connection closes [seconds]
 		//"timeout": 30,

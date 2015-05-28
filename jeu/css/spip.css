@@ -1586,13 +1586,14 @@ margin-left:-530px;
 width:100%;
 float:left;
 margin-bottom:50px;	
+margin-top: 50px;
 }
 
 .liste-fin-rubrique {
 width:175px;
 float:left;
 margin:0px 10px 20px 0px;
-min-height: 400px;
+min-height: 250px;
 }
 
 	.liste-fin-book {

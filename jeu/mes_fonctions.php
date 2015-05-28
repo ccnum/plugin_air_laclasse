@@ -161,7 +161,7 @@ function balise_ANNEE_ACTUELLE_dist($p) {
 }
 
 function balise_NOM_AUTEUR_dist($p) {
-        $p->code = "'Léonora Miano'";
+        $p->code = "'Joy Surman'";
        return $p;
 }
 

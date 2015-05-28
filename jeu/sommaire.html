@@ -53,6 +53,7 @@
                     [(#ENV{mode}|=={fabrication}|non)
                         <!-- FIN DU JEUX / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
                    				[(#FIN|=={#GET{var_fin}}|non)    
+                            <INCLURE{fond=liste-cadavres-visiteur}{id_rubrique=#GET{rub_jeu}} />
                             <INCLURE{fond=liste-cadavres-fin}{id_rubrique=#GET{rub_jeu}} />
                           ]
  

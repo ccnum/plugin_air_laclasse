@@ -8,28 +8,30 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
 
 #SET{i,0}
 
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
+    <B_articles_tous>
     #SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>
     
     <!-- LISTE CADAVRES -->
-    <BOUCLE_articles_tous(ARTICLES){id_rubrique}>
+    <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
 
     <div class="liste-link">
     <!-- TOOL TIP CONTENT -->
         <div class="liste-tooltip-content">
         	<div id="liste-tooltip-content">
-                <div class="liste-tooltip-num-cadavre">Histoire #GET{i}</div>
+                <div class="liste-tooltip-num-cadavre">Histoire [(#GET{i}|plus{1})]</div>
                 <!--<div class="liste-tooltip-num-chapitre">#SURTITRE</div>-->
                 <div class="liste-tooltip-titre-chapitre">#TITRE</div>
-                <BOUCLE_auteur_tous(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
-                <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                <div class="liste-tooltip-auteur">#NOM</div>
+                <BOUCLE_auteur_article2(AUTEURS){id_auteur IN 1,2,60,71,80,28,70,73}{par hasard}{0,1}{tout}>
+                    <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+               </BOUCLE_auteur_article2>
+                <div class="liste-tooltip-auteur">#SURTITRE</div>
+
                 <div class="liste-tooltip-auteur">
                     [(#DESCRIPTIF|cleanCut)]<br />
                 </div>                
-                </BOUCLE_auteur_tous>
             </div>
             <div id="liste-tooltip-bulle">
             </div>
@@ -44,5 +46,5 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
     <!-- FIN LISTE CADAVRES -->
     
 	</div>
-    
+</B_articles_tous>
 </BOUCLE_rubriques_toutes>

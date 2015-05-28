@@ -40,6 +40,11 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
     <div class="forum-texte">
 	<b>#NOM - [(#DATE|jour)] [(#DATE|nom_mois)]  [(#DATE|annee)]</b> 
 	#TEXTE
+    <BOUCLE_documents_joints(DOCUMENTS) {id_forum} {tout} {doublons}>
+        <div class="">
+            [<br /><a href="#URL_DOCUMENT" title="[(#TITRE|supprimer_numero)]" [(#TYPE_DOCUMENT|match{jpg|png|gif}|?{class="thickbox mediabox"})] type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{80}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]}|inserer_attribut{style,'border:0px solid #000000;'})</a>]
+        </div>
+    </BOUCLE_documents_joints>
 	</div>
 	
     <!-- REPONSES -->
@@ -51,6 +56,11 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
         <div class="forum-reponse-texte">
         <b>#NOM - [(#DATE|jour)] [(#DATE|nom_mois)]  [(#DATE|annee)]</b> 
         #TEXTE
+        <BOUCLE_documents_joints2(DOCUMENTS) {id_forum} {tout} {doublons}>
+            <div class="">
+                [<br /><a href="#URL_DOCUMENT" title="[(#TITRE|supprimer_numero)]" [(#TYPE_DOCUMENT|match{jpg|png|gif}|?{class="thickbox mediabox"})] type="#MIME_TYPE">(#LOGO_DOCUMENT||image_reduire{80}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]}|inserer_attribut{style,'border:0px solid #000000;'})</a>]
+            </div>
+        </BOUCLE_documents_joints2>
         </div>
     </div>
     </BOUCLE_reponse>

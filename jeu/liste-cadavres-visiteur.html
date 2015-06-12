@@ -4,15 +4,14 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
 (grille des cadavres affiché pour les visiteurs)
  
  -->
- #CACHE{0}
-
+#CACHE{0}
 #SET{i,0}
 
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#RUB_JEU}{tout}{id_rubrique != 12}{par id_rubrique}>
     <B_articles_tous>
     #SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
-    <div class="liste-title">#GET{i}</div>
+    <div class="liste-title">#ID_RUBRIQUE</div>
     
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
@@ -37,14 +36,32 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
             </div>
         </div>
     
-    
-   		<a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1" class="verrouille [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'last',''})]"></a>
+   		<a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1&rub_jeu=#RUB_JEU" class="verrouille [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'last',''})]"></a>
          
     </div>
     <div class="liste-link-spacer-5"></div>
     </BOUCLE_articles_tous>
     <!-- FIN LISTE CADAVRES -->
-    
+    [(#SESSION{statut}|=={0minirezo}|oui)
+        <div class="liste-link">
+        <!-- TOOL TIP CONTENT -->
+            <div class="liste-tooltip-content">
+                <div id="liste-tooltip-content">
+                    <div class="liste-tooltip-titre-chapitre">Edition administrateurs</div>
+                    <br />
+                </div>
+                <div id="liste-tooltip-bulle">
+                </div>
+            </div>
+        
+        
+            <a href="#URL_SITE_SPIP/?page=edition&id_rubrique=#ID_RUBRIQUE" target="_blank" class="auteur"></a>
+             
+        </div>
+        <div class="liste-link-spacer-5"></div>
+
+        
+    ]
 	</div>
 </B_articles_tous>
 </BOUCLE_rubriques_toutes>

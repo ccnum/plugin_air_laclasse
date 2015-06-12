@@ -7,8 +7,8 @@
       #SET{rub_jeu,#RUB_JEU}
     ]
 
-    <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{tout}>
-      <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{tout}>
+    <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{par id_rubrique}{inverse}{tout}>
+      <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{par id_rubrique}{inverse}{tout}>
         #SET{rub_jeu,#ID_RUBRIQUE}
         [(#VAL{rub_jeu}|cookie{#ID_RUBRIQUE})]
       </BOUCLE_j1>
@@ -16,6 +16,7 @@
 
 [(#SESSION{login}|oui)#SET{ecriture,oui}]
 <INCLURE{fond=layout_init}{ecriture=oui}>
+<meta http-equiv="refresh" content="300" >
 
 <!-- BOOK -->
 <div id="global-ecriture">
@@ -38,48 +39,27 @@
                 </div>]
             </div>
 
-            [(#ENV{mode}|=={fabrication}|oui)
-                <!--
-                  <div id="countdown-blog"></div>
-                  <script type="text/javascript" src="#CHEMIN{js/countdown.js}"></script>
-                -->
-              ]
 
               <!-- LISTE DES CADAVRES -->
+           			[(#FIN|=={#GET{var_fin}}|non) 
+                   <div class="content-right-large">
+                      <div class="texte-presentation" >
+                        <div class="bord">Voici la grille des histoires en cours d'écriture :</div>  
+                        <INCLURE{fond=liste-cadavres-visiteur}{rub_jeu=#GET{rub_jeu}} />
+                      </div>           
+                      <div class="texte-presentation" >
+                        <div><br /></div>
+                        <div class="bord">Et les histoires terminées :</div>  
+                        <INCLURE{fond=liste-cadavres-fin}{id_rubrique=#GET{rub_jeu}} />
+                      </div>
+                    </div>
+                ]
+      			     
+         </div>
 
-                 <div id="liste-cadavres">
-                    #SET{var_fin, false}
+         </div>
 
-                    [(#ENV{mode}|=={fabrication}|non)
-                        <!-- FIN DU JEUX / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
-                   				[(#FIN|=={#GET{var_fin}}|non)    
-                            <INCLURE{fond=liste-cadavres-visiteur}{id_rubrique=#GET{rub_jeu}} />
-                            <INCLURE{fond=liste-cadavres-fin}{id_rubrique=#GET{rub_jeu}} />
-                          ]
- 
-                   				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
-                              [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur}{id_rubrique=#GET{rub_jeu}} />]
-                              [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur}{id_rubrique=#GET{rub_jeu}} />]
-                              <INCLURE{fond=sommaire-legende} />
-                            ] 
-                             [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
-                                <INCLURE{fond=liste-cadavres-fin}{id_rubrique=#GET{rub_jeu}} />
-                            ]     
-                          ]
-                    ]
-                    [(#ENV{mode}|=={fabrication}|oui)                      
-                            [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur}{id_rubrique=#GET{rub_jeu}} />]
-                            [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur}{id_rubrique=#GET{rub_jeu}} />]
-                            <INCLURE{fond=sommaire-legende} />
-                    ]
-      			     </div>
-
-           </div>
-
-           </div>
-
-        </div>
+      </div>
 
 </div>
 </BOUCLE_article>

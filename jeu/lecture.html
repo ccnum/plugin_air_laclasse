@@ -24,10 +24,26 @@
       #SET{visible,visible}
     ]
 
-<INCLURE{fond=layout_init}{pages=oui}{home=oui}>
+[(#REM)RUBRIQUE DE JEU : argument / cookie /derniere rubrique ]
+
+    #SET{rub_jeu,#EVAL{$_COOKIE['rub_jeu']}}
+
+    [(#RUB_JEU|oui) 
+      [(#VAL{rub_jeu}|cookie{#RUB_JEU})] 
+      #SET{rub_jeu,#RUB_JEU}
+    ]
+
+    <BOUCLE_jeu(RUBRIQUES){si #GET{rub_jeu}|=={''}|oui}{titre==jeu}{0,1}{par id_rubrique}{inverse}{tout}>
+      <BOUCLE_j1(RUBRIQUES){id_parent=#ID_RUBRIQUE}{0,1}{par id_rubrique}{inverse}{tout}>
+        #SET{rub_jeu,#ID_RUBRIQUE}
+        [(#VAL{rub_jeu}|cookie{#ID_RUBRIQUE})]
+      </BOUCLE_j1>
+    </BOUCLE_jeu>
+
+<INCLURE{fond=layout_init}{pages=oui}{home=oui}{id_rubrique=#GET{rub_jeu}}{overflow=oui}>
 
 <!-- BOOK -->
-<div id="global">
+<div id="global" style="overflow: auto;">
 
     <div id="global-spacer"></div>
         

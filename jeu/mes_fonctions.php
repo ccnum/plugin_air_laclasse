@@ -4,7 +4,7 @@
 # Ouverture Wiki  #
 ###################
 
-define('SECTEURS_WIKI', '36');
+/*define('SECTEURS_WIKI', '36');
 
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
     return true;
@@ -52,7 +52,7 @@ function autoriser_rubrique_publierdans($faire, $type, $id, $qui, $opt) {
 function analyse_droits_rapide() {
   return true;
 }
-
+*/
 
 #########################
 # Fonctions générales   #

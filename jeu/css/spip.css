@@ -162,6 +162,7 @@ margin:15px 0px 15px 0px;
 /* -------------------- */
 /* STRUCTURE */
 /* -------------------- */
+/*Overflow pour le scroll*/
 
 html, body {
 background-color:#556270;	
@@ -432,15 +433,24 @@ border-radius:5px;
 }
 
 .texte-presentation {
-	
 	font-size:15px;
+	
 }
 
 div.texte-presentation {
 	position: relative;
-	margin: 10px 20px 0px 100px ;
+	clear:both; 
+	position: relative; 
+	margin: 20px; 
+	padding: 0px 20px 15px 20px; 
 }
 
+.texte-presentation div.bord{
+	margin: 10px 20px 0px 100px ;
+	border-left: 5px #ff6b6b solid; 
+	padding: 10px; 
+	margin: 20px;
+}
 
 /* -------------------- */
 /* COUNTDOWN */
@@ -472,9 +482,9 @@ width:50px;
 .liste-title {
 color:#556270;
 font-size:15px;
-margin:0px 0px 10px 0px;
-float:left;
-
+margin:0px auto 5px auto;
+/*float:left;*/
+text-align: center;
 }
 
 .liste-link {
@@ -1582,27 +1592,28 @@ margin-left:-530px;
 /* FIN DU JEUX */
 /* -------------------- */
 
+
+
 #liste-fin {
 width:100%;
 float:left;
 margin-bottom:50px;	
-margin-top: 50px;
 }
 
 .liste-fin-rubrique {
 width:175px;
 float:left;
 margin:0px 10px 20px 0px;
-min-height: 250px;
+min-height: 150px;
 }
 
 	.liste-fin-book {
 	float:left;
-	border: 1px solid #CCC;	
+	border: 0px solid #CCC;	
 	}
 	
 	.liste-fin-book:hover {
-	border: 1px solid #000;	
+	border: 0px solid #000;	
 	}
 	
 	.liste-book-bt {

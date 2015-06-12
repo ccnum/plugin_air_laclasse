@@ -1,6 +1,6 @@
 #CACHE{0}
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" [(#OVERFLOW|oui)style="overflow: auto;"]>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body [(#OVERFLOW|oui)style="overflow: auto;"]>
 
 <!-- TOOLTIP -->
 <div id="liste-tooltip"></div>
@@ -53,7 +53,7 @@
 <!-- RETOUR HOME -->
 [(#HOME|oui)
 <div id="retour-home">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/lecture/bt-home.png}" onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';" width="60" height="60" /></a>
+<a href="#URL_SITE_SPIP?scenario=jeu[&rub_jeu=(#ID_RUBRIQUE)]"><img src="#CHEMIN{img/lecture/bt-home.png}" onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';" width="60" height="60" /></a>
 </div>
 ]
 

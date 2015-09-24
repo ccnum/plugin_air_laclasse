@@ -287,6 +287,25 @@ float:left;
 margin:7px 10px 0px 0px;
 }
 
+
+/* -------------------- */
+/* SUPPRIMER */
+/* -------------------- */
+
+.action_supprimer, .formulaire_editer_rubrique .action_supprimer, .action_supprimer_off {
+	width: 15px;
+	height: 15px;
+	float: left;
+	margin: auto;
+	margin-left: 5px;
+	margin-bottom: 3px;
+	margin-right: 5px;
+	background: url(../img/ecriture/logo_supprimer_off_15.png) no-repeat scroll 0% 0%;  position: relative; z-index: 2;	
+}
+.action_supprimer:hover, .formulaire_editer_rubrique .action_supprimer:hover, .action_supprimer_on {
+	background: url(../img/ecriture/logo_supprimer_on_15.png) no-repeat scroll 0% 0%;  position: relative; z-index: 2;	
+}
+
 /* -------------------- */
 /* SOMMAIRE */
 /* -------------------- */
@@ -1337,6 +1356,8 @@ font-family:Arial, Helvetica, sans-serif;
 	clear:both;
 	}
 
+
+
 /* -------------------- */
 /* LECTURE */
 /* -------------------- */
@@ -1376,8 +1397,12 @@ margin-bottom:50px;
 	text-align:justify;
 	}
 
-	.lecture-page p, .texte-courant-lecture p {
-	margin-bottom: 10px;
+	.lecture-page p, .texte-courant-lecture p, .texte_courant p {
+		margin-bottom: 25px;
+	}
+
+	.texte-presentation p, #texte-presentation p {
+		margin-bottom: 17px;
 	}
 
 .texte-courant-lecture {
@@ -1604,6 +1629,14 @@ margin:0px 10px 20px 0px;
 			color:#ff6b6b;
 	
 		}
+
+	#footer select{
+		width: 150px;
+	}
+
+	#footer option, #footer select {
+		font-size:11px;
+	}
 
 /* -------------------- */
 /* COLORBOX */

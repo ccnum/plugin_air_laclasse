@@ -1,10 +1,12 @@
 <?php
+    include_spip('base/abstract_sql');
 
 // PIPELINES
 	//$GLOBALS['marqueur'] .= ':'.$_COOKIE['mobile'];
-	$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';
+	//$GLOBALS['spip_pipeline']['pre_propre'] .= '|post_autobr';
 	$GLOBALS['spip_pipeline']['formulaire_traiter'] .= "|traiter_article_jeu";
-define('_DEBUG_AUTORISER', true);
+	define('_DEBUG_AUTORISER', true);
+	define('_AUTOBR', true);
 
 //Cas de la publication du chapitre d'une histoire (JEU)
   function traiter_article_jeu0($flux){  
@@ -29,6 +31,20 @@ define('_DEBUG_AUTORISER', true);
     return $flux;
   } 
 
+function annee_rub1($idr){
+
+	$date = sql_getfetsel("id_rubrique", "spip_rubriques", "id_rubrique=" . intval($idr));
+
+	if ($date != '')
+	{
+	  $annee_scolaire = intval(substr($date,0,4));
+	  $mois_scolaire = intval(substr($date,5,2));
+	  if ($mois_scolaire < 9) $annee_scolaire--;
+	}
+
+	return $annee_scolaire;
+}
+
 
 // ANNEE
 
@@ -37,14 +53,28 @@ define('_DEBUG_AUTORISER', true);
 	&&($_COOKIE[_cookie_annee_scolaire]!='')
 	&&($_COOKIE[_cookie_annee_scolaire]>2011))
 	$annee_scolaire = $_COOKIE[_cookie_annee_scolaire];
-	else $annee_scolaire = 2013;
+	else $annee_scolaire = 2015;
+
+	//Hack temporaire d'indexation d'année
+	if ((isset($_GET['id_rubrique']))){	
+		$id_rub = $_GET['id_rubrique'];
+		/*$date = sql_getfetsel("id_parent", "spip_rubriques", "id_rubrique=" . intval($id_rub));
+
+		if ($date != '')
+		{
+		  $annee_scolaire = intval(substr($date,0,4));
+		  $mois_scolaire = intval(substr($date,5,2));
+		  if ($mois_scolaire < 9) $annee_scolaire--;
+		}*/
+		if ($annee_scolaire == "") $annee_scolaire = 2015;
+	} 
 
 	define('_annee_scolaire',$annee_scolaire);
 
 //SQUELETTES
 
 	// 'nom' => 'chemin du squelette'
-	$dir = 'sites/air.thematiques.localhost/';
+	$dir = 'sites/air.laclasse.com/';
 	$squelettes = array(
 	  'jeu'=>$dir.'squelettes/jeu:'.$dir.'squelettes/air:'.$dir.'squelettes',
 	  'air'=>$dir.'squelettes/air:'.$dir.'squelettes'

@@ -1,9 +1,10 @@
 #CACHE{0}
-
 #SET{id_art,0}
-<BOUCLE_id_forum(ARTICLES){titre_mot==agora}{0,1}>
-#SET{id_art,#ID_ARTICLE}
-</BOUCLE_id_forum>
+<BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+    <BOUCLE_id_forum(ARTICLES){titre_mot==agora}{id_rubrique}{0,1}>
+        #SET{id_art,#ID_ARTICLE}
+    </BOUCLE_id_forum>
+</BOUCLE_annee>
 
 <script>
     function reload_cookie(url,cookie_nom,cookie_valeur) {  
@@ -25,7 +26,7 @@
 
 <div id="footer">
     <div id="footer-inner">
-        
+
         <div id="footer-nav-left">
             [(#SESSION{id_auteur}|oui)
             Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>
@@ -44,12 +45,12 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
                     <select onchange="reload_cookie('','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
-                        <option value="#" style="display:inline;">---</option>
+                        <option value="#" style="">---</option>
                         <BOUCLE_vieux(ARTICLES){par date}{date!=0000}{0,1}{tout}>
                         [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]
                         </BOUCLE_vieux>
-                        <option style="display:inline;" value="2011">2011/2012</option>                        
-                        <option style="display:inline;" value="2010">2010/2011</option>
+                        <option style="" value="2011">2011/2012</option>                        
+                        <option style="" value="2010">2010/2011</option>
             		</select>
                 </form>
             </span>

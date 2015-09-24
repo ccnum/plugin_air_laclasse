@@ -1,6 +1,7 @@
 <?php
 
 include_spip('action/editer_objet');
+include_spip('base/abstract_sql');
 
 function creer_histoire($id_rub)
 {
@@ -10,7 +11,6 @@ function creer_histoire($id_rub)
 
 
 function annee_rub($idr){
-    include_spip('base/abstract_sql');
 
     $date = sql_getfetsel("maj", "spip_rubriques", "id_rubrique=" . intval($idr));
 
@@ -30,7 +30,7 @@ function balise_ANNEE_SCOLAIRE_dist($p) {
       &&($_COOKIE[_cookie_annee_scolaire]!='')
       &&($_COOKIE[_cookie_annee_scolaire]>2011))
       $p->code = $_COOKIE[_cookie_annee_scolaire];
-    else $p->code = 2014;
+    else $p->code = 2015;
    return $p;
 }
 
@@ -97,7 +97,7 @@ function afficher_options_date($annee,$mois,$annee_scolaire)
   if ($mois<9) $annee = $annee--; 
     for ($i=$annee_actuelle;$i>=$annee;$i--) {
     $j=$i+1;
-    $texte .= "<option style='display:inline;' value='$i'";
+    $texte .= "<option style='' value='$i'";
     if ($i==$annee_scolaire) $texte .= " selected ";
     $texte .= ">$i/$j</option>";
   }

@@ -31,6 +31,8 @@ function balise_ANNEE_SCOLAIRE_dist($p) {
       &&($_COOKIE[_cookie_annee_scolaire]>2011))
       $p->code = $_COOKIE[_cookie_annee_scolaire];
     else $p->code = 2015;
+  if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
+  $p->code = $_GET['annee_scolaire'];
    return $p;
 }
 
@@ -48,7 +50,7 @@ function balise_NOM_AUTEUR_dist($p) {
 // Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil
 
 function balise_FIN_dist($p) {
-        $p->code = "'false'";
+        $p->code = "'true'";
        return $p;
 }
 
@@ -56,7 +58,7 @@ function balise_FIN_dist($p) {
 // Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
 
 function balise_LECTURE_dist($p) {
-        $p->code = "'false'";
+        $p->code = "'true'";
        return $p;
 }
 

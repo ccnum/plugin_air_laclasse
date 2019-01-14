@@ -55,12 +55,6 @@ function annee_rub1($idr){
 	$annee_scolaire = $_COOKIE[_cookie_annee_scolaire];
 	else $annee_scolaire = 2015;
 
-	if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
-	{
-		$annee_scolaire = $_GET['annee_scolaire'];
-		setcookie("_cookie_annee_scolaire", $annee_scolaire);
-	}
-
 	//Hack temporaire d'indexation d'année
 	if ((isset($_GET['id_rubrique']))){	
 		$id_rub = $_GET['id_rubrique'];

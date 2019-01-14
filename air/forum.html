@@ -29,7 +29,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
     <hr />
 
 <!-- AFFICHAGE FORUM -->
-<BOUCLE_forum(FORUMS){id_article}{par date}>
+<BOUCLE_forum(FORUMS){id_article}{par date}{inverse}>
 
 	<!-- IMAGE PROFIL -->
     <div class="forum-img-profil">
@@ -48,7 +48,7 @@ la premiere fois qu'un message est poste (cf. inc/invalideur). ]
 	</div>
 	
     <!-- REPONSES -->
-    <BOUCLE_reponse(FORUMS){id_parent}{par date}>
+    <BOUCLE_reponse(FORUMS){id_parent}{par date}{inverse}>
     <div class="forum-reponse">
     	<div class="forum-reponse-img">
         [(#LOGO_AUTEUR||image_reduire{42,42})]

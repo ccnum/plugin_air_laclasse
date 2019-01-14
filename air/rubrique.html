@@ -1,6 +1,6 @@
 <BOUCLE_principale(RUBRIQUES){id_rubrique}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
@@ -142,13 +142,10 @@
                     
                     <!-- Boucle affichage des cadavres -->
                     <BOUCLE_cadavres(ARTICLES){id_rubrique}{id_rubrique !=12}{par date}>
-
-                    	<BOUCLE_auteur_chapitre(AUTEURS){id_article}{0,1}>
 						
                         <!-- L'UTILISATEUR N'EST PAS WEBMESTRE / ECRIVAIN -->
                         #SET{var_oui, oui}
                         [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
-                        
                             <!-- L'utilisateur est sur son espace de travail -->
                             [(#GET{var_id_zone}|=={#ID_RUBRIQUE}|oui)
                             
@@ -225,7 +222,6 @@
 
                         ]
 
-                        </BOUCLE_auteur_chapitre>
 
                     </BOUCLE_cadavres>
 
@@ -248,7 +244,7 @@
 .crayon-html .formulaire_spip textarea {height:300px;background-color:#FFF;}
 .formulaire_crayon {width:500px;margin-left:auto;margin-right:auto;margin-top:40px;z-index:9999}
 .resizehandle{display:none;}
-.markItUpFooter{display:none;}
+/*.markItUpFooter{display:none;}*/
 .crayon-html .crayon-boutons {position:relative;width: auto; padding: 10px 45px 0 0;margin:5px 0px 0px 0px; }
 .crayon-html .crayon-boutons button { width: auto; height: 32px; text-indent: 0; cursor: pointer; background: #ff6b6b; color: #FFF; border-radius: 5px; font-family:Arial, Helvetica, sans-serif; font-size:13px; margin:0px 0px 0px 10px; float:left;}
 .crayon-icones em.crayon-crayon {
@@ -315,32 +311,36 @@ $('#nav-top').click(function(event) {
 
 // SCRIPT OPEN CLOSE
 $('.script-texte-hide').hide();
-$('#open-script-ecrivain').toggle(function() {
-	$('#slideup-script-ecrivain').show();
-	$(this).css('background-image','url(#CHEMIN{img/ecriture/bt-moins.png})');
-	
-}, function() {
-	$('#slideup-script-ecrivain').hide();
-	$(this).css('background-image','url(#CHEMIN{img/ecriture/bt-plus.png})');
+$('#open-script-ecrivain').click(function() {
+	$('#slideup-script-ecrivain').toggle('fast');
+	if( $('#slideup-script-ecrivain').is(':visible') ) {
+        $('#open-script-ecrivain').css('background-image','url(#CHEMIN{img/ecriture/bt-moins.png})');    
+    }
+    else {
+        $('#open-script-ecrivain').css('background-image','url(#CHEMIN{img/ecriture/bt-plus.png})');
+    }
 });
-$('#open-script-college').toggle(function() {
-	$('#slideup-script-college').show();
-	$(this).css('background-image','url(#CHEMIN{img/ecriture/bt-moins.png})');
-}, function() {
-	$('#slideup-script-college').hide();
-	$(this).css('background-image','url(#CHEMIN{img/ecriture/bt-plus.png})');
+$('#open-script-college').click(function() {
+    $('#slideup-script-college').toggle('fast');
+    if( $('#slideup-script-college').is(':visible') ) {
+        $('#open-script-college').css('background-image','url(#CHEMIN{img/ecriture/bt-moins.png})');    
+    }
+    else {
+        $('#open-script-college').css('background-image','url(#CHEMIN{img/ecriture/bt-plus.png})');
+    }
 });
 
 // PROLOGUE OPEN CLOSE
 $('#texte_prologue').hide();
 $('#open_prologue').click(function() {
-	$('#texte_prologue').show();
+	$('#texte_prologue').show('normal');
 	$('#close_prologue').show();
 	$(this).hide();
+    resize_global_content();
 });
 
 $('#close_prologue').click(function() {
-	$('#texte_prologue').hide();
+	$('#texte_prologue').hide('normal');
 	$('#open_prologue').show();
 	$(this).hide();
 });

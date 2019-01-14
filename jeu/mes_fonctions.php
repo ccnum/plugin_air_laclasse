@@ -105,11 +105,11 @@ function valider_chapitre($id_article,$id_rubrique){
 
       //mail
          $to = sql_getfetsel("soustitre", "spip_articles", "id_article = ".$id_article);
-         $subject = 'Votre chapitre AIR !';
-         $message = "Bonjour,\r\n\r\nFélicitations pour votre participation au cadavre exquis #air2014.\r\n Accédez dès maintenant à votre chapitre en ligne : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique.". Vous serez prévenus par un prochain mail lorsque votre histoire écrite à 5 mains sera disponible.\r\n\r\nA très bientôt\r\n\r\nL'équipe d'Erasme et de la Villa Gillet.";
-         $headers = "From: thematiques@laclasse.com" . "\r\n" .
-         "Reply-To: thematiques@laclasse.com" . "\r\n" .
-         "Bcc: pvincent@erasme.org, kcharnay@villetassinlademilune.fr, evalette@villetassinlademilune.fr" . "\r\n" .
+         $subject = 'Vous venez d\'écrire un chapitre !';
+         $message = "Bonjour,\r\n\r\nMerci d'avoir participé au petit fablab d'écriture !\r\nAccédez dès maintenant à votre chapitre en ligne : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique.". Un deuxième message vous préviendra lorsque votre histoire sera disponible.\r\n\r\nA très bientôt\r\n\r\nSuivez nos actualités sur Twitter @petitfablab ou sur le blog https://petit-fablab-ecriture.tumblr.com/ \r\n\r\nLe petit fablab d'écriture est un dispositif imaginé par Erasme, laboratoire d'innovation ouverte de la Métropole de Lyon, en collaboration avec la Villa Gillet. \r\nRetrouvez le Petit Fab Lab d'écriture à Lyon aux Assises Internationales du Roman et à Grenoble à La Casemate et au salon Experimenta.";
+         $headers = "From: petitfablab@gmail.com" . "\r\n" .
+         "Reply-To: petitfablab@gmail.com" . "\r\n" .
+         "Bcc: pvincent@erasme.org, petitfablab@gmail.com" . "\r\n" .
          "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
          "X-Mailer: PHP/" . phpversion();
          if (isset($to)&&($to != "")&&(filter_var($to, FILTER_VALIDATE_EMAIL))) mail($to, $subject, $message,$headers);
@@ -129,11 +129,11 @@ function valider_chapitre($id_article,$id_rubrique){
               }
           }
 
-          $subject = 'Votre histoire AIR !';
-          $message = "Bonjour à tous,\r\n\r\nFélicitations votre cadavre exquis est terminé.\r\n Discutez de l'édition de votre histoire avec vos co-auteurs par retour de mail : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique."\r\n\r\nA très bientôt\r\n\r\nL'équipe d'Erasme et de la Villa Gillet.";
-          $headers = "From: thematiques@laclasse.com" . "\r\n" .
-          "Reply-To: thematiques@laclasse.com" . "\r\n" .
-          "Bcc: pvincent@erasme.org, kcharnay@villetassinlademilune.fr, evalette@villetassinlademilune.fr" . "\r\n" .
+          $subject = 'Votre histoire est en ligne !';
+          $message = "Bonjour à tous,\r\n\r\nFélicitations votre histoire est en ligne.\r\nDiscutez de l'édition de votre histoire avec vos co-auteurs par retour de mail : http://air.laclasse.com/spip.php?scenario=jeu&page=lecture&id_rubrique=".$id_rubrique."\r\n\r\nA très bientôt\r\n\r\nSuivez nos actualités sur Twitter @petitfablab ou sur le blog https://petit-fablab-ecriture.tumblr.com/ \r\n\r\nLe petit fablab d'écriture est un dispositif imaginé par Erasme, laboratoire d'innovation ouverte de la Métropole de Lyon, en collaboration avec la Villa Gillet.  \r\nRetrouvez le Petit Fab Lab d'écriture à Lyon aux Assises Internationales du Roman et à Grenoble à La Casemate et au salon Experimenta. ";
+          $headers = "From: petitfablab@gmail.com" . "\r\n" .
+          "Reply-To: petitfablab@gmail.com" . "\r\n" .
+          "Bcc: pvincent@erasme.org, petitfablab@gmail.com" . "\r\n" .
           "Content-Type: text/plain; charset='utf-8'" . "\r\n" .
           "X-Mailer: PHP/" . phpversion();
           //$to = "pvincent@erasme.org";

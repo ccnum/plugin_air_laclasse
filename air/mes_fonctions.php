@@ -42,7 +42,7 @@ function balise_ANNEE_ACTUELLE_dist($p) {
 }
 
 function balise_NOM_AUTEUR_dist($p) {
-        $p->code = "'Joy Surman'";
+        $p->code = "'Violaine Schwartz'";
        return $p;
 }
 
@@ -50,7 +50,7 @@ function balise_NOM_AUTEUR_dist($p) {
 // Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil
 
 function balise_FIN_dist($p) {
-        $p->code = "'true'";
+        $p->code = "'false'";
        return $p;
 }
 
@@ -58,7 +58,7 @@ function balise_FIN_dist($p) {
 // Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
 
 function balise_LECTURE_dist($p) {
-        $p->code = "'true'";
+        $p->code = "'false'";
        return $p;
 }
 

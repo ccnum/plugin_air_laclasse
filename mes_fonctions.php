@@ -1,9 +1,7 @@
 <?php
 
-###################
-# Ouverture Wiki  #
-###################
-define('SECTEURS_WIKI', '36');
+  error_reporting(error_reporting() & (-1 ^ E_DEPRECATED));
+
 
 function autoriser_article_modifier($faire, $type, $id, $qui, $opt) {
   // Si on est deja autorise en standard, dire 'OK'
@@ -80,7 +78,7 @@ function balise_NOM_AUTEUR_dist($p) {
 // Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil
 
 function balise_FIN_dist($p) {
-        $p->code = "'false'";
+        $p->code = "'true'";
        return $p;
 }
 
@@ -88,7 +86,7 @@ function balise_FIN_dist($p) {
 // Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
 
 function balise_LECTURE_dist($p) {
-        $p->code = "'false'";
+        $p->code = "'true'";
        return $p;
 }
 

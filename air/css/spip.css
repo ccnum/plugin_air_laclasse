@@ -65,7 +65,7 @@ background-color:#556270;
 height: 100%;
 width:100%;
 text-align:center;
-overflow:hidden;
+overflow:visible;
 }
 
 body.mobile {
@@ -1667,6 +1667,8 @@ margin:0px 10px 20px 0px;
 
 form.formulaire_crayon {	width: 730px;	}
 
+
+
 #spip-admin {	display: none;	}
 
 li.editer p.explication, .editer_pgp, .editer_bio, .editer_liens_sites, .saisie_session_nom, .saisie_session_email {display: none;}
@@ -1676,4 +1678,11 @@ div.socialtags {
 	margin-bottom: 10px;
 	margin-right: 30px;
 	position: relative;
+}
+
+.crayon-html .crayon-boutons button {
+	text-align : left;
+	border-color: white;
+	padding-left: 10px;
+	padding-right: 10px;
 }

@@ -1,16 +1,5 @@
-\***************************************************************************/
- *  Copyright (c) 2005-2012                                                *
- *  Classe culturelle numérique Cadavre Exquis Laclasse.com - Plugin SPIP3                           *
- *  Concept : Erasme *
- *  Développement : Erasme - Inook *  
- *  Produit par Erasme, centre d'innovation du Département du Rhône      *
- *                                                                         *
- *  Ce programme est un logiciel libre distribue sous licence AGPL : https://fr.wikipedia.org/wiki/GNU_Affero_General_Public_License     *
- *  Vous pouvez l'utiliser, le distribuer et le modifier selon les termes de cette license.
- *  Pour plus de details voir le fichier LICENSE.txt ou l'aide en ligne : http://gitlab.erasme.org/plugin_thematique_laclasse *
-\***************************************************************************/
-
-Un [wiki d'installation et d'utilisation](https://github.com/ccnum/plugin_air_laclasse/wiki) le plus complet possible est disponible. Pensez à le maintenir à jour !
+Un [wiki d'installation et d'utilisation](https://github.com/ccnum/plugin_air_laclasse/wiki) le plus complet possible
+est disponible. Pensez à le maintenir à jour !
 
 
 INSTALLATION basique

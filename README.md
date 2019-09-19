@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier LICENSE.txt ou l'aide en ligne : http://gitlab.erasme.org/plugin_thematique_laclasse *
 \***************************************************************************/
 
+Un [wiki d'installation et d'utilisation](https://github.com/ccnum/plugin_air_laclasse/wiki) le plus complet possible est disponible. Pensez à le maintenir à jour !
+
 
 INSTALLATION basique
 

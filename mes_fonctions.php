@@ -49,7 +49,7 @@ function analyse_droits_rapide() {
 }
 
 ###################
-# Fonctions générales  #
+# Fonctions gÃ©nÃ©rales  #
 ###################
 
 function balise_ANNEE_SCOLAIRE_dist($p) {
@@ -82,8 +82,8 @@ function balise_FIN_dist($p) {
        return $p;
 }
 
-// Si balise_LECTURE_dist = false -> les textes sont masqués dans la vue lecture
-// Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
+// Si balise_LECTURE_dist = false -> les textes sont masquÃ©s dans la vue lecture
+// Si balise_LECTURE_dist = true -> les textes sont affichÃ©s dans la vue lecture
 
 function balise_LECTURE_dist($p) {
         $p->code = "'true'";

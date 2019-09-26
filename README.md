@@ -9,4 +9,4 @@ INSTALLATION basique
 - Copier le fichier mes_options.php.dist dans le répertoire /config en le renommant mes_options.php
 - Créer une rubrique portant le nom de l'année scolaire en cours et les noms d'histoire asssociées
 
-test push github
+test push github novachat

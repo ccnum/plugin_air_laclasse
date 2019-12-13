@@ -93,17 +93,26 @@ function cleanCut($string,$length=200,$cutString = '(...)')
   return $cutString.substr($str,stripos($str,' '));
 }
 
+/**
+ * La fonction prend la date actuelle et l'année scolaire et tente de déduire quelle option rendre
+ * sélectionnée par défaut.
+ * @param $annee
+ * @param $mois
+ * @param $annee_scolaire
+ * @return string
+ */
 function afficher_options_date($annee,$mois,$annee_scolaire)
 {
-  if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
-  if ($mois<9) $annee = $annee--; 
+    $texte='';
+    if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
+    if ($mois<9) $annee = $annee--;
     for ($i=$annee_actuelle;$i>=$annee;$i--) {
-    $j=$i+1;
-    $texte .= "<option style='' value='$i'";
-    if ($i==$annee_scolaire) $texte .= " selected ";
-    $texte .= ">$i/$j</option>";
-  }
-  return $texte;
+        $j=$i+1;
+        $texte .= "<option style='' value='$i'";
+        if ($i==$annee_scolaire) $texte .= " selected ";
+        $texte .= ">$i/$j</option>";
+    }
+    return $texte;
 }
 
 ?>

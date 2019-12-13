@@ -7,12 +7,19 @@
 </BOUCLE_annee>
 
 <script>
-    function reload_cookie(url,cookie_nom,cookie_valeur) {  
-      if (cookie_valeur <= 2011)
-        url = 'http://airchive.laclasse.com/?annee_scolaire='+cookie_valeur; 
-      else  
-        document.cookie = cookie_nom + "=" + escape(cookie_valeur); 
-      reload(url);
+    function reload_cookie(url,cookie_nom,cookie_valeur) {
+        console.log('toto');
+        console.log('url : ' + url);
+        console.log('cookie_nom : ' + cookie_nom);
+        console.log('cookie_valeur : ' + cookie_valeur);
+        /*
+        if (cookie_valeur <= 2011) {
+            url = 'http://airchive.laclasse.com/?annee_scolaire=' + cookie_valeur;
+        }
+        else {
+            document.cookie = cookie_nom + "=" + escape(cookie_valeur);
+        }
+        reload(url);
     }
 
     function reload(url) {
@@ -21,6 +28,8 @@
         window.location.reload();
       }
       else window.location.href = url;
+
+         */
     }
 </script>
 
@@ -43,7 +52,7 @@
             </BOUCLE_page_footer>
             <a href="http://www.laclasse.com/">Laclasse.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             [(#REM)[(#SESSION{login}|=={}|oui)<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>&nbsp;&nbsp;|]]
-            <span id="annee_scolaire" title="Choisir l'ann�e scolaire">
+            <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
                     <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">

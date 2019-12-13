@@ -7,29 +7,31 @@
 </BOUCLE_annee>
 
 <script>
-    function reload_cookie(url,cookie_nom,cookie_valeur) {
-        console.log('toto');
-        console.log('url : ' + url);
-        console.log('cookie_nom : ' + cookie_nom);
-        console.log('cookie_valeur : ' + cookie_valeur);
-        /*
-        if (cookie_valeur <= 2011) {
-            url = 'http://airchive.laclasse.com/?annee_scolaire=' + cookie_valeur;
+    function recharger_page(url, nom_cookie, annee_choisie) {
+        mise_a_jour_cookie(nom_cookie, annee_choisie);
+
+        if (annee_choisie <= 2011) {
+            url = 'http://airchive.laclasse.com/?annee_scolaire=' + annee_choisie;
         }
         else {
-            document.cookie = cookie_nom + "=" + escape(cookie_valeur);
+            document.cookie = nom_cookie + "=" + escape(annee_choisie);
         }
         reload(url);
     }
 
-    function reload(url) {
-      if (url == 'self')  {
-        location.reload( true );
-        window.location.reload();
-      }
-      else window.location.href = url;
+    function mise_a_jour_cookie(cookie_nom, cookie_valeur) {
+        document.cookie = cookie_nom + "=" + escape(cookie_valeur);
+        document.annee_scolaire.annee_scolaire.value = cookie_nom + "=" + escape(cookie_valeur);
+        console.log('le cookie a dorénavant la valeur de : ' + cookie_valeur)
+    }
 
-         */
+    function reload(url) {
+        if (url == 'self') {
+            location.reload( true );
+            window.location.reload();
+        } else {
+            window.location.href = url;
+        }
     }
 </script>
 
@@ -55,7 +57,7 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
-                    <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
+                    <select onchange="recharger_page('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
                         <option value="#" style="">---</option>
                         <BOUCLE_vieux(ARTICLES){par date}{date!=0000}{0,1}{tout}>
                         [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]

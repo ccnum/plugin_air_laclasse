@@ -53,7 +53,7 @@ function annee_rub1($idr){
 	&&($_COOKIE[_cookie_annee_scolaire]!='')
 	&&($_COOKIE[_cookie_annee_scolaire]>2011))
 	$annee_scolaire = $_COOKIE[_cookie_annee_scolaire];
-	else $annee_scolaire = 2015;
+	else $annee_scolaire = 2019;
 
 	//Hack temporaire d'indexation d'année
 	if ((isset($_GET['id_rubrique']))){	
@@ -66,7 +66,7 @@ function annee_rub1($idr){
 		  $mois_scolaire = intval(substr($date,5,2));
 		  if ($mois_scolaire < 9) $annee_scolaire--;
 		}*/
-		if ($annee_scolaire == "") $annee_scolaire = 2015;
+		if ($annee_scolaire == "") $annee_scolaire = 2019;
 	} 
 
 	define('_annee_scolaire',$annee_scolaire);

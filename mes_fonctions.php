@@ -74,19 +74,19 @@ function balise_NOM_AUTEUR_dist($p) {
        return $p;
 }
 
-// Si balise_FIN_dist = false -> affichage de la grille sur la page d'accueil
-// Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil
+// Si balise_FIN_dist = false -> affichage de la grille sur la page d'accueil (début d'année)
+// Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil (fin d'année)
 
 function balise_FIN_dist($p) {
-        $p->code = "'true'";
+        $p->code = "'false'";
        return $p;
 }
 
-// Si balise_LECTURE_dist = false -> les textes sont masqués dans la vue lecture
-// Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
+// Si balise_LECTURE_dist = false -> les textes sont masqués dans la vue lecture (début d'année)
+// Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture (fin d'année)
 
 function balise_LECTURE_dist($p) {
-        $p->code = "'true'";
+        $p->code = "'false'";
        return $p;
 }
 
@@ -123,7 +123,12 @@ function cleanCut($string,$length=200,$cutString = '(...)')
 
 function afficher_options_date($annee,$mois,$annee_scolaire)
 {
-  if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
+  if (date('m')>=8) { // La nouvelle année scolaire apparaîtra dans le menu au mois d'août.
+      $annee_actuelle = date('Y');
+  }
+  else{
+      $annee_actuelle = date('Y')-1;
+  }
   if ($mois<9) $annee = $annee--; 
     for ($i=$annee_actuelle;$i>=$annee;$i--) {
     $j=$i+1;

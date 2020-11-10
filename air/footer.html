@@ -58,7 +58,7 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
                     <select onchange="recharger_page('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
-                        <option value="#" style="">---</option>
+                        <!-- <option value="#" style="">---</option> -->
                         <BOUCLE_vieux(ARTICLES){par date}{date!=0000}{0,1}{tout}>
                         [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]
                         </BOUCLE_vieux>
@@ -74,6 +74,7 @@
 <!-- Xiti -->
 [<script type="text/javascript" src="http://www.laclasse.com/v25/js/marqueur_men/xtfirst_ENT.js"></script>
 <script type="text/javascript" src="http://www.laclasse.com/pls/public/xiti_men.get_marqueur_thema?plogin=(#SESSION{login})"></script>]
+
 
 <!-- Marqueur Google Analytics -->
 <script src="https://www.google-analytics.com/urchin.js" type="text/javascript"></script>

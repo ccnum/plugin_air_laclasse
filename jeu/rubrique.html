@@ -109,7 +109,7 @@
         <!-- END PROLOGUE -->
         <!-- Boucle affichage des cadavres -->
         <BOUCLE_cadavres(ARTICLES){id_rubrique}{par date}{tout}>
-        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{id_cadavre_hidden}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>] 
+        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{id_cadavre_hidden}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
         [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{id_cadavre_hidden}}|oui)<INCLURE{fond=chapitre-visible, id_article}>]
                              
         </BOUCLE_cadavres>

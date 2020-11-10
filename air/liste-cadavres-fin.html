@@ -13,15 +13,16 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
 <div id="liste-fin">
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
 <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
-
-    	<div class="liste-fin-rubrique">
-
+    [(#COMPTEUR_BOUCLE|modulo{3}|=={1}|oui)
+    <div class="ouvrant">
+    ]
+    <div class="liste-fin-rubrique">
             <!--<div class="liste-title">#ID_RUBRIQUE</div>-->
 
             <div class="liste-fin-book">
                 <!-- COUVERTURE LIVRE -->
                 <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
-                [(#LOGO_RUBRIQUE|image_reduire{175,0})]
+                [(#LOGO_RUBRIQUE|image_reduire{170,0})]
                 </a>
             </div>
 
@@ -33,6 +34,9 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
             </div>
 
         </div>
+    [(#COMPTEUR_BOUCLE|modulo{3}|=={0}|oui)
+    </div>
+    ]
 
 </BOUCLE_rubriques_toutes>
 </BOUCLE_annee>

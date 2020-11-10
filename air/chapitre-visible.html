@@ -1,91 +1,36 @@
 <!--
 
-RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
-(Cadavre n-1 visible)
- 
+RUBRIQUE.HTML > CHAPITRE-ECRITURE.HTML
+(interface d'édition d'un chapitre)
+
  -->
-<BOUCLE_article_verrouille(ARTICLES){id_article}>
-<!-- DESCRIPTION CHAPITRE-->
+
+<BOUCLE_article(ARTICLES){id_article}>
 <div class="ecriture-chapitre">
 
-	<div class="ecriture-chapitre-picto">
-    <img src="#CHEMIN{img/ecriture/picto-oeil.png}" width="50" height="50" />
+    <div class="ecriture-chapitre-picto">
+        <img src="#CHEMIN{img/ecriture/picto-crayon.png}" width="50" height="50" />
     </div>
-    
+
     <div class="ecriture-chapitre-texte">
-    	<div class="ecriture-chapitre-surtitre rose">#SURTITRE</div>
-        <div class="ecriture-chapitre-titre">#TITRE</div> 
+        <div class="ecriture-chapitre-surtitre rose">#SURTITRE</div>
+        <div class="ecriture-chapitre-titre #EDIT{titre}">#TITRE</div>
     </div>
-    
+
     <div class="ecriture-chapitre-auteur">
-   <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
-		<div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+        <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
+        <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
         <div class="ecriture-chapitre-nom">#NOM</div>
-         #SET{var_auteur_article, #NOM}
-   </BOUCLE_auteur_article>
+        #SET{var_auteur_article, #NOM}
+        </BOUCLE_auteur_article>
     </div>
 
-</div>
-
-<!-- TEXTE  -->
-<div class="texte_courant">
-	<!-- LONGUEUR DE L' ARTICLE-->
-    #SET{ma_regexp, [[:alpha:]]}
-   <span class="texte-masque">[(#DESCRIPTIF|couper{[(#DESCRIPTIF|textebrut|strlen|moins{200})], ''}|replace{#GET{ma_regexp}, x})]</span>
-   <span>[(#DESCRIPTIF|cleanCut)]</span>   
-</div>
-
-
-<!-- SCRIPT  -->
-<div class="script-forum-fleche">
-<img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
-</div>
-<div class="script-ecrivain">
-	<div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
-    <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
-    <div class="script-texte script-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
-        #TEXTE
-        <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
-            <div style="clear: both; padding: 5px;">
-                <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3}|?{class="mediabox boxIframe"})]>
-                    [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
-                </a>
-                <?php
-                    //phpinfo();
-                    include_spip('inc/securiser_action');
-                    include_spip('inc/autoriser');                                  
-                    if ((isset($GLOBALS['auteur_session']['nom']))&&(autoriser('modifier', 'article', #ID_ARTICLE)))
-                        {   $action="documenter";
-                            $redirect="#SELF";
-                            $arg="-#ID_ARTICLE/article/#ID_DOCUMENT";
-                            $confirmation= attribut_html("Etes vous sûr de vouloir supprimer ce document ?");
-                            echo "<a href='".securiser_action_auteur($action, $arg, $redirect, $mode=false, $att='')."' class='rouge droite ajax' onClick='return confirmation(\"$confirmation\")' title='supprimer ce document' ><div class='action_supprimer'></div></a>";
-                        }
-                ?>
-            </div>
-        </BOUCLE_doc>
+    <!-- TEXTE  -->
+    <div class="texte_courant ecriture-edition #EDIT{descriptif}">
+        [(#DESCRIPTIF)]
     </div>
 
+    <INCLURE{fond=chapitre-ecriture-script, id_article}>
+
 </div>
-
-
-         
-
-
-<!-- FORUM -->
-
-	<!-- NB DE MESSAGE -->
-    
-	
-    <a href="#URL_SITE_SPIP/?page=forum&id_article=#ID_ARTICLE" class="mediabox boxIframe boxWidth-730px boxHeight-80pc">
-        <div class="forum_bt">
-        <div class="forum-titre">FORUM</div>
-        <div class="forum-nb-message"><BOUCLE_combien(FORUMS){id_article}{plat}></BOUCLE_combien>[(#TOTAL_BOUCLE)]<//B_combien></div>
-        </div>
-    </a>
-	
-
-</BOUCLE_article_verrouille>
-
-
-<hr/>
+</BOUCLE_article>

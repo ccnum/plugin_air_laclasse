@@ -720,8 +720,8 @@ width:520px;
 }
 
 .texte-masque {
-background-color:#CCC;
-color:#CCC;
+/*background-color:#CCC;
+color:#CCC;*/
 }
 
 #texte_prologue {
@@ -1539,9 +1539,13 @@ margin-bottom:50px;
 }
 
 .liste-fin-rubrique {
-width:175px;
+width:170px;
 float:left;
 margin:0px 10px 20px 0px;
+}
+.ouvrant{
+	height: 290px;
+	clear: both;
 }
 
 	.liste-fin-book {

@@ -2,7 +2,7 @@
 
 	#SET{ma_regexp, [[:alpha:]]}
 	<div class="texte-courant-lecture">
-		<span class="texte-masque">[(#DESCRIPTIF|replace{#GET{ma_regexp}, x})]</span>
+		<span class="texte-masque">#DESCRIPTIF</span>
 		<span>[(#DESCRIPTIF|cleanCut)]</span>
 	</div>
 

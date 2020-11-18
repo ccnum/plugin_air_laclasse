@@ -10,14 +10,13 @@ ID / NOM AUTEUR
 #SET{i,0}
 
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par num titre}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par date}>
 	#SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
 	<div class="liste-title">#GET{i}</div>
-    
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
-
+    <!-- mettre boucle ci-dessus par date -->
         <div class="liste-link">
         <!-- TOOL TIP CONTENT -->
             <div class="liste-tooltip-content">
@@ -44,7 +43,7 @@ ID / NOM AUTEUR
                 </BOUCLE_auteur_actif>
             </B_auteur_actif>
                 <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
-                <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>       
+                <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
                 </BOUCLE_auteur_actif1>
             <//B_auteur_actif>
 

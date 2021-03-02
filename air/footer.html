@@ -12,9 +12,11 @@
         console.log('url : ' + url);
         console.log('cookie_nom : ' + cookie_nom);
         console.log('cookie_valeur : ' + cookie_valeur);
-        /*
-        if (cookie_valeur <= 2011) {
-            url = 'http://airchive.laclasse.com/?annee_scolaire=' + cookie_valeur;
+
+        if (cookie_valeur === 2010) {
+            url = 'https://airchive.laclasse.com/spip.php?page=rubrique&id_rubrique=23';
+        } else if (cookie_valeur === 2011) {
+            url = 'https://airchive.laclasse.com/spip.php?page=rubrique&id_rubrique=3';
         }
         else {
             document.cookie = cookie_nom + "=" + escape(cookie_valeur);
@@ -29,7 +31,6 @@
       }
       else window.location.href = url;
 
-         */
     }
 </script>
 

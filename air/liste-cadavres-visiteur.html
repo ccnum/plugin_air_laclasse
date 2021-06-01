@@ -1,26 +1,25 @@
 <!--
-
 SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
 (grille des cadavres affiché pour les visiteurs)
- 
+
  -->
- #CACHE{0}
+#CACHE{0}
 
 #SET{i,0}
 
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
-    #SET{i,#GET{i}|plus{1}}
-	<div class="liste-colonnes">
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par titre}>
+#SET{i,#GET{i}|plus{1}}
+<div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>
-    
+
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
 
     <div class="liste-link">
-    <!-- TOOL TIP CONTENT -->
+        <!-- TOOL TIP CONTENT -->
         <div class="liste-tooltip-content">
-        	<div id="liste-tooltip-content">
+            <div id="liste-tooltip-content">
                 <div class="liste-tooltip-num-cadavre">Histoire #GET{i}</div>
                 <!--<div class="liste-tooltip-num-chapitre">#SURTITRE</div>-->
                 <div class="liste-tooltip-titre-chapitre">#TITRE</div>
@@ -29,22 +28,22 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
                 <div class="liste-tooltip-auteur">#NOM</div>
                 <div class="liste-tooltip-auteur">
                     [(#DESCRIPTIF|cleanCut)]<br />
-                </div>                
+                </div>
                 </BOUCLE_auteur_tous>
             </div>
             <div id="liste-tooltip-bulle">
             </div>
         </div>
-    
-    
-   		<a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1" class="verrouille [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'last',''})]"></a>
-         
+
+
+        <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1" class="verrouille [(#COMPTEUR_BOUCLE|=={#TOTAL_BOUCLE}|?{'last',''})]"></a>
+
     </div>
     <div class="liste-link-spacer-5"></div>
     </BOUCLE_articles_tous>
     <!-- FIN LISTE CADAVRES -->
-    
-	</div>
-    
+
+</div>
+
 </BOUCLE_rubriques_toutes>
 </BOUCLE_annee>

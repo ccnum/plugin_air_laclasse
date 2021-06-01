@@ -102,7 +102,7 @@ header('Location: spip.php?page=mobile2');
                     #SET{var_fin, false}
 
                     [(#ENV{mode}|=={fabrication}|non)
-                        <!-- FIN DU JEUX / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
+                        <!-- FIN DU JEU / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
                    				[(#FIN|=={#GET{var_fin}}|non)    
                             <INCLURE{fond=liste-cadavres-fin} />
                           ]

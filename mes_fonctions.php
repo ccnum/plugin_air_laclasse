@@ -88,16 +88,18 @@ function balise_NOM_AUTEUR_dist($p) {
 // Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil (fin d'année)
 
 function balise_FIN_dist($p) {
-        $p->code = "'true'";
-       return $p;
+    // NE ME MODIFIE PAS ! LE BON FICHIER À MODIFIER EST air/mes_fonctions.php !!!!!
+    $p->code = "'true'";
+    return $p;
 }
 
 // Si balise_LECTURE_dist = false -> les textes sont masqués dans la vue lecture (début d'année)
 // Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture (fin d'année)
 
 function balise_LECTURE_dist($p) {
-        $p->code = "'true'";
-       return $p;
+    // NE ME MODIFIE PAS ! LE BON FICHIER À MODIFIER EST air/mes_fonctions.php !!!!!
+    $p->code = "'true'";
+    return $p;
 }
 
 

@@ -58,7 +58,7 @@ function balise_ANNEE_SCOLAIRE_dist($p) {
       &&($_COOKIE[_cookie_annee_scolaire]!='')
       &&($_COOKIE[_cookie_annee_scolaire]>2011))
       $p->code = $_COOKIE[_cookie_annee_scolaire];
-    else $p->code = 2014;
+    else $p->code = 2021;
   if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
   $p->code = $_GET['annee_scolaire'];
    return $p;
@@ -123,15 +123,13 @@ function cleanCut($string,$length=200,$cutString = '(...)')
 
 function afficher_options_date($annee,$mois,$annee_scolaire)
 {
-  if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
-  if ($mois<9) $annee = $annee--; 
+    if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
+    if ($mois<9) $annee = $annee--;
     for ($i=$annee_actuelle;$i>=$annee;$i--) {
-    $j=$i+1;
-    $texte .= "<option style='display:inline;' value='$i'";
-    if ($i==$annee_scolaire) $texte .= " selected ";
-    $texte .= ">$i/$j</option>";
-  }
-  return $texte;
+        $j=$i+1;
+        $texte .= "<option style='display:inline;' value='$i'";
+        if ($i==$annee_scolaire) $texte .= " selected ";
+        $texte .= ">$i/$j</option>";
+    }
+    return $texte;
 }
-
-?>

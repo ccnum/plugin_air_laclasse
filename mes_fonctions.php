@@ -133,5 +133,3 @@ function afficher_options_date($annee,$mois,$annee_scolaire)
   }
   return $texte;
 }
-
-?>

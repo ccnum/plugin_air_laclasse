@@ -100,18 +100,20 @@ header('Location: spip.php?page=mobile2');
                     #SET{var_fin, false}
 
                     [(#ENV{mode}|=={fabrication}|non)
-                        <!-- FIN DU JEUX / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
+                        <!-- FIN DU JEU / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
                    				[(#FIN|=={#GET{var_fin}}|non)
                             <INCLURE{fond=liste-cadavres-fin} />
                           ]
 
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
+                            [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
                               [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
                               [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
                               <INCLURE{fond=sommaire-legende} />
                             ]
-                             [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
+                             [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|non)
+
+                                <!-- affichage années #ANNEE_ACTUELLE #EVAL{_annee_scolaire}-->
                                 <INCLURE{fond=liste-cadavres-fin} />
                             ]
                           ]

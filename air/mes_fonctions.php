@@ -114,3 +114,40 @@ function afficher_options_date($annee,$mois,$annee_scolaire)
     }
     return $texte;
 }
+
+/**
+ * Enregistre en session l'année que le visiteur souhaite afficher.
+ * -> cette année ne peut être inférieure à 2021 car cette année est le début de fictions
+ *      -> 2021 devient alors l'année choisie
+ * -> cette année ne peut pas être supérieur à l'année en cours (on ne peut pas demander l'année 2022 si on est en 2021.
+ *      -> 2021 devient l'année choisie
+ * @param int $anneeDemandee
+ */
+function setAnneeActuelle($anneeDemandee=2000){
+    if( intval($anneeDemandee)<2021 ){ // On ne peut pas demander de date avant 2021 (fictions n'existait pas)
+        $_SESSION['anneeActuelle']=2021;
+    } else{
+        (date('m')>=9)==true ? $annee_actuelle = date('Y') : $annee_actuelle = date('Y')-1;
+        if($anneeDemandee > $annee_actuelle){
+            $_SESSION['anneeActuelle']=2021; // On ne peut pas demander de date après l'année actuelle.
+        } else{
+            $_SESSION['anneeActuelle']=intval($anneeDemandee);
+        }
+    }
+}
+
+/**
+ * On renvoie l'année qui est demandée si elle existe. Sinon, on renvoie l'année scolaire en cours
+ * (ex : 2021 pour l'année 2021-2022).
+ * @return int
+ */
+function getAnneeActuelle(): int
+{
+    if( isset($_SESSION['anneeActuelle']) ){
+        return $_SESSION['anneeActuelle'];
+    } else{
+        if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
+        $_SESSION['anneeActuelle'] = $annee_actuelle;
+        return $_SESSION['anneeActuelle'];
+    }
+}

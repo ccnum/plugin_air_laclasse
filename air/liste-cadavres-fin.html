@@ -11,7 +11,7 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
     #SET{var_nom_auteur,#SESSION{nom}}
 
 <div id="liste-fin">
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
 <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
 
     	<div class="liste-fin-rubrique">

@@ -1,6 +1,6 @@
 #CACHE{0}
 #SET{id_art,0}
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
 <BOUCLE_id_forum(ARTICLES){titre_mot==agora}{id_rubrique}{0,1}>
 #SET{id_art,#ID_ARTICLE}
 </BOUCLE_id_forum>
@@ -33,7 +33,6 @@
      * @param urlToGo
      */
     function redirectPage(urlToGo){
-        //console.log('je dois rediriger vers cette page : ' + urlToGo)
         window.location.href = urlToGo;
     }
 </script>
@@ -63,7 +62,7 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
                     <select name="annee_scolaire">
-                        <option onclick="redirectPage('#URL_SITE_SPIP?annee=2021')" value="2021">2021/2022</option>
+                        <option onclick="redirectPage('[(#SELF|parametre_url{annee,2021})]')" value="2021">2021/2022</option>
                         <option onclick="redirectPage('https://air.laclasse.com')">Voir les années antérieures</option>
             		</select>
                 </form>

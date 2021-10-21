@@ -1,4 +1,4 @@
-<?php
+[(#ENV{annee}|setAnneeActuelle)]<?php
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
@@ -6,14 +6,12 @@ $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
 $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
 
 if ($iphone || $android || $palmpre || $ipod || $berry == true) 
-{ 
-[(#LECTURE|=={true}|oui)
-header('Location: spip.php?page=mobile2');
-]
+{
+    [(#LECTURE|=={true}|oui)
+        header('Location: spip.php?page=mobile2');
+    ]
 }
-
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -29,7 +27,7 @@ header('Location: spip.php?page=mobile2');
 </head>
 
 <body>
-
+<!-- test année [(#ENV{annee}|getAnneeActuelle)] -->
 <!-- ID/NOM AUTEUR-->
  	
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
@@ -60,7 +58,7 @@ header('Location: spip.php?page=mobile2');
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 </div>
-<BOUCLE_annee(RUBRIQUES){titre==2021}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==2021|getAnneeActuelle}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">
@@ -108,12 +106,12 @@ header('Location: spip.php?page=mobile2');
                           ]
  
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
+                            [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|oui)
                               [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
                               [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
                               <INCLURE{fond=sommaire-legende} />
                             ] 
-                             [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|non)
+                             [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|non)
                                 <INCLURE{fond=liste-cadavres-fin} />
                             ]     
                           ]

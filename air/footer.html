@@ -33,6 +33,7 @@
      * @param urlToGo
      */
     function redirectPage(urlToGo){
+        //console.log('je dois rediriger vers cette page : ' + urlToGo)
         window.location.href = urlToGo;
     }
 </script>
@@ -62,8 +63,8 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
                     <select name="annee_scolaire">
-                        <option onselect="redirectPage('#URL_SITE_SPIP')" value="2021">2021/2022</option>
-                        <option onselect="redirectPage('air.laclasse.com')">Voir les années antérieures</option>
+                        <option onclick="redirectPage('#URL_SITE_SPIP?annee=2021')" value="2021">2021/2022</option>
+                        <option onclick="redirectPage('https://air.laclasse.com')">Voir les années antérieures</option>
             		</select>
                 </form>
             </span>

@@ -1,6 +1,6 @@
 #CACHE{0}
 #SET{id_art,0}
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
 <BOUCLE_id_forum(ARTICLES){titre_mot==agora}{id_rubrique}{0,1}>
 #SET{id_art,#ID_ARTICLE}
 </BOUCLE_id_forum>
@@ -8,10 +8,6 @@
 
 <script>
     function reload_cookie(url,cookie_nom,cookie_valeur) {
-        console.log('toto');
-        console.log('url : ' + url);
-        console.log('cookie_nom : ' + cookie_nom);
-        console.log('cookie_valeur : ' + cookie_valeur);
         /*
         if (cookie_valeur <= 2011) {
             url = 'http://airchive.laclasse.com/?annee_scolaire=' + cookie_valeur;
@@ -31,6 +27,14 @@
 
          */
     }
+
+    /**
+     * Redirige la page actuelle en fonction de ce qui est transmise en argument.
+     * @param urlToGo
+     */
+    function redirectPage(urlToGo){
+        window.location.href = urlToGo;
+    }
 </script>
 
 <div id="footer">
@@ -42,14 +46,14 @@
             [(#SESSION{statut}|=={0minirezo}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#URL_SITE_SPIP/?page=forum&id_article=111" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">Accéder au forum<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]
             ]
             [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
-            <a href="https://www.laclasse.com/portail/#app.doc/node/4104193">Espace doc</a>
+            <BOUCLE_pages_speciales_footer_gauche(ARTICLES){titre_mot=lien-footer-gauche}>
+            <a href="[(#DESCRIPTIF|textebrut)]">#TITRE</a>&nbsp;&nbsp;|
+            </BOUCLE_pages_speciales_footer_gauche>
         </div>
 
         <div id="footer-nav">
-            <BOUCLE_pages_speciales_footer(RUBRIQUES){titre_mot=pages_speciales}>
-                <BOUCLE_pages_footer(ARTICLES){id_rubrique}>
+            <BOUCLE_pages_speciales_footer(ARTICLES){titre_mot=lien-footer-droite}>
             <a href="#URL_SITE_SPIP/?page=page&id_article=#ID_ARTICLE">#TITRE</a>&nbsp;&nbsp;|
-                </BOUCLE_pages_footer>
             </BOUCLE_pages_speciales_footer>
 
             <a href="http://www.laclasse.com/">Laclasse.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;
@@ -57,13 +61,9 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;"> 
-                    <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
-                        <option value="#" style="">---</option>
-                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000-00-00 00:00:00}{0,1}{tout}>
-                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]
-                        </BOUCLE_vieux>
-                        <option style="" value="2011">2011/2012</option>                        
-                        <option style="" value="2010">2010/2011</option>
+                    <select name="annee_scolaire">
+                        <option onclick="redirectPage('[(#SELF|parametre_url{annee,2021})]')" value="2021">2021/2022</option>
+                        <option onclick="redirectPage('https://air.laclasse.com')">Voir les années antérieures</option>
             		</select>
                 </form>
             </span>

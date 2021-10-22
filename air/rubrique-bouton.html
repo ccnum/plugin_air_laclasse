@@ -19,7 +19,7 @@ RUBRIQUE.HTML > RUBRIQUE-BOUTON.HTML
 
 <!-- cas spécifique de l'ecrivain (impossible de determiner une zone de travail) -->
 #SET{var_oui, oui}
-<BOUCLE_annee(RUBRIQUES){titre==#ANNEE_SCOLAIRE}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==2021|getAnneeActuelle}{tout}{0,1}>
 <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}>
 <BOUCLE_zone_ecrivain_article(ARTICLES){id_rubrique}{par date}{inverse}{0,1}>
 <BOUCLE_zone_ecrivain_auteur(AUTEURS){id_article}{0,1}>

@@ -24,23 +24,10 @@ function annee_rub($idr){
   return $annee_scolaire;
 }
 
-function balise_ANNEE_SCOLAIRE_dist($p) {
-    if ((isset($_COOKIE[_cookie_annee_scolaire]))
-      &&($_COOKIE[_cookie_annee_scolaire]!=0)
-      &&($_COOKIE[_cookie_annee_scolaire]!='')
-      &&($_COOKIE[_cookie_annee_scolaire]>2011))
-      $p->code = $_COOKIE[_cookie_annee_scolaire];
-    else $p->code = 2015;
-  if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
-  $p->code = $_GET['annee_scolaire'];
-   return $p;
-}
-
 function balise_ANNEE_ACTUELLE_dist($p) {
     if (date('m')>=9) $p->code = date('Y'); else $p->code = date('Y')-1;
     return $p;
 }
-
 function balise_NOM_AUTEUR_dist($p) {
         $p->code = "'Violaine Schwartz'";
        return $p;

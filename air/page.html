@@ -72,47 +72,29 @@ PAGE-TYPE.HTML
         	
            <div class="content">
            <BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
-            <BOUCLE_art(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
-
-             <div class="content-left-small">
-                <div id="titre_site">
-                    <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
-                </div>
-                <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
-                <div id="texte-presentation" class="#EDIT{texte}">
-                  [(#TEXTE)]
-                </div>
-             </div>
-
-            </BOUCLE_art>
+               <BOUCLE_art(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
+               <div class="content-left-small">
+                   <div id="titre_site">
+                       <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                   </div>
+                   <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
+                   <div id="texte-presentation" class="#EDIT{texte}">[(#TEXTE)]</div>
+               </div>
+               </BOUCLE_art>
             </BOUCLE_annee>
-           
-           <div class="content-right-large">
-            <BOUCLE_page_article(ARTICLES){id_article}>
-            	<!-- TEXTE PAGE -->
-                <div id="page-type">
-                	<div class="page-type-titre">
-                    #TITRE
-                    </div>
-                    <div class="page-type-texte #EDIT{texte}">
-                	#TEXTE
-                	</div>
-                </div>
-            
-            </BOUCLE_page_article>
-           
-            </div>
-            
+
+               <div class="content-right-large">
+               <BOUCLE_page_article(ARTICLES){id_article}>
+                   <!-- TEXTE PAGE -->
+                   <div id="page-type">
+                       <div class="page-type-titre">#TITRE</div>
+                       <div class="page-type-texte #EDIT{texte}">#TEXTE</div>
+                   </div>
+               </BOUCLE_page_article>
+               </div>
            </div>
-           
-           </div>
-        
         </div>
-        
-        
-
-
-
+    </div>
 </div>
 
 <INCLURE{fond=footer}/>

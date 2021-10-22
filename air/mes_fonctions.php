@@ -189,7 +189,28 @@ function masquerTexteChapitre(string $texteAMasquer='', int $nbDeCaracteresATron
         'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
         'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z  ',
     );
-    $texteMasque = str_replace($caracteresAMasquer, "X", $texteTronque);
     //$texteMasqueRegex = preg_replace('[0-9a-zA-Z]', 'X', $texteMasque);
-    return $texteMasque;
+    return str_replace($caracteresAMasquer, "X", $texteTronque);
+}
+
+/**
+ * Cette fonction reçoit une chaîne de caractères (un chapitre) et doit n'en retourner que les X derniers caractères. X
+ * étant le nombre de caractères finaux que nous désirons. Enfin avant de renvoyer la fin de chaîne ainsi tronquée, on
+ * lui concatènera (à son commencement) la chaîne de caractère éventuelle reçue en troisième argument (qui est sensée
+ * symboliser le texte manquant)
+ *
+ * Ex : recupererDernieresLignesChapitres('toto_titi_tutu_tata', 5, '...') renverra ...titi_tutu_tata
+ *
+ * -> Si le nombre de caractères voulus est supérieur à la taille du texte, on renverra le texte complet sans la chaîne
+ * à concaténer au début.
+ *
+ * @param string $texteChapitre
+ * @param int $nbDeDerniersCaracteresAAfficher
+ * @return string
+ */
+function recupererDernieresLignesChapitres($texteChapitre='', $nbDeDerniersCaracteresAAfficher=325, $chaineAConcatenerAuDebut='(...)'){
+    if( strlen($texteChapitre) < $nbDeDerniersCaracteresAAfficher ){
+        return $texteChapitre;
+    }
+    return $chaineAConcatenerAuDebut . substr($texteChapitre, strlen($texteChapitre)-$nbDeDerniersCaracteresAAfficher, -1);
 }

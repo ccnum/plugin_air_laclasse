@@ -31,19 +31,8 @@ RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
 <div class="texte_courant">
 	<!-- LONGUEUR DE L' ARTICLE-->
     #SET{ma_regexp, [[:alpha:]]}
-    <!--
-     Le descriptif en texte brut:
-     [(#DESCRIPTIF|textebrut)]
-
-     -------------------------------------------------------------
-    -->
-    <!--
-    Le descriptif tronqué :
-    [(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]
-
-    -->
    <span class="texte-masque">[(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]</span>
-   <span>[(#DESCRIPTIF|cleanCut)]</span>   
+   <span>[(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]</span>
 </div>
 
 

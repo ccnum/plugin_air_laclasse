@@ -47,7 +47,7 @@
             ]
             [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
             <BOUCLE_pages_speciales_footer_gauche(ARTICLES){titre_mot=lien-footer-gauche}>
-            <a href="[(#DESCRIPTIF|textebrut)]">#TITRE</a>&nbsp;&nbsp;|
+            [(#SESSION{statut}|=={0minirezo}|oui)<a href="[(#DESCRIPTIF|textebrut)]">#TITRE</a>&nbsp;&nbsp;|]
             </BOUCLE_pages_speciales_footer_gauche>
         </div>
 

@@ -151,3 +151,45 @@ function getAnneeActuelle(): int
         return $_SESSION['anneeActuelle'];
     }
 }
+
+/**
+ * Cette fonction reçoit une chaîne de caractère (un chapitre complet) et doit en retrancher les X derniers caractères.
+ * X étant l'entier reçu en deuxième argument. Puis chaque caractère doit être remplacé par un x.
+ *
+ * -> si le chapitre contient moins de caractères que le nb de caractères à tronquer, on ne renvoie qu'une chaîne vide.
+ *
+ * @param string $texteAMasquer
+ * @param int $nbDeCaracteresATronquerALaFin
+ * @return string
+ */
+function masquerTexteChapitre(string $texteAMasquer='', int $nbDeCaracteresATronquerALaFin=325): string
+{
+    if(strlen($texteAMasquer) < $nbDeCaracteresATronquerALaFin){
+        return '';
+    }
+    $texteTronque = substr($texteAMasquer, 0, strlen($texteAMasquer)-$nbDeCaracteresATronquerALaFin);
+
+    // Remplace tous les caractères sauf les diacritiques.
+    // Les RegEx ne semblent pas vouloir fonctionner :/ Je soupçonne un pb d'encofdage iso-latin/utf-8. AU SECOURS !
+    $caracteresAMasquer = array(
+        "à", "ä",
+        "À", "Ä",
+        "ç",
+        "Ç",
+        "é", "è", "ë", "ê",
+        "É", "È", "Ë", "Ê",
+        "î", "ï",
+        "Î", "Ï",
+        "ô", "ö",
+        "Ô", "Ö",
+        "ù", "û", "ü",
+        "Ù", "û", "ü",
+        "ŷ", "ÿ",
+        "Ŷ", "Ÿ",
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z  ',
+    );
+    $texteMasque = str_replace($caracteresAMasquer, "X", $texteTronque);
+    //$texteMasqueRegex = preg_replace('[0-9a-zA-Z]', 'X', $texteMasque);
+    return $texteMasque;
+}

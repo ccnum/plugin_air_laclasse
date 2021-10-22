@@ -26,7 +26,7 @@ RUBRIQUE.HTML > CHAPITRE-VERROUILLE.HTML
 
    [(#ENV{fin}|=={oui}|non)
       <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
-      [<div class="ecriture-chapitre-nom">(#DESCRIPTIF|cleanCut)</div>]
+      [<div class="ecriture-chapitre-nom">(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})</div>]
    ]
 
    </div>

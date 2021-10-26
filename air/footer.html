@@ -7,6 +7,7 @@
 </BOUCLE_annee>
 
 <script>
+    /*
     function reload_cookie(url,cookie_nom,cookie_valeur) {
         console.log('toto');
         console.log('url : ' + url);
@@ -54,15 +55,8 @@
             [(#REM)[(#SESSION{login}|=={}|oui)<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>&nbsp;&nbsp;|]]
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
-                <form name="annee_scolaire" style="display:inline;"> 
-                    <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
-                        <option value="#" style="">---</option>
-                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000-00-00 00:00:00}{0,1}{tout}>
-                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{2021}})]
-                        </BOUCLE_vieux>
-                        <option style="" value="2011">2011/2012</option>                        
-                        <option style="" value="2010">2010/2011</option>
-            		</select>
+                <form name="annee_scolaire" style="display:inline;">
+                    #MENU_DEROULANT_ANNEE
                 </form>
             </span>
         </div>

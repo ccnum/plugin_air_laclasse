@@ -176,3 +176,63 @@ function recupererDernieresLignesChapitres($texteChapitre='', $nbDeDerniersCarac
     }
     return $chaineAConcatenerAuDebut . substr($texteChapitre, strlen($texteChapitre)-$nbDeDerniersCaracteresAAfficher, -1);
 }
+
+/**
+ * Renvoie l'année scolaire en cours.
+ * Ex :
+ * - renverra 2021 si on est en décembre 2021
+ * - renverra 2021 si on est en mai 2022
+ * - renverra 2020 si on est en juin 2021
+ * --> Le mois qui permet de basculer d'une année scolaire à une autre est septembre (compris)
+ *
+ * @return int
+ */
+function getAnneeScolaireCourante(){
+    return (date('m')>=9) ? intval(date('Y')) : intval(date('Y'))-1;
+}
+
+
+/*
+ *  BALISES SPIP PERSONNALISÉES
+ *
+ * Il est possible de créer des balises SPIP personnalisées du type #MA_BALISE. Pour cela, il suffit de déclarer une
+ * fonction ici-même.
+ *
+ * DOCUMENTATION ICI :
+ * https://code.spip.net/fr/archives/compilateur/article/creer-des-balises-personnalisees-9
+ * https://passingcuriosity.com/2008/creating-custom-tags-spip-static/
+ *
+ */
+
+/**
+ * Cette fonction permet de générer le contenu de la balise #MENU_DEROULANT_ANNEE.
+ * @param object $p
+ * @return object
+ */
+function balise_MENU_DEROULANT_ANNEE(object $p): object
+{
+    // Historiquement, la première année commence en 2012.
+    $anne_debut = 2012;
+    // La dernière année est l'année scolaire courante.
+    $annee_courante = getAnneeScolaireCourante();
+    $codeHTML = '<select name="annee_scolaire_voulue">';
+    for ($i = $annee_courante; $i >= $anne_debut; $i--) {
+        $codeHTML .= '<option value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
+    }
+    $codeHTML .= '</select>';
+
+    /*
+     * <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
+                        <option value="#" style="">---</option>
+                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000-00-00 00:00:00}{0,1}{tout}>
+                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{2021}})]
+                        </BOUCLE_vieux>
+                        <option style="" value="2011">2011/2012</option>
+                        <option style="" value="2010">2010/2011</option>
+            		</select>
+     */
+
+    $contenu = "<!-- je suis un test de balise dynamique objet -->" . $codeHTML;
+    $p->code = '\'' . $contenu . '\'';
+    return $p;
+}

@@ -9,7 +9,7 @@ SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
 #SET{i,0}
 
 <!-- titi -->
-<BOUCLE_annee(RUBRIQUES){titre==#ANNEE_VOULUE}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_voulue}}{tout}{0,1}>
 <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
     #SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">

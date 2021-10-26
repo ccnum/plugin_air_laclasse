@@ -1,6 +1,6 @@
 <!--
 SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
-(grille des cadavres affiché à la fin du jeu)
+(grille des cadavres affichée à la fin du jeu)
  -->
 
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
@@ -10,29 +10,27 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
 <div id="liste-fin">
-<BOUCLE_annee(RUBRIQUES){titre==#ANNEE_VOULUE}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
-
-    	<div class="liste-fin-rubrique">
-
-            <!--<div class="liste-title">#ID_RUBRIQUE</div>-->
-
-            <div class="liste-fin-book">
-                <!-- COUVERTURE LIVRE -->
-                <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
+    test
+    #ENV{annee_voulue}
+    titi
+<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_voulue}}{tout}{0,1}>
+    <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par id_rubrique}>
+    <div class="liste-fin-rubrique">
+        <!--<div class="liste-title">#ID_RUBRIQUE</div>-->
+        <div class="liste-fin-book">
+            <!-- COUVERTURE LIVRE -->
+            <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
                 [(#LOGO_RUBRIQUE|image_reduire{175,0})]
-                </a>
-            </div>
-
-            <!-- BOUTON TELECHARGEMENT -->
-            <div class="liste-book-bt">
-             <BOUCLE_doc(DOCUMENTS){id_rubrique = #ID_RUBRIQUE}{mode=document}{doublons}>
-             <a href="#URL_DOCUMENT">#TYPE_DOCUMENT</a>
-             </BOUCLE_doc>
-            </div>
-
+            </a>
         </div>
 
-</BOUCLE_rubriques_toutes>
+        <!-- BOUTON TELECHARGEMENT -->
+        <div class="liste-book-bt">
+            <BOUCLE_doc(DOCUMENTS){id_rubrique = #ID_RUBRIQUE}{mode=document}{doublons}>
+            <a href="#URL_DOCUMENT">#TYPE_DOCUMENT</a>
+             </BOUCLE_doc>
+        </div>
+    </div>
+    </BOUCLE_rubriques_toutes>
 </BOUCLE_annee>
 </div>

@@ -23,7 +23,6 @@ header('Location: spip.php?page=mobile2');
         <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
         <meta name="viewport" content="width=980, user-scalable=no" />
     </head>
-    #SET{annee_choisie,#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR}
     [(#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR|setenv{annee_voulue})]
 <body>
 
@@ -57,7 +56,7 @@ header('Location: spip.php?page=mobile2');
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 </div>
-<BOUCLE_annee(RUBRIQUES){titre==#GET{annee_choisie}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_voulue}}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">
@@ -101,25 +100,25 @@ header('Location: spip.php?page=mobile2');
                     [(#ENV{mode}|=={fabrication}|non)
                         <!-- FIN DU JEU / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
                    				[(#FIN|=={#GET{var_fin}}|non)
-                            <INCLURE{fond=liste-cadavres-fin} />
+                            <INCLURE{fond=liste-cadavres-fin,env} />
                           ]
 
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#ANNEE_VOULUE}|oui)
-                              [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
-                              [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
+                            [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|oui)
+                              [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur,env} />]
+                              [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur,env} />]
                               <INCLURE{fond=sommaire-legende} />
                             ]
-                             [(#ANNEE_ACTUELLE|=={#ANNEE_VOULUE}|non)
+                             [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|non)
 
                                 <!-- affichage années #ANNEE_ACTUELLE #EVAL{_annee_scolaire}-->
-                                <INCLURE{fond=liste-cadavres-fin} />
+                                <INCLURE{fond=liste-cadavres-fin,env} />
                             ]
                           ]
                     ]
                     [(#ENV{mode}|=={fabrication}|oui)
-                            [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
-                            [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
+                            [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur,env} />]
+                            [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur,env} />]
                             <INCLURE{fond=sommaire-legende} />
                     ]
       			     </div>

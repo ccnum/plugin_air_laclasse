@@ -7,30 +7,14 @@
 </BOUCLE_annee>
 
 <script>
-    /*
-    function reload_cookie(url,cookie_nom,cookie_valeur) {
-        console.log('toto');
-        console.log('url : ' + url);
-        console.log('cookie_nom : ' + cookie_nom);
-        console.log('cookie_valeur : ' + cookie_valeur);
-        /*
-        if (cookie_valeur <= 2011) {
-            url = 'http://airchive.laclasse.com/?annee_scolaire=' + cookie_valeur;
-        }
-        else {
-            document.cookie = cookie_nom + "=" + escape(cookie_valeur);
-        }
-        reload(url);
-    }
-
-    function reload(url) {
-      if (url == 'self')  {
-        location.reload( true );
-        window.location.reload();
-      }
-      else window.location.href = url;
-
-         */
+    /**
+     * Redirige la page vers celle de la bonne année.
+     * @param anneeScolaire L'objet select contenant l'année choisie dans son attribut value.
+     */
+    function redirigerPage(anneeScolaire={}){
+        const url = new URL(window.location.href);
+        url.searchParams.set('annee_scolaire', anneeScolaire.value);
+        window.location.replace(url.href);
     }
 </script>
 

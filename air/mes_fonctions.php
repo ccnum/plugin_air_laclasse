@@ -215,24 +215,13 @@ function balise_MENU_DEROULANT_ANNEE(object $p): object
     $anne_debut = 2012;
     // La dernière année est l'année scolaire courante.
     $annee_courante = getAnneeScolaireCourante();
-    $codeHTML = '<select name="annee_scolaire_voulue">';
+    $codeHTML = '<select name="annee_scolaire_voulue" onchange="redirigerPage(this)">'; // « redirigerPage » est une
+                                                                                    // fonction js présente dans le même
+                                                                                    // fragment qui appelle la balise.
     for ($i = $annee_courante; $i >= $anne_debut; $i--) {
         $codeHTML .= '<option value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
     }
     $codeHTML .= '</select>';
-
-    /*
-     * <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
-                        <option value="#" style="">---</option>
-                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000-00-00 00:00:00}{0,1}{tout}>
-                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{2021}})]
-                        </BOUCLE_vieux>
-                        <option style="" value="2011">2011/2012</option>
-                        <option style="" value="2010">2010/2011</option>
-            		</select>
-     */
-
-    $contenu = "<!-- je suis un test de balise dynamique objet -->" . $codeHTML;
-    $p->code = '\'' . $contenu . '\'';
+    $p->code = '\'' . $codeHTML . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     return $p;
 }

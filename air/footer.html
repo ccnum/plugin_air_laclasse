@@ -1,3 +1,10 @@
+[(#REM) Quand stocker en mémoire l'année souhaitée par le visiteur ?
+Changer d'année se fait via le footer. Ce changement d'année redirige vers la même page mais en lui ajoutant en
+argument l'année voulue. Donc le footer sera forcément présent sur la page redirigée. On peut donc en conclure que
+le meilleur moment pour stocker en mémoire l'année voulue est au chargement du footer.
+]
+#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR
+
 #CACHE{0}
 #SET{id_art,0}
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>

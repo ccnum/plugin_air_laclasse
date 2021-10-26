@@ -225,3 +225,14 @@ function balise_MENU_DEROULANT_ANNEE(object $p): object
     $p->code = '\'' . $codeHTML . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     return $p;
 }
+
+/**
+ * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir.
+ * @param object $p
+ * @return object
+ */
+function balise_MEMORISER_ANNEE_VOULUE_PAR_VISITEUR(object $p) {
+    $_SESSION['annee_scolaire'] = $_GET['annee_scolaire'];
+    $p->code = "''";
+    return $p;
+}

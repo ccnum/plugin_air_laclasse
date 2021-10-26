@@ -227,12 +227,15 @@ function balise_MENU_DEROULANT_ANNEE(object $p): object
 }
 
 /**
- * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir.
+ * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir. ON ne fait cette
+ * action que si ce paramètre d'url existe !
  * @param object $p
  * @return object
  */
 function balise_MEMORISER_ANNEE_VOULUE_PAR_VISITEUR(object $p) {
-    $_SESSION['annee_scolaire'] = $_GET['annee_scolaire'];
+    if( isset($_GET['annee_scolaire']) ) {
+        $_SESSION['annee_scolaire'] = $_GET['annee_scolaire'];
+    }
     $p->code = "''";
     return $p;
 }

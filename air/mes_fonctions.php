@@ -191,6 +191,31 @@ function getAnneeScolaireCourante(){
     return (date('m')>=9) ? intval(date('Y')) : intval(date('Y'))-1;
 }
 
+/**
+ * Génère le menu déroulant permettant de naviguer dans les années précédentes du site.
+ * @param int $anneePreSelectionnee
+ * @return string
+ */
+function creerMenuDeroulantAnnee(int $anneePreSelectionnee=2012):string
+{
+    // Historiquement, la première année commence en 2012.
+    $anne_debut = 2012;
+    // La dernière année est l'année scolaire courante.
+    $annee_courante = getAnneeScolaireCourante();
+    $codeHTML = '<select name="annee_scolaire_voulue" onchange="redirigerPage(this.value)">';   // « redirigerPage » est une
+                                                                                                // fonction js présente dans le même
+                                                                                                // fragment qui appelle la balise.
+    for ($i = $annee_courante; $i >= $anne_debut; $i--) {
+        $selected = '';
+        if($anneePreSelectionnee==$i){
+            $selected= ' selected ';
+        }
+        $codeHTML .= '<option' . $selected . ' value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
+    }
+    $codeHTML .= '</select>';
+    return $codeHTML;
+}
+
 
 /*
  *  BALISES SPIP PERSONNALISÉES
@@ -205,40 +230,29 @@ function getAnneeScolaireCourante(){
  */
 
 /**
- * Cette fonction permet de générer le contenu de la balise #MENU_DEROULANT_ANNEE.
- * @param object $p
- * @return object
- */
-function balise_MENU_DEROULANT_ANNEE(object $p): object
-{
-    // Historiquement, la première année commence en 2012.
-    $anne_debut = 2012;
-    // La dernière année est l'année scolaire courante.
-    $annee_courante = getAnneeScolaireCourante();
-    $codeHTML = '<select name="annee_scolaire_voulue" onchange="redirigerPage(this)">'; // « redirigerPage » est une
-                                                                                    // fonction js présente dans le même
-                                                                                    // fragment qui appelle la balise.
-    // Soit on a une année en session qu'on assigne sinon, l'année courante.
-    $_SESSION['annee_scolaire'] ??= getAnneeScolaireCourante();
-    for ($i = $annee_courante; $i >= $anne_debut; $i--) {
-        $selected = ($_SESSION['annee_scolaire'] === $i) ? ' selected' : '';
-        $codeHTML .= '<option' . $selected . ' value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
-    }
-    $codeHTML .= '</select>';
-    $p->code = '\'' . $codeHTML . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
-    return $p;
-}
-
-/**
- * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir. On ne fait cette
- * action que si ce paramètre d'url existe !
+ * Lorsque cette fonction est appelée, elle renvoie l'année présente en paramètre de l'url si ce paramètre existe
+ * sinon, on renverra l'année courante.
  * @param object $p
  * @return object
  */
 function balise_MEMORISER_ANNEE_VOULUE_PAR_VISITEUR(object $p) {
     if( isset($_GET['annee_scolaire']) ) {
-        $_SESSION['annee_scolaire'] = intval($_GET['annee_scolaire']);
+        $p->code = '\'' . $_GET['annee_scolaire'] . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
+    } else{
+        $p->code = '\'' . getAnneeScolaireCourante() . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     }
-    $p->code = "''";
+    return $p;
+}
+
+/**
+ * Renvoie l'année qu'on souhaite voir telle que mémorisée en session. Si cette session n'existe pas, on renverra
+ * l'année scolaire courante.
+ * @param object $p
+ * @return object
+ */
+function balise_ANNEE_VOULUE(object $p) {
+    $_SESSION['annee_scolaire'] ??= getAnneeScolaireCourante();
+    //var_dump($_SESSION['annee_scolaire']);
+    $p->code = '\'' . $_SESSION['annee_scolaire'] . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     return $p;
 }

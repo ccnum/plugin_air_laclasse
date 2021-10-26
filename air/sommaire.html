@@ -11,22 +11,20 @@ if ($iphone || $android || $palmpre || $ipod || $berry == true)
 header('Location: spip.php?page=mobile2');
 ]
 }
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>[(#NOM_SITE_SPIP|textebrut)]</title>
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+        <INCLURE{fond=inclure/head} />
 
-<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inclure/head} />
-
-<script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
-
-<meta name="viewport" content="width=980, user-scalable=no" />
-</head>
-
+        <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
+        <meta name="viewport" content="width=980, user-scalable=no" />
+    </head>
+    #SET{annee_choisie,#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR}
+    [(#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR|setenv{annee_voulue})]
 <body>
 
 <!-- ID/NOM AUTEUR-->
@@ -36,6 +34,7 @@ header('Location: spip.php?page=mobile2');
     <!-- ID et nom de l'auteur connecté -->
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
+
 
 <!-- TOOLTIP -->
 <div id="liste-tooltip">
@@ -58,7 +57,7 @@ header('Location: spip.php?page=mobile2');
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 </div>
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#GET{annee_choisie}}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">
@@ -106,12 +105,12 @@ header('Location: spip.php?page=mobile2');
                           ]
 
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
+                            [(#ANNEE_ACTUELLE|=={#ANNEE_VOULUE}|oui)
                               [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
                               [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
                               <INCLURE{fond=sommaire-legende} />
                             ]
-                             [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|non)
+                             [(#ANNEE_ACTUELLE|=={#ANNEE_VOULUE}|non)
 
                                 <!-- affichage années #ANNEE_ACTUELLE #EVAL{_annee_scolaire}-->
                                 <INCLURE{fond=liste-cadavres-fin} />
@@ -138,7 +137,7 @@ header('Location: spip.php?page=mobile2');
 </BOUCLE_article>
 </BOUCLE_annee>
 
-<INCLURE{fond=footer}/>
+<INCLURE{fond=footer,env}/>
 </body>
 
 <script type="text/javascript">

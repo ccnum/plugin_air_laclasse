@@ -1,10 +1,3 @@
-[(#REM) Quand stocker en mémoire l'année souhaitée par le visiteur ?
-Changer d'année se fait via le footer. Ce changement d'année redirige vers la même page mais en lui ajoutant en
-argument l'année voulue. Donc le footer sera forcément présent sur la page redirigée. On peut donc en conclure que
-le meilleur moment pour stocker en mémoire l'année voulue est au chargement du footer.
-]
-#MEMORISER_ANNEE_VOULUE_PAR_VISITEUR
-
 #CACHE{0}
 #SET{id_art,0}
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
@@ -18,9 +11,9 @@ le meilleur moment pour stocker en mémoire l'année voulue est au chargement du
      * Redirige la page vers celle de la bonne année.
      * @param anneeScolaire L'objet select contenant l'année choisie dans son attribut value.
      */
-    function redirigerPage(anneeScolaire={}){
+    function redirigerPage(anneeScolaire){
         const url = new URL(window.location.href);
-        url.searchParams.set('annee_scolaire', anneeScolaire.value);
+        url.searchParams.set('annee_scolaire', anneeScolaire);
         window.location.replace(url.href);
     }
 </script>
@@ -47,7 +40,7 @@ le meilleur moment pour stocker en mémoire l'année voulue est au chargement du
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    #MENU_DEROULANT_ANNEE
+                    [(#ENV{annee_voulue}|creerMenuDeroulantAnnee)]
                 </form>
             </span>
         </div>

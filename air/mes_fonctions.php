@@ -218,8 +218,11 @@ function balise_MENU_DEROULANT_ANNEE(object $p): object
     $codeHTML = '<select name="annee_scolaire_voulue" onchange="redirigerPage(this)">'; // « redirigerPage » est une
                                                                                     // fonction js présente dans le même
                                                                                     // fragment qui appelle la balise.
+    // Soit on a une année en session qu'on assigne sinon, l'année courante.
+    $_SESSION['annee_scolaire'] ??= getAnneeScolaireCourante();
     for ($i = $annee_courante; $i >= $anne_debut; $i--) {
-        $codeHTML .= '<option value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
+        $selected = ($_SESSION['annee_scolaire'] === $i) ? ' selected' : '';
+        $codeHTML .= '<option' . $selected . ' value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
     }
     $codeHTML .= '</select>';
     $p->code = '\'' . $codeHTML . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
@@ -227,14 +230,14 @@ function balise_MENU_DEROULANT_ANNEE(object $p): object
 }
 
 /**
- * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir. ON ne fait cette
+ * Lorsque cette fonction est appelée, elle stocke en session l'année que l'utilisateur souhaite voir. On ne fait cette
  * action que si ce paramètre d'url existe !
  * @param object $p
  * @return object
  */
 function balise_MEMORISER_ANNEE_VOULUE_PAR_VISITEUR(object $p) {
     if( isset($_GET['annee_scolaire']) ) {
-        $_SESSION['annee_scolaire'] = $_GET['annee_scolaire'];
+        $_SESSION['annee_scolaire'] = intval($_GET['annee_scolaire']);
     }
     $p->code = "''";
     return $p;

@@ -89,22 +89,20 @@ body.mobile {
 	margin-left:auto;
 	margin-right:auto;
 	width:980px;
-    height: 100%;
 	text-align:left;
     background-image:url(../img/global/bg-book.png);
 	background-repeat:repeat-y;
 }
 #contenuPages{
-    height: 100%;
     width: 100%;
 }
 
 #page-gauche-livre{
-	width: 50%;
+	width: 45%;
 	float: left;
 }
 #page-droite-livre{
-	width: 50%;
+	width: 45%;
 	float: right;
 }
 

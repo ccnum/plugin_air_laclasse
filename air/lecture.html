@@ -71,8 +71,8 @@
     [(#TITRE|setenv{annee_voulue})]
 </BOUCLE_NOM_ANNEE>
 <!-- on veut l'année : #ENV{annee_voulue} -->
-<!-- on veut l'id de l'année : #ENV{id_rubrique_annee_voulue} -->
-<!-- on veut l'histoire : #ENV{id_rubrique_histoire_voulue} -->
+<!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
+<!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
 
 
 [(#REM) Apparemment, le but de ce squelette est de donner l'apparence d'un livre dont chaque page serait un des]
@@ -82,18 +82,14 @@
 [(#REM) Un premier clic sur « suivant » remplacera le texte du prologue par la partie 2 tandis que la page de]
 [(#REM) droite recevra le chapitre 3. Etc... pour les autres utilisations des flèches précédentes et suivantes.]
 <!-- BOOK -->
-<div id="livre">
+<div id="livre" style="display:inline-block;">
     <div id="global-spacer"></div>
-    <div id="contenuPages"">
-        <div id="page-gauche-livre">
-            <p>contenu gauche</p>
-            <p>contenu gauche</p><p>contenu gauche</p>
-            <p>contenu gauche</p>
-            <p>contenu gauche</p>
-            <p>contenu gauche</p>
-            <p>contenu gauche</p>
-            <p>contenu gauche</p>
-            <p>contenu gauche</p>
+    <div id="contenuPages" style="">
+        <div id="page-gauche-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;">
+            [(#REM) Au départ, la page de gauche contient le prologue.]
+            <BOUCLE_prologue(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
+            #TEXTE
+            </BOUCLE_prologue>
         </div>
 
         <div id="page-droite-livre">

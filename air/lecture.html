@@ -1,28 +1,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=980, user-scalable=no" />
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 
-<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inclure/head} />
+        <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 
-<script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
-<meta name="viewport" content="width=980, user-scalable=no" />
+        <INCLURE{fond=inclure/head} />
 
-</head>
+        <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
+    </head>
 
-<body>
+    <body>
 <!-- ID/NOM AUTEUR-->
-  
+
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
     #CACHE{0}
-      
+
     <!-- ID et nom de l'auteur connecté -->
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
- 
-        
+
+
 <!-- TOOLTIP -->
 <div id="liste-tooltip">
 </div>
@@ -58,49 +58,54 @@
 <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/lecture/bt-home.png}" onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';" width="60" height="60" /></a>
 </div>
 
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+    [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
+    [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
+</BOUCLE_principale>
+
+<BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
+[(#TITRE|setenv{annee_voulue})]
+</BOUCLE_NOM_ANNEE>
+
+<!-- on veut l'année : #ENV{annee_voulue} -->
+<!-- on veut l'id de l'année : #ENV{id_rubrique_annee_voulue} -->
+<!-- on veut l'histoire : #ENV{id_rubrique_histoire_voulue} -->
+
+
 <!-- BOOK -->
 <div id="global">
-
-    <div id="global-spacer">
-        </div>
-        
+    <div id="global-spacer"></div>
     <div class="global-content">
-          
-           <div class="content">
-           
-               <!-- PAGE GAUCHE -->
-               <div class="content-left">
-               
-                  <!-- PPROLOGUE -->
-                    <div class="lecture-page" id="page-gauche-1" data-num="1">
-                      
-                        <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                          <span class="lecture-titre-cadavre">#TITRE</span>
-                        </BOUCLE_lecture_titre_rubrique_prologue>
-                        
-                        <BOUCLE_annee(RUBRIQUES){titre==#SESSION{annee_voulue}}{tout}{0,1}>
-                        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>                            
-                          <h1 class="prologue">#TITRE</h1>
-                        <h2></h2>
-                          <div class="texte-courant-lecture texte-prologue">
-                            #TEXTE
-                            </div>
+        <div class="content">
+            <!-- PAGE GAUCHE -->
+            <div class="content-left">
+                <!-- PROLOGUE -->
+                <div>
+                    <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                    <span class="lecture-titre-cadavre">#TITRE</span>
+                    </BOUCLE_lecture_titre_rubrique_prologue>
+
+                    <BOUCLE_annee(RUBRIQUES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{tout}{0,1}>
+                        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
+                    <h1 class="prologue">#TITRE</h1>
+                    <h2></h2>
+                    <div class="texte-courant-lecture texte-prologue">#TEXTE</div>
                         </BOUCLE_article>
-                        </BOUCLE_annee>    
-                    </div>
-        
-                   <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>               
-                   
+                    </BOUCLE_annee>
+                </div>
+
+                   <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>
+
                    <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-                    
+
                         <!-- BOUTONS OPTIONS GAUCHE-->
                         <div class="lecture-options">
                             <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
                             <span class="lecture-titre-cadavre">#TITRE</span>
                             </BOUCLE_lecture_titre_rubrique_droite2>
-                            
+
                             <div class="lecture-chapitre-auteur">
-    
+
                              <BOUCLE_auteur_article2(AUTEURS){id_article}{0,1}>
                                   <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                                   <div class="ecriture-chapitre-nom">#NOM</div>
@@ -112,7 +117,7 @@
 
                             </div>
                          </div>
-                        
+
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
                        <h2>#TITRE</h2>
@@ -124,27 +129,26 @@
                           [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                           [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                         ]
- 
+
                    </div>
                    </BOUCLE_lecture_gauche>
-                   
                </div>
-               
+
                <!-- PAGE DROITE -->
                <div class="content-right">
-               
+                   contenu droite
                    <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
-                   
+
                    <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-                  
+
                         <!-- BOUTONS OPTIONS GAUCHE-->
                         <div class="lecture-options">
                             <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
                             <span class="lecture-titre-cadavre">#TITRE</span>
                             </BOUCLE_lecture_titre_rubrique_droite>
-                            
+
                             <div class="lecture-chapitre-auteur">
-    
+
                              <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
                                   <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                                   <div class="ecriture-chapitre-nom">#NOM</div>
@@ -156,16 +160,14 @@
 
                             </div>
                          </div>
-                       
+
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
                          <h2>#TITRE</h2>
                         [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021
-
-                       }}|oui)
+                        [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
                           [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                           [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                         ]
@@ -173,18 +175,19 @@
                    </div>
                     </BOUCLE_lecture_droite>
                </div>
-            
+
            </div>
-           
+
            </div>
-        
-</div>
-        
+
 </div>
 
+</div>
+<INCLURE{fond=footer,annee_voulue=2021}/>
 </body>
 
 <script type="text/javascript">
+
 $(document).ready(function() {
 
 // RESIZE
@@ -232,7 +235,7 @@ $('.lecture-tooltip').mouseover(function() {
   var toptooltip = Math.round(offset.top);
   toptooltip = toptooltip - hauteur_tooltip;
   var lefttooltip = Math.round(offset.left);
-  lefttooltip -= 100; 
+  lefttooltip -= 100;
   $('#liste-tooltip').css('top', 75);
   $('#liste-tooltip').css('left', lefttooltip + 2);
 });
@@ -251,7 +254,7 @@ function resize_global_content() {
   $(".stitches-inner").css({'margin-top':stitches_margin});
 }
 
-//PAGINATION & AFFICHAGE DES PAGES
+//PAGINATION &amp; AFFICHAGE DES PAGES
 
 function pagination(var_compteur) {
   if(var_compteur%2 == 0) {
@@ -275,7 +278,7 @@ function next_prev(var_compteur, var_limite) {
     $('#bt-next').hide();
   }
   else {};
-  
+
   if(var_compteur == 1 || var_compteur == 2){$('#bt-prev').hide();} else {};
 }
 </script>

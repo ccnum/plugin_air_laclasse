@@ -122,10 +122,10 @@
                         <h1 class="nettoyeur">#SURTITRE</h1>
                        <h2>#TITRE</h2>
                         #SET{var_lecture, false}
-                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|non)
+                        [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
-                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|oui)
+                        [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|oui)
                           [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                           [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                         ]
@@ -136,7 +136,6 @@
 
                <!-- PAGE DROITE -->
                <div class="content-right">
-                   contenu droite
                    <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
 
                    <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
@@ -164,10 +163,10 @@
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
                          <h2>#TITRE</h2>
-                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|non)
+                        [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
+                        [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|oui)
                           [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                           [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                         ]
@@ -183,7 +182,6 @@
 </div>
 
 </div>
-<INCLURE{fond=footer,annee_voulue=2021}/>
 </body>
 
 <script type="text/javascript">

@@ -13,9 +13,6 @@
 </head>
 
 <body>
-titi
-#SESSION{annee_voulue}
-toto
 <!-- ID/NOM AUTEUR-->
   
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
@@ -81,7 +78,7 @@ toto
                           <span class="lecture-titre-cadavre">#TITRE</span>
                         </BOUCLE_lecture_titre_rubrique_prologue>
                         
-                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021}}{tout}{0,1}>
+                        <BOUCLE_annee(RUBRIQUES){titre==#SESSION{annee_voulue}}{tout}{0,1}>
                         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>                            
                           <h1 class="prologue">#TITRE</h1>
                         <h2></h2>
@@ -120,10 +117,10 @@ toto
                         <h1 class="nettoyeur">#SURTITRE</h1>
                        <h2>#TITRE</h2>
                         #SET{var_lecture, false}
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|non)
+                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|oui)
+                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|oui)
                           [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                           [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                         ]
@@ -163,7 +160,7 @@ toto
                         <!-- CONTENT GAUCHE -->
                         <h1 class="nettoyeur">#SURTITRE</h1>
                          <h2>#TITRE</h2>
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021}}|non)
+                        [(#ANNEE_ACTUELLE|=={#SESSION{annee_voulue}}|non)
                           <INCLURE{fond=lecture-texte-visible, id_article}>
                         ]
                         [(#ANNEE_ACTUELLE|=={#EVAL{2021

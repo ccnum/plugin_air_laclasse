@@ -235,24 +235,11 @@ function creerMenuDeroulantAnnee(int $anneePreSelectionnee=2012):string
  * @param object $p
  * @return object
  */
-function balise_MEMORISER_ANNEE_VOULUE_PAR_VISITEUR(object $p) {
+function balise_recuperer_annee_voulue(object $p){
     if( isset($_GET['annee_scolaire']) ) {
         $p->code = '\'' . $_GET['annee_scolaire'] . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     } else{
         $p->code = '\'' . getAnneeScolaireCourante() . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     }
-    return $p;
-}
-
-/**
- * Renvoie l'année qu'on souhaite voir telle que mémorisée en session. Si cette session n'existe pas, on renverra
- * l'année scolaire courante.
- * @param object $p
- * @return object
- */
-function balise_ANNEE_VOULUE(object $p) {
-    $_SESSION['annee_scolaire'] ??= getAnneeScolaireCourante();
-    //var_dump($_SESSION['annee_scolaire']);
-    $p->code = '\'' . $_SESSION['annee_scolaire'] . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
     return $p;
 }

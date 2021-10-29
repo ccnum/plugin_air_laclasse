@@ -66,8 +66,14 @@
         <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
         const chapitre2 = {
             "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
-            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            "nomAuteur":"",
+            "logoAuteur":"",
         };
+            <BOUCLE_auteur_chapitre_1(AUTEURS){id_article}{0,1}>
+        chapitre2.nomAuteur = "[(#NOM|echapper_tags|attribut_html)]";
+        chapitre2.logoAuteur = "[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]";
+            </BOUCLE_auteur_chapitre_1>
         </BOUCLE_chapitre2>
 
         <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
@@ -90,6 +96,8 @@
             "titre":"[(#TITRE|echapper_tags|attribut_html)]"
         };
         </BOUCLE_chapitre5>
+
+        console.log(chapitre2);
 
         /**
          * Reconvertit les caractères échappées à leur apparence normale.

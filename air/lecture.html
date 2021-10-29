@@ -23,6 +23,133 @@
     #SET{var_nom_auteur,#SESSION{nom}}
 
 
+
+[(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intérsseront]
+[(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
+<BOUCLE_principale(RUBRIQUES){id_rubrique}>
+    [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
+    [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
+</BOUCLE_principale>
+<BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
+    [(#TITRE|setenv{annee_voulue})]
+</BOUCLE_NOM_ANNEE>
+<!-- on veut l'année : #ENV{annee_voulue} -->
+<!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
+<!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
+
+<script type="text/javascript">
+    /*
+        pageCourante :
+        - 1 signifie Prologue-chapitre_1
+        - 2 signifie chapitre_2-chapitre_3
+        - 3 signifie chapitre_4-chapitre_5
+     */
+    let pageCourante=1;
+
+    [(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]
+    <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
+    const textePrologue = "[(#TEXTE|echapper_tags|attribut_html)]";
+    </BOUCLE_prologue2>
+
+    <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
+    const texteChapitre1 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+    </BOUCLE_chapitre1>
+
+    <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
+    const texteChapitre2 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+    </BOUCLE_chapitre2>
+
+    <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
+    const texteChapitre3 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+    </BOUCLE_chapitre3>
+
+    <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
+    const texteChapitre4 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+    </BOUCLE_chapitre4>
+
+    <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
+    const texteChapitre5 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+    </BOUCLE_chapitre5>
+
+    /**
+     * Reconvertit les caractères échappées à leur apparence normale.
+     * En théorie, on ne devrait pas subir de failles d'injection de code car le code reçu est protégé et encapsulé par
+     * SPIP.
+     * MAIS ON VA QUAND MÊME SUPPRIMER AU CAS OÙ LES BALISES DE SCRIPT!
+     * @param input
+     * @returns {string}
+     */
+    function htmlDecode(input) {
+        // D'abord on décode.
+        const texteParse = new DOMParser().parseFromString(input, "text/html");
+        let codeHTML = texteParse.documentElement.textContent;
+
+        // Puis on créé un vrai élément HTML mais bidon.
+        const divTemporaire = document.createElement('div');
+        divTemporaire.innerHTML = codeHTML;
+        // On parcourt tous les éventuels éléments <script> que l'on videra de leur substance.
+        const scriptsDansDiv = divTemporaire.getElementsByTagName('script');
+        let i = scriptsDansDiv.length;
+        while (i--) {
+            scriptsDansDiv[i].parentNode.removeChild(scriptsDansDiv[i]);
+        }
+        return divTemporaire.innerHTML;
+    }
+
+    /**
+     * Affiche le contenu textuel dans les pages lorsqu'un utilisateur souhaite en tourner une.
+     */
+    function afficherPage(){
+        switch (pageCourante){
+            case 1:{
+                const pageGauche = document.getElementById('page-gauche-livre');
+                pageGauche.innerHTML = htmlDecode(textePrologue);
+                const pageDroite = document.getElementById('page-droite-livre');
+                pageDroite.innerHTML = htmlDecode(texteChapitre1);
+                break;
+            }
+            case 2:{
+                const pageGauche = document.getElementById('page-gauche-livre');
+                pageGauche.innerHTML = htmlDecode(texteChapitre2);
+                const pageDroite = document.getElementById('page-droite-livre');
+                pageDroite.innerHTML = htmlDecode(texteChapitre3);
+                break;
+            }
+            case 3:{
+                const pageGauche = document.getElementById('page-gauche-livre');
+                pageGauche.innerHTML = htmlDecode(texteChapitre4);
+                const pageDroite = document.getElementById('page-droite-livre');
+                pageDroite.innerHTML = htmlDecode(texteChapitre5);
+                break;
+            }
+            default:
+                break
+        }
+    }
+
+    /**
+     * Demande d'affichage de la page précédente du livre. Appel provenant du bouton précédent en haut du livre.
+     */
+    function tournerPagePrecedente(){
+        if(pageCourante>1){
+            pageCourante--;
+            afficherPage();
+        }
+    }
+
+
+    /**
+     * Demande d'affichage de la page suivante du livre. Appel provenant du bouton suivant en haut du livre.
+     */
+    function tournerPageSuivante(){
+        if(pageCourante<3){
+            pageCourante++;
+            afficherPage();
+        }
+    }
+</script>
+
+
 <!-- TOOLTIP -->
 <div id="liste-tooltip">
 </div>
@@ -48,31 +175,32 @@
 
 <!-- PAGE SUIVANT PRECEDENTE-->
 <div  class="bt-next-prev" id="bt-prev">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+    <img
+            src="#CHEMIN{img/global/bt-retour.png}"
+            onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';"
+            onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';"
+            onclick="tournerPagePrecedente();"
+            width="54" height="54" />
 </div>
-
 <div  class="bt-next-prev" id="bt-next">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-next.png}" onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';" width="54" height="54" /></a>
+    <img
+            src="#CHEMIN{img/global/bt-next.png}"
+            onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';"
+            onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';"
+            onclick="tournerPageSuivante();"
+            width="54" height="54" />
 </div>
 
 <!-- RETOUR HOME -->
 <div id="retour-home">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/lecture/bt-home.png}" onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';" width="60" height="60" /></a>
+    <a href="#URL_SITE_SPIP">
+        <img
+                src="#CHEMIN{img/lecture/bt-home.png}"
+                onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';"
+                onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';"
+                width="60" height="60" />
+    </a>
 </div>
-
-
-[(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intérsseront]
-[(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
-<BOUCLE_principale(RUBRIQUES){id_rubrique}>
-    [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
-    [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
-</BOUCLE_principale>
-<BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
-    [(#TITRE|setenv{annee_voulue})]
-</BOUCLE_NOM_ANNEE>
-<!-- on veut l'année : #ENV{annee_voulue} -->
-<!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
-<!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
 
 
 [(#REM) Apparemment, le but de ce squelette est de donner l'apparence d'un livre dont chaque page serait un des]
@@ -85,14 +213,14 @@
     <div id="livre" style="display:inline-block;">
         <div id="global-spacer"></div>
         <div id="contenuPages" style="">
-            <div id="page-gauche-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;">
+            <div id="page-gauche-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;width: 44%;float: left;">
                 [(#REM) Au départ, la page de gauche contient le prologue.]
                 <BOUCLE_prologue(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
                 #TEXTE
                 </BOUCLE_prologue>
             </div>
 
-            <div id="page-droite-livre">
+            <div id="page-droite-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;width: 44%;float: right;">
                 [(#REM) Au départ, la page de droite contient le chapitre 1.]
                 <BOUCLE_chapitre_1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
                 #DESCRIPTIF
@@ -101,31 +229,5 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        [(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]
-        <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
-        const textePrologue = '#TEXTE';
-        </BOUCLE_prologue2>
-
-        <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
-        const texteChapitre1 = '#DESCRIPTIF';
-        </BOUCLE_chapitre1>
-
-        <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
-        const texteChapitre2 = '#DESCRIPTIF';
-        </BOUCLE_chapitre2>
-
-        <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
-        const texteChapitre3 = '#DESCRIPTIF';
-        </BOUCLE_chapitre3>
-
-        <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
-        const texteChapitre4 = '#DESCRIPTIF';
-        </BOUCLE_chapitre4>
-
-        <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
-        const texteChapitre5 = '#DESCRIPTIF';
-        </BOUCLE_chapitre5>
-    </script>
 </body>
 </html>

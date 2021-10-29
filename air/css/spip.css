@@ -98,12 +98,8 @@ body.mobile {
 }
 
 #page-gauche-livre{
-	width: 45%;
-	float: left;
 }
 #page-droite-livre{
-	width: 45%;
-	float: right;
 }
 
 #global-ecriture {

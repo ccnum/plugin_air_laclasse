@@ -48,29 +48,47 @@
          */
         let pageCourante=1;
 
-        [(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]
+        /*[(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]*/
         <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
-        const textePrologue = "[(#TEXTE|echapper_tags|attribut_html)]";
+        const prologue = {
+            "texte":"[(#TEXTE|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_prologue2>
 
         <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
-        const texteChapitre1 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+        const chapitre1 = {
+            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_chapitre1>
 
         <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
-        const texteChapitre2 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+        const chapitre2 = {
+            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_chapitre2>
 
         <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
-        const texteChapitre3 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+        const chapitre3 = {
+            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_chapitre3>
 
         <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
-        const texteChapitre4 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+        const chapitre4 = {
+            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_chapitre4>
 
         <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
-        const texteChapitre5 = "[(#DESCRIPTIF|echapper_tags|attribut_html)]";
+        const chapitre5 = {
+            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]"
+        };
         </BOUCLE_chapitre5>
 
         /**
@@ -105,23 +123,23 @@
             switch (pageCourante){
                 case 1:{
                     const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(textePrologue);
+                    pageGauche.innerHTML = htmlDecode(prologue.texte);
                     const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(texteChapitre1);
+                    pageDroite.innerHTML = htmlDecode(chapitre1.texte);
                     break;
                 }
                 case 2:{
                     const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(texteChapitre2);
+                    pageGauche.innerHTML = htmlDecode(chapitre2.texte);
                     const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(texteChapitre3);
+                    pageDroite.innerHTML = htmlDecode(chapitre3.texte);
                     break;
                 }
                 case 3:{
                     const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(texteChapitre4);
+                    pageGauche.innerHTML = htmlDecode(chapitre4.texte);
                     const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(texteChapitre5);
+                    pageDroite.innerHTML = htmlDecode(chapitre5.texte);
                     break;
                 }
                 default:

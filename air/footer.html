@@ -6,13 +6,15 @@
     </BOUCLE_id_forum>
 </BOUCLE_annee>
 
+<!-- url du site : #URL_SITE_SPIP -->
+
 <script>
     /**
      * Redirige la page vers celle de la bonne année.
      * @param anneeScolaire L'objet select contenant l'année choisie dans son attribut value.
      */
     function redirigerPage(anneeScolaire){
-        const url = new URL(window.location.href);
+        const url = new URL('#URL_SITE_SPIP');
         //url = window.location.href.split('?')[0];
         url.searchParams.set('annee_scolaire', anneeScolaire);
         window.location.replace(url.href);

@@ -41,7 +41,7 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    [(#ENV{annee_voulue}|creerMenuDeroulantAnnee)]
+                    [(#ENV{annee_scolaire, 2021}|creerMenuDeroulantAnnee)]
                 </form>
             </span>
         </div>

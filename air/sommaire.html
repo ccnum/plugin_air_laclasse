@@ -23,10 +23,6 @@ header('Location: spip.php?page=mobile2');
         <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
         <meta name="viewport" content="width=980, user-scalable=no" />
     </head>
-    [(#RECUPERER_ANNEE_VOULUE|setenv{annee_voulue})]
-    <!-- ma session vaut #SESSION{annee_voulue} -->
-
-
 <body>
 
 <!-- ID/NOM AUTEUR-->
@@ -59,7 +55,7 @@ header('Location: spip.php?page=mobile2');
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
 </div>
-<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_voulue}}{tout}{0,1}>
+<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_scolaire, 2021}}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">
@@ -107,12 +103,12 @@ header('Location: spip.php?page=mobile2');
                           ]
 
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|oui)
+                            [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, 2021}}|oui)
                               [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur,env} />]
                               [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur,env} />]
                               <INCLURE{fond=sommaire-legende} />
                             ]
-                             [(#ANNEE_ACTUELLE|=={#ENV{annee_voulue}}|non)
+                             [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, 2021}}|non)
 
                                 <!-- affichage années #ANNEE_ACTUELLE #EVAL{_annee_scolaire}-->
                                 <INCLURE{fond=liste-cadavres-fin,env} />

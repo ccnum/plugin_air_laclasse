@@ -166,8 +166,8 @@
                 default:
                     break
             }
-            titrePageGauche.innerText=origineInfoGauche.titre
-            titrePageDroite.innerText=origineInfoDroite.titre
+            titrePageGauche.innerText=htmlDecode(origineInfoGauche.titre);
+            titrePageDroite.innerText=htmlDecode(origineInfoDroite.titre);
             pageGauche.innerHTML = htmlDecode(origineInfoGauche.texte);
             pageDroite.innerHTML = htmlDecode(origineInfoDroite.texte);
             nomAuteurGauche.innerHTML = htmlDecode(origineInfoGauche.nomAuteur);

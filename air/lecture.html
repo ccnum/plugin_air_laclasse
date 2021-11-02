@@ -119,7 +119,7 @@
             // Puis on créé un vrai élément HTML mais bidon.
             const divTemporaire = document.createElement('div');
             divTemporaire.innerHTML = codeHTML;
-            // On parcourt tous les éventuels éléments <script> que l'on videra de leur substance.
+            // On parcourt tous les éventuels éléments "script" que l'on videra de leur substance.
             const scriptsDansDiv = divTemporaire.getElementsByTagName('script');
             let i = scriptsDansDiv.length;
             while (i--) {
@@ -128,81 +128,55 @@
             return divTemporaire.innerHTML;
         }
 
+        function miseAJourPage(){
+
+        }
+
         /**
          * Affiche le contenu textuel dans les pages lorsqu'un utilisateur souhaite en tourner une.
          */
         function afficherPage(){
+            // Les titres
+            const titrePageGauche = document.getElementById('titre-chapitre-gauche');
+            const titrePageDroite = document.getElementById('titre-chapitre-droite');
+            // Les textes
+            const pageGauche = document.getElementById('page-gauche-texte');
+            const pageDroite = document.getElementById('page-droite-texte');
+            // Les noms d'auteur
+            const nomAuteurGauche = document.getElementById('nom-auteur-gauche');
+            const nomAuteurDroite = document.getElementById('nom-auteur-droite');
+            // Les logos des auteurs
+            const logoGauche = document.querySelector("#logo-auteur-gauche img");
+            const logoDroite = document.querySelector("#logo-auteur-droite img");
+
+            let origineInfoGauche, origineInfoDroite;
             switch (pageCourante){
                 case 1:{
-                    // Les titres
-                    const titrePageGauche = document.getElementById('titre-chapitre-gauche');
-                    titrePageGauche.innerText=prologue.titre
-                    const titrePageDroite = document.getElementById('titre-chapitre-droite');
-                    titrePageDroite.innerText=chapitre1.titre
-                    // Les textes
-                    const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(prologue.texte);
-                    const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(chapitre1.texte);
-                    // Les noms d'auteur
-                    const nomAuteurGauche = document.getElementById('nom-auteur-gauche');
-                    nomAuteurGauche.innerHTML = htmlDecode(prologue.nomAuteur);
-                    const nomAuteurDroite = document.getElementById('nom-auteur-droite');
-                    nomAuteurDroite.innerHTML = htmlDecode(chapitre1.nomAuteur);
-                    // Les logos des auteurs
-                    const logoGauche = document.querySelector("#logo-auteur-gauche img");
-                    logoGauche.src = prologue.logoAuteur;
-                    const logoDroite = document.querySelector("#logo-auteur-droite img");
-                    logoDroite.src = chapitre1.logoAuteur;
+                    origineInfoGauche = prologue;
+                    origineInfoDroite = chapitre1;
                     break;
                 }
                 case 2:{
-                    // Les titres
-                    const titrePageGauche = document.getElementById('titre-chapitre-gauche');
-                    titrePageGauche.innerText=chapitre2.titre
-                    const titrePageDroite = document.getElementById('titre-chapitre-droite');
-                    titrePageDroite.innerText=chapitre3.titre
-                    const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(chapitre2.texte);
-                    const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(chapitre3.texte);
-                    // Les noms d'auteur
-                    const nomAuteurGauche = document.getElementById('nom-auteur-gauche');
-                    nomAuteurGauche.innerHTML = htmlDecode(chapitre2.nomAuteur);
-                    const nomAuteurDroite = document.getElementById('nom-auteur-droite');
-                    nomAuteurDroite.innerHTML = htmlDecode(chapitre3.nomAuteur);
-                    // Les logos des auteurs
-                    const logoGauche = document.querySelector("#logo-auteur-gauche img");
-                    logoGauche.src = chapitre2.logoAuteur;
-                    const logoDroite = document.querySelector("#logo-auteur-droite img");
-                    logoDroite.src = chapitre3.logoAuteur;
+                    origineInfoGauche = chapitre2;
+                    origineInfoDroite = chapitre3;
                     break;
                 }
                 case 3:{
-                    // Les titres
-                    const titrePageGauche = document.getElementById('titre-chapitre-gauche');
-                    titrePageGauche.innerText=chapitre4.titre
-                    const titrePageDroite = document.getElementById('titre-chapitre-droite');
-                    titrePageDroite.innerText=chapitre5.titre
-                    const pageGauche = document.getElementById('page-gauche-texte');
-                    pageGauche.innerHTML = htmlDecode(chapitre4.texte);
-                    const pageDroite = document.getElementById('page-droite-texte');
-                    pageDroite.innerHTML = htmlDecode(chapitre5.texte);
-                    // Les noms d'auteur
-                    const nomAuteurGauche = document.getElementById('nom-auteur-gauche');
-                    nomAuteurGauche.innerHTML = htmlDecode(chapitre4.nomAuteur);
-                    const nomAuteurDroite = document.getElementById('nom-auteur-droite');
-                    nomAuteurDroite.innerHTML = htmlDecode(chapitre5.nomAuteur);
-                    // Les logos des auteurs
-                    const logoGauche = document.querySelector("#logo-auteur-gauche img");
-                    logoGauche.src = chapitre4.logoAuteur;
-                    const logoDroite = document.querySelector("#logo-auteur-droite img");
-                    logoDroite.src = chapitre5.logoAuteur;
+                    origineInfoGauche = chapitre4;
+                    origineInfoDroite = chapitre5;
                     break;
                 }
                 default:
                     break
             }
+            titrePageGauche.innerText=origineInfoGauche.titre
+            titrePageDroite.innerText=origineInfoDroite.titre
+            pageGauche.innerHTML = htmlDecode(origineInfoGauche.texte);
+            pageDroite.innerHTML = htmlDecode(origineInfoDroite.texte);
+            nomAuteurGauche.innerHTML = htmlDecode(origineInfoGauche.nomAuteur);
+            nomAuteurDroite.innerHTML = htmlDecode(origineInfoDroite.nomAuteur);
+            logoGauche.src = origineInfoGauche.logoAuteur;
+            logoDroite.src = origineInfoDroite.logoAuteur;
         }
 
         /**

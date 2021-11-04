@@ -8,7 +8,6 @@ ID / NOM AUTEUR
 
 #SET{var_nom_auteur,#SESSION{nom}}
 #SET{i,0}
-
 <BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_scolaire, 2021}}{tout}{0,1}>
 <BOUCLE_histoires_exclues(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=ne_pas_afficher}{tout}{doublons}>
     <!-- [(#REM) On souhaite parfois masquer certaines histoires (celles faites par d'autres personnes par ex... ]-->
@@ -21,7 +20,6 @@ ID / NOM AUTEUR
     
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
-        <!-- titi : #TITRE -->
         <div class="liste-link">
         <!-- TOOL TIP CONTENT -->
             <div class="liste-tooltip-content">

@@ -133,7 +133,7 @@ function masquerTexteChapitre(string $texteAMasquer='', int $nbDeCaracteresATron
     $texteTronque = substr($texteAMasquer, 0, strlen($texteAMasquer)-$nbDeCaracteresATronquerALaFin);
 
     // Remplace tous les caractères sauf les diacritiques.
-    // Les RegEx ne semblent pas vouloir fonctionner :/ Je soupçonne un pb d'encofdage iso-latin/utf-8. AU SECOURS !
+    // Les RegEx ne semblent pas vouloir fonctionner :/ Je soupçonne un pb d'encodage iso-latin/utf-8. AU SECOURS !
     $caracteresAMasquer = array(
         "à", "ä", "â",
         "À", "Ä", "Â",

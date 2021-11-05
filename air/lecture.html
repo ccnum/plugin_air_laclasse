@@ -20,12 +20,11 @@
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
 
-
 <!--
 [(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intéresseront]
 [(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
 [(#REM) Je les récupère de cette manière car le code historique empêche d'utiliser les sessions de SPIP, les sessions]
-[(#REM) PHP ainsi que - pour cette page- les variables d'environnement.]
+[(#REM) PHP ainsi que -pour cette page- les variables d'environnement.]
 -->
 <BOUCLE_principale(RUBRIQUES){id_rubrique}>
     [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
@@ -48,6 +47,8 @@
          */
         let pageCourante=1;
 
+        // TODO Factoriserce code js dès que possible.
+
         /*[(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]*/
         <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
         const prologue = {
@@ -60,7 +61,7 @@
 
         <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
         const chapitre1 = {
-            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_1(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_1>
@@ -69,7 +70,7 @@
 
         <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
         const chapitre2 = {
-            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_2(AUTEURS){id_article=#ID_ARTICLE}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_2>
@@ -78,7 +79,7 @@
 
         <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
         const chapitre3 = {
-            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_3(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_3>
@@ -87,7 +88,7 @@
 
         <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
         const chapitre4 = {
-            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_4(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_4>
@@ -96,7 +97,7 @@
 
         <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
         const chapitre5 = {
-            "texte":"[(#DESCRIPTIF|echapper_tags|attribut_html)]",
+            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_5(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_5>
@@ -278,6 +279,7 @@
                         </BOUCLE_auteur_prologue>
                     <!--[(#REM) Le texte du prologue.]-->
                     <div id="page-gauche-texte" class="texte-courant-lecture" style="clear: both;">#TEXTE</div>
+
                     </BOUCLE_titre_prologue>
                 </div>
 
@@ -296,7 +298,14 @@
                     <div id="logo-auteur-droite" class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                     <div id="nom-auteur-droite" class="ecriture-chapitre-nom">#NOM</div>
                         </BOUCLE_auteur_chapitre1>
-                    <div id="page-droite-texte" class="texte-courant-lecture" style="clear: both">#DESCRIPTIF</div>
+                    <div id="page-droite-texte" class="texte-courant-lecture" style="clear: both">
+                        [(#ENV{annee_voulue}|=={2021}|oui)
+                        <span class="texte-masque">[(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]</span>
+                        [(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]
+                        ]
+                        [(#ENV{annee_voulue}|=={2021}|non) #DESCRIPTIF]
+                    </div>
+
                     </BOUCLE_titre_chapitre_1>
                 </div>
             </div>

@@ -277,7 +277,7 @@
                     <div id="nom-auteur-gauche" class="ecriture-chapitre-nom">#NOM</div>
                         </BOUCLE_auteur_prologue>
                     <!--[(#REM) Le texte du prologue.]-->
-                    <div id="page-gauche-texte" style="clear: both;">#TEXTE</div>
+                    <div id="page-gauche-texte" class="texte-courant-lecture" style="clear: both;">#TEXTE</div>
                     </BOUCLE_titre_prologue>
                 </div>
 
@@ -296,7 +296,7 @@
                     <div id="logo-auteur-droite" class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                     <div id="nom-auteur-droite" class="ecriture-chapitre-nom">#NOM</div>
                         </BOUCLE_auteur_chapitre1>
-                    <div id="page-droite-texte" style="clear: both">#DESCRIPTIF</div>
+                    <div id="page-droite-texte" class="texte-courant-lecture" style="clear: both">#DESCRIPTIF</div>
                     </BOUCLE_titre_chapitre_1>
                 </div>
             </div>

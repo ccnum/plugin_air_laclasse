@@ -36,7 +36,7 @@ RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
 
 <!-- SCRIPT  -->
 <div class="script-forum-fleche">
-<img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
 </div>
 <div class="script-ecrivain">
 	<div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
@@ -45,7 +45,7 @@ RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
         #TEXTE
         <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
             <div style="clear: both; padding: 5px;">
-                <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3}|?{class="mediabox boxIframe"})]>
+                <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3|m4a}|?{class="mediabox boxIframe"})]>
                     [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
                 </a>
                 <?php

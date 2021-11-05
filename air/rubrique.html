@@ -1,20 +1,18 @@
 <BOUCLE_principale(RUBRIQUES){id_rubrique}>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+        <meta name="viewport" content="width=980, user-scalable=no" />
 
-<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inclure/head} />
+        <title>[(#NOM_SITE_SPIP|textebrut)]</title>
+        <INCLURE{fond=inclure/head} />
 
-<script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
-<script type="text/javascript" src="#CHEMIN{js/jquery.scrollTo-1.4.2-min.js}"></script>
-<meta name="viewport" content="width=980, user-scalable=no" />
-
+        <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
+        <script type="text/javascript" src="#CHEMIN{js/jquery.scrollTo-1.4.2-min.js}"></script>
 </head>
-
-<body>
+    <body>
 
 <!-- ID/NOM AUTEUR-->
  	
@@ -127,10 +125,8 @@
                             <div class="ecriture-chapitre-auteur">
                             
                             </div>
-                            
-                            <div class="texte_courant #EDIT{texte}" id="texte_prologue">
-                            #TEXTE<br />
-                            </div>
+
+                            [<div id="texte_prologue" class="#EDIT{texte} texte texte_courant">(#TEXTE|image_reduire{520,0})</div>]
                         
                         </BOUCLE_article>
                         </BOUCLE_annee>

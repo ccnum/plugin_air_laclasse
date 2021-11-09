@@ -61,9 +61,6 @@
          */
         let pageCourante=1;
 
-        // TODO Factoriser ce code js dès que possible.
-        // TODO L'année 2021 est inscrite comme année par défaut en dur -> rendre ça dynamique.
-
         /*[(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]*/
         <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
         const prologue = {
@@ -144,7 +141,6 @@
             return divTemporaire.innerHTML;
         }
 
-
         /**
          * Affiche le contenu textuel dans les pages lorsqu'un utilisateur souhaite en tourner une.
          */
@@ -202,7 +198,6 @@
             }
         }
 
-
         /**
          * Demande d'affichage de la page suivante du livre. Appel provenant du bouton suivant en haut du livre.
          */
@@ -212,7 +207,7 @@
                 afficherPage();
             }
         }
-    </script>
+        </script>
 
         <!-- TOOLTIP -->
         <div id="liste-tooltip">
@@ -231,9 +226,9 @@
         <div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
         -->
         <div class="stitches">
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
         </div>
 
         <!-- PAGE SUIVANT PRECEDENTE-->

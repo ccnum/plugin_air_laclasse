@@ -33,58 +33,57 @@ header('Location: spip.php?page=mobile2');
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
 
+    <!-- [(#REM) Récupération des données qui nous seront utiles.] -->
+    <!-- [(#REM) On a besoin de : ] -->
+    <!-- [(#REM) - la dernière année scolaire créée (au cas où il y aurait une année non faite) ]-->
 
-<!-- TOOLTIP -->
-<div id="liste-tooltip">
-</div>
+    <BOUCLE_rubrique_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+        <BOUCLE_derniere_annee_scolaire(RUBRIQUES){id_parent}{titre != modele}{par titre}{inverse}{0,1}>
+            <!-- [(#REM) On prend la dernière année et on ignore au cas où celle nommée "modele".] -->
+            #SET{derniere_annee_scolaire_connue, #TITRE}
+        </BOUCLE_derniere_annee_scolaire>
+    </BOUCLE_rubrique_annees>
 
-<!-- BOUTON CONNEXION -->
-<INCLURE{fond=inclure/authentification} />
+    <!-- TOOLTIP -->
+    <div id="liste-tooltip"></div>
 
-<!-- ELEMENTS GRAPHIQUES-->
-<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+    <!-- BOUTON CONNEXION -->
+    <INCLURE{fond=inclure/authentification} />
 
-<div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-<div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+    <!-- ELEMENTS GRAPHIQUES-->
+    <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+    <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+    <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+    <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
 
-<div class="stitches-ecriture">
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-</div>
-<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_scolaire, 2021}}{tout}{0,1}>
-<BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
-<!-- BOOK -->
-<div id="global-ecriture">
+    <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+    <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
 
-		<div id="global-spacer"></div>
+    <div class="stitches-ecriture">
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+    </div>
 
-		<div class="global-content">
-
-           <div class="content">
-
-           <div class="content-left-small">
-              <div id="titre_site">
-                <a href="http://air.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
-              </div>
-              <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
-              <div id="texte-presentation" class="#EDIT{texte}">
-                [(#TEXTE)]
-              </div>
-           </div>
-
-           <div class="content-right-large">
-
-            <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
-                [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">
-                  (#DESCRIPTIF)
-                </div>]
-            </div>
-
-            [(#ENV{mode}|=={fabrication}|oui)
+    <BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}}{tout}{0,1}>
+        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
+    <!-- BOOK -->
+    <div id="global-ecriture">
+        <div id="global-spacer"></div>
+        <div class="global-content">
+            <div class="content">
+                <div class="content-left-small">
+                    <div id="titre_site">
+                        <a href="http://air.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                    </div>
+                    <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
+                    <div id="texte-presentation" class="#EDIT{texte}">[(#TEXTE)]</div>
+                </div>
+                <div class="content-right-large">
+                    <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
+                        [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">(#DESCRIPTIF)</div>]
+                    </div>
+                    [(#ENV{mode}|=={fabrication}|oui)
                 <!--
                   <div id="countdown-blog"></div>
                   <script type="text/javascript" src="#CHEMIN{js/countdown.js}"></script>
@@ -102,12 +101,12 @@ header('Location: spip.php?page=mobile2');
                           ]
 
                    				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, 2021}}|oui)
+                            [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}}|oui)
                               [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur,env} />]
                               [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur,env} />]
                               <INCLURE{fond=sommaire-legende} />
                             ]
-                             [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, 2021}}|non)
+                             [(#ANNEE_ACTUELLE|=={#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}}|non)
                                 <INCLURE{fond=liste-cadavres-fin,env} />
                             ]
                           ]

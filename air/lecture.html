@@ -9,7 +9,6 @@
 
         <INCLURE{fond=inclure/head} />
     </head>
-
     <body>
 <!-- ID/NOM AUTEUR-->
 
@@ -20,23 +19,38 @@
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
 
-<!--
-[(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intéresseront]
-[(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
-[(#REM) Je les récupère de cette manière car le code historique empêche d'utiliser les sessions de SPIP, les sessions]
-[(#REM) PHP ainsi que -pour cette page- les variables d'environnement.]
--->
-<BOUCLE_principale(RUBRIQUES){id_rubrique}>
-    [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
-    [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
-</BOUCLE_principale>
-<BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
-    [(#TITRE|setenv{annee_voulue})]
-</BOUCLE_NOM_ANNEE>
-<!--[(#REM) Test de récupération ]-->
-<!-- on veut l'année : #ENV{annee_voulue} -->
-<!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
-<!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
+    <!--
+    [(#REM) Récupération des données qui nous seront utiles.]
+    [(#REM) On a besoin de : ]
+    [(#REM) - la dernière année scolaire créée (au cas où il y aurait une année non faite) ]
+    [(#REM) - l'année voulue (celle demandée dans l'url). ]
+    [(#REM) - l'id de la rubrique de l'année voulue (celle demandée dans l'url). ]
+    [(#REM) - l'id de l'histoire demandée. ]
+    -->
+    <BOUCLE_rubrique_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+        <BOUCLE_derniere_annee_scolaire(RUBRIQUES){id_parent}{titre != modele}{par titre}{inverse}{0,1}>
+        <!-- [(#REM) On prend la dernière année et on ignore au cas où celle nommée "modele".] -->
+        #SET{derniere_annee_scolaire_connue, #TITRE}
+        </BOUCLE_derniere_annee_scolaire>
+    </BOUCLE_rubrique_annees>
+    <!--
+    [(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intéresseront]
+    [(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
+    [(#REM) Je les récupère de cette manière car le code historique empêche d'utiliser les sessions de SPIP, les sessions]
+    [(#REM) PHP ainsi que -pour cette page- les variables d'environnement.]
+    -->
+    <BOUCLE_principale(RUBRIQUES){id_rubrique}>
+        [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
+        [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
+    </BOUCLE_principale>
+    <BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
+        [(#TITRE|setenv{annee_voulue})]
+    </BOUCLE_NOM_ANNEE>
+    <!--[(#REM) Test de récupération ]-->
+    <!-- on veut la dernière année scolaire connue en base : #GET{derniere_annee_scolaire_connue} -->
+    <!-- on veut l'année : #ENV{annee_voulue} -->
+    <!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
+    <!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
 
         <script type="text/javascript">
         /*
@@ -62,7 +76,7 @@
 
         <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
         const chapitre1 = {
-            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_1(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_1>
@@ -71,7 +85,7 @@
 
         <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
         const chapitre2 = {
-            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_2(AUTEURS){id_article=#ID_ARTICLE}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_2>
@@ -80,7 +94,7 @@
 
         <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
         const chapitre3 = {
-            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_3(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_3>
@@ -89,7 +103,7 @@
 
         <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
         const chapitre4 = {
-            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_4(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_4>
@@ -98,7 +112,7 @@
 
         <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
         const chapitre5 = {
-            "texte":"[(#ENV{annee_voulue}|=={2021}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
             "titre":"[(#TITRE|echapper_tags|attribut_html)]",
             <BOUCLE_auteur_chapitre_5(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
             "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_5>
@@ -300,13 +314,12 @@
                     <div id="nom-auteur-droite" class="ecriture-chapitre-nom">#NOM</div>
                         </BOUCLE_auteur_chapitre1>
                     <div id="page-droite-texte" class="texte-courant-lecture" style="clear: both">
-                        [(#ENV{annee_voulue}|=={2021}|oui)
+                        [(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|oui)
                         <span class="texte-masque">[(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]</span>
                         [(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]
                         ]
-                        [(#ENV{annee_voulue}|=={2021}|non) #DESCRIPTIF]
+                        [(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non) #DESCRIPTIF]
                     </div>
-
                     </BOUCLE_titre_chapitre_1>
                 </div>
             </div>

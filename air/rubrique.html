@@ -1,5 +1,4 @@
-<BOUCLE_principale(RUBRIQUES){id_rubrique}>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<BOUCLE_principale(RUBRIQUES){id_rubrique}><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="fr" xml:lang="fr" xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -33,115 +32,104 @@
     <BOUCLE_id_zone(spip_auteurs_liens){objet = rubrique}{spip_auteurs_liens.id_auteur =  #GET{var_id_auteur}}{0,1}>
     #SET{var_id_zone, #ID_OBJET}
     </BOUCLE_id_zone>
+
+    <BOUCLE_rubrique_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+        <BOUCLE_derniere_annee_scolaire(RUBRIQUES){id_parent}{titre != modele}{par titre}{inverse}{0,1}>
+            <!-- [(#REM) On prend la dernière année et on ignore au cas où celle nommée "modele".] -->
+            #SET{derniere_annee_scolaire_connue, #TITRE}
+        </BOUCLE_derniere_annee_scolaire>
+    </BOUCLE_rubrique_annees>
     
-<!-- TOOLTIP -->
-<div id="liste-tooltip">
-</div>
+        <!-- TOOLTIP -->
+        <div id="liste-tooltip"></div>
 
-<!-- BOUTON CONNEXION -->
-<div id="bouton-connexion">
-    [(#SESSION{id_auteur}|non)<span id="bouton-connexion-texte"><a href="#URL_SITE_SPIP/?page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">se connecter</a></span>]
-    [(#SESSION{id_auteur}|oui)<span id="bouton-connexion-texte"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
-    <span id="bouton-connexion-picto"><img src="#CHEMIN{img/global/picto-login.png}" width="17" height="18" /></span>
-</div>
-
-<!-- ELEMENTS GRAPHIQUES-->
-<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
-
-
-<div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-<div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
-
-<div class="stitches-ecriture">
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-</div>
-
-<!-- RETOUR INDEX -->
-<div id="bouton-retour">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-</div>
-
-<!-- NAVIGATION ANCRE-->
-<div id="ecriture-navigation">
-<a href="#" id="nav-top"><img src="#CHEMIN{img/ecriture/fleche-top.png}" width="9" height="12" /></a>
-<a href="#" id="nav-script">script</a>
-<a href="#" id="nav-forum">forum</a>
-<a href="#" id="nav-ecrire">écrire</a>
-</div>
-
-<!-- BOOK -->
-<div id="global-ecriture">
-
-		<div id="global-spacer">
+        <!-- BOUTON CONNEXION -->
+        <div id="bouton-connexion">
+            [(#SESSION{id_auteur}|non)<span id="bouton-connexion-texte"><a href="#URL_SITE_SPIP/?page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">se connecter</a></span>]
+            [(#SESSION{id_auteur}|oui)<span id="bouton-connexion-texte"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
+            <span id="bouton-connexion-picto"><img src="#CHEMIN{img/global/picto-login.png}" width="17" height="18" /></span>
         </div>
-        
-		<div class="global-content">
-        	
-           <div class="content">
-           
-           <div class="content-left-small">
-                
-                <div id="titre_site">
-           		<a href="https://air.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
-           		</div>
-           
-                <div id="ecriture-en-cours">
-                <INCLURE{fond=rubrique-bouton}>
-                </div>
-                
-                 <!-- LISTE CADAVRE SMALL-->
-                <div id="ecriture-liste">
-                [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur-small} />]
-                </div>
-			</div>
-           
-           <div class="content-right-large">
-				<div id="ecriture">
 
-                    <!-- PROLOGUE -->
-                    <div class="ecriture-chapitre">
-                        <div class="ecriture-chapitre-picto">
-            				<div id="open_prologue">
-                               <img src="#CHEMIN{img/ecriture/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-open-prologue.png}';" width="25" height="25" />
-                            </div>
-                            
-                            <div id="close_prologue">
-                               <img src="#CHEMIN{img/ecriture/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-close-prologue.png}';" width="25" height="25" />
-                            </div>
-        				</div>
-    
-                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021}}{tout}{0,1}>
-                        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>                            
-                            <div class="ecriture-chapitre-texte">
-                                <div class="ecriture-chapitre-surtitre">—</div>
-                                <div class="ecriture-chapitre-titre">#TITRE</div> 
-                            </div>
-                            
-                            <div class="ecriture-chapitre-auteur">
-                            
-                            </div>
+        <!-- ELEMENTS GRAPHIQUES-->
+        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
 
-                            [<div id="texte_prologue" class="#EDIT{texte} texte texte_courant">(#TEXTE|image_reduire{520,0})</div>]
+        <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+        <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
 
-                        <!-- SCRIPT  -->
-                        <div class="script-forum-fleche">
-                            <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+        <div class="stitches-ecriture">
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        </div>
+
+        <!-- RETOUR INDEX -->
+        <div id="bouton-retour">
+            <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+        </div>
+
+        <!-- NAVIGATION ANCRE-->
+        <div id="ecriture-navigation">
+            <a href="#" id="nav-top"><img src="#CHEMIN{img/ecriture/fleche-top.png}" width="9" height="12" /></a>
+            <a href="#" id="nav-script">script</a>
+            <a href="#" id="nav-forum">forum</a>
+            <a href="#" id="nav-ecrire">écrire</a>
+        </div>
+
+        <!-- BOOK -->
+        <div id="global-ecriture">
+            <div id="global-spacer"></div>
+            <div class="global-content">
+                <div class="content">
+                    <div class="content-left-small">
+                        <div id="titre_site">
+                            <a href="https://air.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
                         </div>
-                        <div class="script-ecrivain">
-                            <div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
-                            <div class="script-titre">SCRIPT | Prologue</div>
-                            <div class="script-texte scrirecalculpt-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
-                                <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
-                                <div style="clear: both; padding: 5px;">
-                                    <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3|m4a}|?{class="mediabox boxIframe"})]>
-                                        [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
-                                    </a>
-                                    <?php
+                        <div id="ecriture-en-cours">
+                            <INCLURE{fond=rubrique-bouton}>
+                        </div>
+
+                        <!-- LISTE CADAVRE SMALL-->
+                        <div id="ecriture-liste">[(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur-small} />]</div>
+                    </div>
+
+                    <div class="content-right-large">
+                        <div id="ecriture">
+                            <!-- PROLOGUE -->
+                            <div class="ecriture-chapitre">
+                                <div class="ecriture-chapitre-picto">
+                                    <div id="open_prologue">
+                                        <img src="#CHEMIN{img/ecriture/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-open-prologue.png}';" width="25" height="25" />
+                                    </div>
+                                    <div id="close_prologue">
+                                        <img src="#CHEMIN{img/ecriture/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-close-prologue.png}';" width="25" height="25" />
+                                    </div>
+                                </div>
+                                <BOUCLE_annee(RUBRIQUES){titre==#GET{derniere_annee_scolaire_connue}}{tout}{0,1}>
+                                    <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
+                                <div class="ecriture-chapitre-texte">
+                                    <div class="ecriture-chapitre-surtitre">—</div>
+                                    <div class="ecriture-chapitre-titre">#TITRE</div>
+                                </div>
+                                <div class="ecriture-chapitre-auteur"></div>
+                                [<div id="texte_prologue" class="#EDIT{texte} texte texte_courant">(#TEXTE|image_reduire{520,0})</div>]
+
+                                <!-- SCRIPT  -->
+                                <div class="script-forum-fleche">
+                                    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+                                </div>
+                                <div class="script-ecrivain">
+                                    <div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
+                                    <div class="script-titre">SCRIPT | Prologue</div>
+                                    <div class="script-texte scrirecalculpt-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
+                                        <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
+                                        <div style="clear: both; padding: 5px;">
+                                            <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3|m4a}|?{class="mediabox boxIframe"})]>
+                                                [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
+                                            </a>
+                                            <?php
                     //phpinfo();
                     include_spip('inc/securiser_action');
                     include_spip('inc/autoriser');
@@ -153,16 +141,15 @@
                             echo "<a href='".securiser_action_auteur($action, $arg, $redirect, $mode=false, $att='')."' class='rouge droite ajax' onClick='return confirmation(\"$confirmation\")' title='supprimer ce document' ><div class='action_supprimer'></div></a>";
                                     }
                                     ?>
+                                        </div>
+                                        </BOUCLE_doc>
                                 </div>
-                                </BOUCLE_doc>
                             </div>
-                        </div>
                         
-                        </BOUCLE_article>
-                        </BOUCLE_annee>
-                    
-                    </div>
-                    <hr />
+                                    </BOUCLE_article>
+                                </BOUCLE_annee>
+                            </div>
+                            <hr />
                     
                     <!-- END PROLOGUE -->
                     
@@ -260,7 +247,7 @@
 
 </div>
 
-<INCLURE{fond=footer,annee_voulue=2021}/>
+<INCLURE{fond=footer,annee_voulue=#GET{derniere_annee_scolaire_connue}}/>
 
 </body>
 

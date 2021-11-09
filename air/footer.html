@@ -6,8 +6,12 @@
     </BOUCLE_id_forum>
 </BOUCLE_annee>
 
-<!-- url du site : #URL_SITE_SPIP -->
-
+<BOUCLE_rubrique_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+    <BOUCLE_derniere_annee_scolaire(RUBRIQUES){id_parent}{titre != modele}{par titre}{inverse}{0,1}>
+        <!-- [(#REM) On prend la dernière année et on ignore au cas où celle nommée "modele".] -->
+        #SET{derniere_annee_scolaire_connue, #TITRE}
+    </BOUCLE_derniere_annee_scolaire>
+</BOUCLE_rubrique_annees>
 <script>
     /**
      * Redirige la page vers celle de la bonne année.
@@ -43,7 +47,7 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    [(#ENV{annee_scolaire, 2021}|creerMenuDeroulantAnnee)]
+                    [(#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}|creerMenuDeroulantAnnee)]
                 </form>
             </span>
         </div>

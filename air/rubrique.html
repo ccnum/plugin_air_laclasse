@@ -125,16 +125,7 @@
                                     <div class="script-titre">SCRIPT | Prologue</div>
                                     <div class="script-texte scrirecalculpt-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
                                         <!-- [(#REM) Cette boucle sert à afficher les lecteurs de fichiers audio]-->
-                                        <BOUCLE_lecteurs_audio(DOCUMENTS){id_article}{extension==mp3|ogg|aac|m4a}{mode=document}>
-                                        <figure>
-                                            <figcaption>#TITRE</figcaption>
-                                            <audio
-                                                    controls
-                                                    src="#URL_DOCUMENT">
-                                                Votre navigateur ne permet pas de lire les fichiers audio.
-                                            </audio>
-                                        </figure>
-                                        </BOUCLE_lecteurs_audio>
+                                        <INCLURE{fond=inclure/lecteur_audio, id_article} />
 
                                         <!-- [(#REM) Cette boucle sert à afficher la liste des documents joints]-->
                                         <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>

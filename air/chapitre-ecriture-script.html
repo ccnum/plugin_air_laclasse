@@ -20,16 +20,7 @@ RUBRIQUE.HTML > CHAPITRE-ECRITURE-SCRIPT.HTML
     <br /><hr />
 
     <!-- [(#REM) Cette boucle sert à afficher les lecteurs de fichiers audio]-->
-    <BOUCLE_lecteurs_audio(DOCUMENTS){id_article}{extension==mp3|ogg|aac|m4a}{mode=document}>
-    <figure>
-        <figcaption>#TITRE</figcaption>
-        <audio
-                controls
-                src="#URL_DOCUMENT">
-            Votre navigateur ne permet pas de lire les fichiers audio.
-        </audio>
-    </figure>
-    </BOUCLE_lecteurs_audio>
+    <INCLURE{fond=inclure/lecteur_audio, id_article} />
 
     <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
     <div style="clear: both; padding: 5px; margin-top: 10px;">

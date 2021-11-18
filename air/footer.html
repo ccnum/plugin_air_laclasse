@@ -30,6 +30,7 @@
     <div id="footer-inner">
         <div id="footer-nav-left">
             [(#SESSION{id_auteur}|oui)Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>]
+            <!-- [(#REM) Le contenu du lien d'accès au forum est modifiable à volonté dans le BO ]-->
             <BOUCLE_lien_forum(ARTICLES){id_rubrique}{titre_mot=footer-forum}{0,1}>
             [(#SESSION{id_auteur}|oui)
             [(#GET{id_art}|=={0}|non|et{#SESSION{statut}|=={0minirezo}|oui}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#SOUSTITRE" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">#TITRE<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]

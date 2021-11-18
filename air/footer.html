@@ -28,13 +28,15 @@
 <BOUCLE_annee_courante(RUBRIQUES){titre==#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}}{tout}{0,1}>
 <div id="footer">
     <div id="footer-inner">
-
         <div id="footer-nav-left">
+            [(#SESSION{id_auteur}|oui)Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>]
+            <BOUCLE_lien_forum(ARTICLES){id_rubrique}{titre_mot=footer-forum}{0,1}>
             [(#SESSION{id_auteur}|oui)
-            Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>
-            [(#GET{id_art}|=={0}|non|et{#SESSION{statut}|=={0minirezo}|oui}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#URL_SITE_SPIP/?page=forum&id_article=1915" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">Accéder au forum<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]
+            [(#GET{id_art}|=={0}|non|et{#SESSION{statut}|=={0minirezo}|oui}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#SOUSTITRE" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">#TITRE<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]
             ]
+            </BOUCLE_lien_forum>
             [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
+
         <!-- [(#REM) Le contenu des liens de l'espace doc et du blog de l'auteur sont modifiables à volonté dans le BO ]-->
         <!-- [(#REM) Chaque année doit posséder un article ayant un mot-clef spécifique (footer-espace-doc ou footer-blog-auteur) -->
         <!-- [(#REM) On n'utilise pour l'instant que les champs TITRE et SOUSTITRE. -->

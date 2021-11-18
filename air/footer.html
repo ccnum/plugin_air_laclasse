@@ -25,6 +25,7 @@
     }
 </script>
 
+<BOUCLE_annee_courante(RUBRIQUES){titre==#ENV{annee_scolaire, #GET{derniere_annee_scolaire_connue}}}{tout}{0,1}>
 <div id="footer">
     <div id="footer-inner">
 
@@ -34,8 +35,15 @@
             [(#GET{id_art}|=={0}|non|et{#SESSION{statut}|=={0minirezo}|oui}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#URL_SITE_SPIP/?page=forum&id_article=1915" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">Accéder au forum<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]
             ]
             [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
-            <a href="https://www.laclasse.com/portail/#app.doc/node/4104193">Espace doc</a>
-            <a href="http://lebateauvivre.blogs.laclasse.com/">Le bateau vivre</a>
+        <!-- [(#REM) Le contenu des liens de l'espace doc et du blog de l'auteur sont modifiables à volonté dans le BO ]-->
+        <!-- [(#REM) Chaque année doit posséder un article ayant un mot-clef spécifique (footer-espace-doc ou footer-blog-auteur) -->
+        <!-- [(#REM) On n'utilise pour l'instant que les champs TITRE et SOUSTITRE. -->
+        <BOUCLE_espace_doc(ARTICLES){id_rubrique}{titre_mot=footer-espace-doc}{0,1}>
+            <a href="#SOUSTITRE">#TITRE</a>
+        </BOUCLE_espace_doc>
+        <BOUCLE_lien_blog_auteur(ARTICLES){id_rubrique}{titre_mot=footer-blog-auteur}{0,1}>
+            <a href="#SOUSTITRE">#TITRE</a>
+        </BOUCLE_lien_blog_auteur>
         </div>
         
         <div id="footer-nav">
@@ -53,6 +61,7 @@
         </div>
     </div>
 </div>
+</BOUCLE_annee_courante>
 
 <!-- Xiti -->
 [<script type="text/javascript" src="http://www.laclasse.com/v25/js/marqueur_men/xtfirst_ENT.js"></script>

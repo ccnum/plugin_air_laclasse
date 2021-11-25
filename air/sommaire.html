@@ -1,4 +1,4 @@
-<?php
+[(#ENV{annee}|setAnneeActuelle)]<?php
 $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
 $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
 $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
@@ -24,7 +24,7 @@ header('Location: spip.php?page=mobile2');
         <meta name="viewport" content="width=980, user-scalable=no" />
     </head>
 <body>
-
+<!-- test année [(#ENV{annee}|getAnneeActuelle)] -->
 <!-- ID/NOM AUTEUR-->
 
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->

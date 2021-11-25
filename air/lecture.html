@@ -1,283 +1,323 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="viewport" content="width=980, user-scalable=no" />
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 
-<title>[(#NOM_SITE_SPIP|textebrut)]</title>
-[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
-<INCLURE{fond=inclure/head} />
+        <title>[(#NOM_SITE_SPIP|textebrut)]</title>
 
-<script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
-<meta name="viewport" content="width=980, user-scalable=no" />
-
-</head>
-
-<body>
-
+        <INCLURE{fond=inclure/head} />
+    </head>
+    <body>
 <!-- ID/NOM AUTEUR-->
-  
+
     <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
     #CACHE{0}
-      
+
     <!-- ID et nom de l'auteur connecté -->
     #SET{var_id_auteur,#SESSION{id_auteur}}
     #SET{var_nom_auteur,#SESSION{nom}}
- 
-        
-<!-- TOOLTIP -->
-<div id="liste-tooltip">
-</div>
 
+    <!--
+    [(#REM) Récupération des données qui nous seront utiles.]
+    [(#REM) On a besoin de : ]
+    [(#REM) - la dernière année scolaire créée (au cas où il y aurait une année non faite) ]
+    [(#REM) - l'année voulue (celle demandée dans l'url). ]
+    [(#REM) - l'id de la rubrique de l'année voulue (celle demandée dans l'url). ]
+    [(#REM) - l'id de l'histoire demandée. ]
+    -->
+    <BOUCLE_rubrique_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+        <BOUCLE_derniere_annee_scolaire(RUBRIQUES){id_parent}{titre != modele}{par titre}{inverse}{0,1}>
+        <!-- [(#REM) On prend la dernière année et on ignore au cas où celle nommée "modele".] -->
+        #SET{derniere_annee_scolaire_connue, #TITRE}
+        </BOUCLE_derniere_annee_scolaire>
+    </BOUCLE_rubrique_annees>
+    <!--
+    [(#REM) Les deux boucles suivantes servent à récupérer les identifiants et titres des rubriques qui nous intéresseront]
+    [(#REM) dans la page. Il suffira alors de rappeler les variables ainsi sauvées.]
+    [(#REM) Je les récupère de cette manière car le code historique empêche d'utiliser les sessions de SPIP, les sessions]
+    [(#REM) PHP ainsi que -pour cette page- les variables d'environnement.]
+    -->
+    <BOUCLE_principale(RUBRIQUES){id_rubrique}>
+        [(#ID_PARENT|setenv{id_rubrique_annee_voulue})]
+        [(#ID_RUBRIQUE|setenv{id_rubrique_histoire_voulue})]
+    </BOUCLE_principale>
+    <BOUCLE_NOM_ANNEE(RUBRIQUES){id_rubrique=#ENV{id_rubrique_annee_voulue}}{tout}>
+        [(#TITRE|setenv{annee_voulue})]
+    </BOUCLE_NOM_ANNEE>
+    <!--[(#REM) Test de récupération ]-->
+    <!-- on veut la dernière année scolaire connue en base : #GET{derniere_annee_scolaire_connue} -->
+    <!-- on veut l'année : #ENV{annee_voulue} -->
+    <!-- on veut l'id de la rubrique de l'année : #ENV{id_rubrique_annee_voulue} -->
+    <!-- on veut l'id de l'histoire : #ENV{id_rubrique_histoire_voulue} -->
 
-<!-- ELEMENTS GRAPHIQUES-->
-<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+        <script type="text/javascript">
+        /*
+            pageCourante :
+            - 1 signifie Prologue-chapitre_1
+            - 2 signifie chapitre_2-chapitre_3
+            - 3 signifie chapitre_4-chapitre_5
+         */
+        let pageCourante=1;
 
+        /*[(#REM) Tentative de stocker le contenu des textes des chapitres dans des constantes js.]*/
+        <BOUCLE_prologue2(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
+        const prologue = {
+            "texte":"[(#TEXTE|echapper_tags|attribut_html)]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_prologue2(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_prologue2>
+        };
+        </BOUCLE_prologue2>
 
-<div id="book-middle-top"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-<div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+        <BOUCLE_chapitre1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
+        const chapitre1 = {
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_chapitre_1(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_1>
+        };
+        </BOUCLE_chapitre1>
 
-<div class="stitches">
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-<div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-</div>
+        <BOUCLE_chapitre2(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{1,1}>
+        const chapitre2 = {
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_chapitre_2(AUTEURS){id_article=#ID_ARTICLE}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_2>
+        };
+        </BOUCLE_chapitre2>
 
-<!-- PAGE SUIVANT PRECEDENTE-->
-<div  class="bt-next-prev" id="bt-prev">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-</div>
+        <BOUCLE_chapitre3(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{2,1}>
+        const chapitre3 = {
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_chapitre_3(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_3>
+        };
+        </BOUCLE_chapitre3>
 
-<div  class="bt-next-prev" id="bt-next">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-next.png}" onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';" width="54" height="54" /></a>
-</div>
+        <BOUCLE_chapitre4(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{3,1}>
+        const chapitre4 = {
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_chapitre_4(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_4>
+        };
+        </BOUCLE_chapitre4>
 
-<!-- RETOUR HOME -->
-<div id="retour-home">
-<a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/lecture/bt-home.png}" onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';" width="60" height="60" /></a>
-</div>
+        <BOUCLE_chapitre5(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{4,1}>
+        const chapitre5 = {
+            "texte":"[(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non)[(#DESCRIPTIF|echapper_tags|attribut_html)]]",
+            "titre":"[(#TITRE|echapper_tags|attribut_html)]",
+            <BOUCLE_auteur_chapitre_5(AUTEURS){id_article}{0,1}>"nomAuteur":"[(#NOM|echapper_tags|attribut_html)]",
+            "logoAuteur":"[(#LOGO_AUTEUR|extraire_attribut{src}|url_absolue|attribut_html)]",</BOUCLE_auteur_chapitre_5>
+        };
+        </BOUCLE_chapitre5>
 
-<!-- BOOK -->
-<div id="global">
+        /**
+         * Reconvertit les caractères échappées à leur apparence normale.
+         * En théorie, on ne devrait pas subir de failles d'injection de code car le code reçu est protégé et encapsulé par
+         * SPIP.
+         * MAIS ON VA QUAND MÊME SUPPRIMER AU CAS OÙ LES BALISES DE SCRIPT!
+         * @param input
+         * @returns {string}
+         */
+        function htmlDecode(input) {
+            // D'abord on décode.
+            const texteParse = new DOMParser().parseFromString(input, "text/html");
+            let codeHTML = texteParse.documentElement.textContent;
 
-    <div id="global-spacer">
+            // Puis on créé un vrai élément HTML mais bidon.
+            const divTemporaire = document.createElement('div');
+            divTemporaire.innerHTML = codeHTML;
+            // On parcourt tous les éventuels éléments "script" que l'on videra de leur substance.
+            const scriptsDansDiv = divTemporaire.getElementsByTagName('script');
+            let i = scriptsDansDiv.length;
+            while (i--) {
+                scriptsDansDiv[i].parentNode.removeChild(scriptsDansDiv[i]);
+            }
+            return divTemporaire.innerHTML;
+        }
+
+        /**
+         * Affiche le contenu textuel dans les pages lorsqu'un utilisateur souhaite en tourner une.
+         */
+        function afficherPage(){
+            // Les titres
+            const titrePageGauche = document.getElementById('titre-chapitre-gauche');
+            const titrePageDroite = document.getElementById('titre-chapitre-droite');
+            // Les textes
+            const pageGauche = document.getElementById('page-gauche-texte');
+            const pageDroite = document.getElementById('page-droite-texte');
+            // Les noms d'auteur
+            const nomAuteurGauche = document.getElementById('nom-auteur-gauche');
+            const nomAuteurDroite = document.getElementById('nom-auteur-droite');
+            // Les logos des auteurs
+            const logoGauche = document.querySelector("#logo-auteur-gauche img");
+            const logoDroite = document.querySelector("#logo-auteur-droite img");
+
+            let origineInfoGauche, origineInfoDroite;
+            switch (pageCourante){
+                case 1:{
+                    origineInfoGauche = prologue;
+                    origineInfoDroite = chapitre1;
+                    break;
+                }
+                case 2:{
+                    origineInfoGauche = chapitre2;
+                    origineInfoDroite = chapitre3;
+                    break;
+                }
+                case 3:{
+                    origineInfoGauche = chapitre4;
+                    origineInfoDroite = chapitre5;
+                    break;
+                }
+                default:
+                    break
+            }
+            titrePageGauche.innerText=htmlDecode(origineInfoGauche.titre);
+            titrePageDroite.innerText=htmlDecode(origineInfoDroite.titre);
+            pageGauche.innerHTML = htmlDecode(origineInfoGauche.texte);
+            pageDroite.innerHTML = htmlDecode(origineInfoDroite.texte);
+            nomAuteurGauche.innerHTML = htmlDecode(origineInfoGauche.nomAuteur);
+            nomAuteurDroite.innerHTML = htmlDecode(origineInfoDroite.nomAuteur);
+            logoGauche.src = origineInfoGauche.logoAuteur;
+            logoDroite.src = origineInfoDroite.logoAuteur;
+        }
+
+        /**
+         * Demande d'affichage de la page précédente du livre. Appel provenant du bouton précédent en haut du livre.
+         */
+        function tournerPagePrecedente(){
+            if(pageCourante>1){
+                pageCourante--;
+                afficherPage();
+            }
+        }
+
+        /**
+         * Demande d'affichage de la page suivante du livre. Appel provenant du bouton suivant en haut du livre.
+         */
+        function tournerPageSuivante(){
+            if(pageCourante<3){
+                pageCourante++;
+                afficherPage();
+            }
+        }
+        </script>
+
+        <!-- TOOLTIP -->
+        <div id="liste-tooltip">
         </div>
-        
-    <div class="global-content">
-          
-           <div class="content">
-           
-               <!-- PAGE GAUCHE -->
-               <div class="content-left">
-               
-                  <!-- PPROLOGUE -->
-                    <div class="lecture-page" id="page-gauche-1" data-num="1">
-                      
-                        <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                          <span class="lecture-titre-cadavre">#TITRE</span>
-                        </BOUCLE_lecture_titre_rubrique_prologue>
-                        
-                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
-                        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>                            
-                          <h1 class="prologue">#TITRE</h1>
-                        <h2></h2>
-                          <div class="texte-courant-lecture texte-prologue">
-                            #TEXTE
-                            </div>
-                        </BOUCLE_article>
-                        </BOUCLE_annee>    
+
+        <!-- ELEMENTS GRAPHIQUES-->
+        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+        <!--
+        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+        -->
+
+        <div id="book-middle-top"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+        <!--
+        <div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+        -->
+        <div class="stitches">
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        </div>
+
+        <!-- PAGE SUIVANT PRECEDENTE-->
+        <div  class="bt-next-prev" id="bt-prev">
+            <img
+                    src="#CHEMIN{img/global/bt-retour.png}"
+                    onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';"
+                    onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';"
+                    onclick="tournerPagePrecedente();"
+                    width="54" height="54" />
+        </div>
+        <div  class="bt-next-prev" id="bt-next">
+            <img
+                    src="#CHEMIN{img/global/bt-next.png}"
+                    onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';"
+                    onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';"
+                    onclick="tournerPageSuivante();"
+                    width="54" height="54" />
+        </div>
+
+        <!-- RETOUR HOME -->
+        <div id="retour-home">
+            <a href="#URL_SITE_SPIP">
+                <img
+                        src="#CHEMIN{img/lecture/bt-home.png}"
+                        onmouseover="this.src='#CHEMIN{img/lecture/bt-home-hover.png}';"
+                        onmouseout="this.src='#CHEMIN{img/lecture/bt-home.png}';"
+                        width="60" height="60" />
+            </a>
+        </div>
+
+<!--
+[(#REM) Apparemment, le but de ce squelette est de donner l'apparence d'un livre dont chaque page serait un des]
+[(#REM) chapitres du cadavre exquis (dont on a pu récupérer l'id juste avant dans le code).]
+[(#REM) On commencerait par afficher le prologue sur la page gauche et le chapitre 1 sur la page droite.]
+[(#REM) Deux flèches dans l'interface permettent de naviguer dans les chapitres.]
+[(#REM) Un premier clic sur « suivant » remplacera le texte du prologue par la partie 2 tandis que la page de]
+[(#REM) droite recevra le chapitre 3. Etc... pour les autres utilisations des flèches précédentes et suivantes.]
+-->
+        <div id="livre" style="display:inline-block;">
+            <div id="global-spacer"></div>
+            <div id="contenuPages" style="">
+                <div id="page-gauche-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;width: 44%;float: left;">
+                    <!--[(#REM) Au départ, la page de gauche contient le prologue.]-->
+
+                    <!--[(#REM) Le titre de l'histoire courante.]-->
+                    <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                    <span class="lecture-titre-cadavre">#TITRE</span>
+                    </BOUCLE_lecture_titre_rubrique_prologue>
+
+                    <BOUCLE_titre_prologue(ARTICLES){id_rubrique==#ENV{id_rubrique_annee_voulue}}{titre LIKE prologue}>
+                    <!--[(#REM) Le titre du prologue.]-->
+                    <h1 id="titre-chapitre-gauche" style="margin-top:14px;width:100%;float:left;">#TITRE</h1>
+                        <BOUCLE_auteur_prologue(AUTEURS){id_article}{0,1}>
+                    <!--[(#REM) Le nom et le logo de l'auteur.]-->
+                    <div id="logo-auteur-gauche" class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                    <div id="nom-auteur-gauche" class="ecriture-chapitre-nom">#NOM</div>
+                        </BOUCLE_auteur_prologue>
+                    <!--[(#REM) Le texte du prologue.]-->
+                    <div id="page-gauche-texte" class="texte-courant-lecture" style="clear: both;">#TEXTE</div>
+
+                    </BOUCLE_titre_prologue>
+                </div>
+
+                <div id="page-droite-livre" style="padding-left: 25px;padding-top: 50px;padding-right: 30px;width: 44%;float: right;">
+                    <!--[(#REM) Au départ, la page de droite contient le chapitre 1.]-->
+
+                    <!--[(#REM) Le titre de l'histoire courante.]-->
+                    <BOUCLE_titre_rubrique_chapitre1(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                    <span class="lecture-titre-cadavre">#TITRE</span>
+                    </BOUCLE_titre_rubrique_chapitre1>
+
+                    <BOUCLE_titre_chapitre_1(ARTICLES){id_rubrique==#ENV{id_rubrique_histoire_voulue}}{par date}{0,1}>
+                    <h1 id="titre-chapitre-droite" style="margin-top:14px;width:100%;float:left;">#TITRE</h1>
+                        <BOUCLE_auteur_chapitre1(AUTEURS){id_article}{0,1}>
+                    <!--[(#REM) Le nom et le logo de l'auteur.]-->
+                    <div id="logo-auteur-droite" class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                    <div id="nom-auteur-droite" class="ecriture-chapitre-nom">#NOM</div>
+                        </BOUCLE_auteur_chapitre1>
+                    <div id="page-droite-texte" class="texte-courant-lecture" style="clear: both">
+                        [(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|oui)
+                        <span class="texte-masque">[(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]</span>
+                        [(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]
+                        ]
+                        [(#ENV{annee_voulue}|=={#GET{derniere_annee_scolaire_connue}}|non) #DESCRIPTIF]
                     </div>
-        
-                   <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>               
-                   
-                   <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-                    
-                        <!-- BOUTONS OPTIONS GAUCHE-->
-                        <div class="lecture-options">
-                            <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                            <span class="lecture-titre-cadavre">#TITRE</span>
-                            </BOUCLE_lecture_titre_rubrique_droite2>
-                            
-                            <div class="lecture-chapitre-auteur">
-    
-                             <BOUCLE_auteur_article2(AUTEURS){id_article}{0,1}>
-                                  <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                                  <div class="ecriture-chapitre-nom">#NOM</div>
-                             </BOUCLE_auteur_article2>
-
-                             [(#ENV{fin}|=={oui}|non)
-                                <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
-                             ]
-
-                            </div>
-                         </div>
-                        
-                        <!-- CONTENT GAUCHE -->
-                        <h1 class="nettoyeur">#SURTITRE</h1>
-                       <h2>#TITRE</h2>
-                        #SET{var_lecture, false}
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|non)
-                          <INCLURE{fond=lecture-texte-visible, id_article}>
-                        ]
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|oui)
-                          [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
-                          [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
-                        ]
- 
-                   </div>
-                   </BOUCLE_lecture_gauche>
-                   
-               </div>
-               
-               <!-- PAGE DROITE -->
-               <div class="content-right">
-               
-                   <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
-                   
-                   <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-                  
-                        <!-- BOUTONS OPTIONS GAUCHE-->
-                        <div class="lecture-options">
-                            <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                            <span class="lecture-titre-cadavre">#TITRE</span>
-                            </BOUCLE_lecture_titre_rubrique_droite>
-                            
-                            <div class="lecture-chapitre-auteur">
-    
-                             <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
-                                  <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                                  <div class="ecriture-chapitre-nom">#NOM</div>
-                             </BOUCLE_auteur_article>
-
-                             [(#ENV{fin}|=={oui}|non)
-                                <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
-                             ]
-
-                            </div>
-                         </div>
-                       
-                        <!-- CONTENT GAUCHE -->
-                        <h1 class="nettoyeur">#SURTITRE</h1>
-                         <h2>#TITRE</h2>
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|non)
-                          <INCLURE{fond=lecture-texte-visible, id_article}>
-                        ]
-                        [(#ANNEE_ACTUELLE|=={#EVAL{2021|getAnneeActuelle}}|oui)
-                          [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
-                          [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
-                        ]
-
-                   </div>
-                    </BOUCLE_lecture_droite>
-               </div>
-            
-           </div>
-           
-           </div>
-        
-</div>
-        
-</div>
-
-</body>
-
-<script type="text/javascript">
-$(document).ready(function() {
-
-// RESIZE
-  window.onresize = resize_global_content;
-  resize_global_content();
-
-// NICESCROLL
-  $(".global-content").niceScroll({cursorcolor:"#ff6b6b", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
-  $('#ascrail2000').css({'cursor':'pointer'});
-
-// AFFICHAGES DES PAGES
-  var compteur = '#ENV{compteur}';
-  compteur = parseFloat(compteur);
-  var num_page_gauche;
-  var num_page_droite;
-  var num_page_limite = $('.content-left > div').size();
-
-  $('.lecture-page').hide();
-  pagination(compteur);
-  next_prev(compteur,num_page_limite);
-
-
-// BOUTON PAGE SUIVANTE
-$('#bt-prev').click(function(event) {
-    event.preventDefault();
-    compteur -= 2;
-    pagination(compteur);
-    next_prev(compteur,num_page_limite);
-});
-$('#bt-next').click(function(event) {
-    event.preventDefault();
-    compteur += 2;
-    pagination(compteur);
-    next_prev(compteur,num_page_limite);
-});
-
-// ROLLOVER AUTEUR
-$('.lecture-tooltip').mouseover(function() {
-  var offset = $(this).offset();
-  var content_tooltip = $(this).prev().html();
-  $('#liste-tooltip').show();
-  $('#liste-tooltip').html(content_tooltip);
-  var hauteur_tooltip = $('#liste-tooltip-content').height();
-  $('#liste-tooltip').height(hauteur_tooltip);
-  var toptooltip = Math.round(offset.top);
-  toptooltip = toptooltip - hauteur_tooltip;
-  var lefttooltip = Math.round(offset.left);
-  lefttooltip -= 100; 
-  $('#liste-tooltip').css('top', 75);
-  $('#liste-tooltip').css('left', lefttooltip + 2);
-});
-$('.lecture-tooltip').mouseout(function() {
-  $('#liste-tooltip').hide();
-});
-
-});
-
-// RESIZE
-function resize_global_content() {
-  h = $(window).height();
-  h -=61;
-  $('.global-content').height(h);
-  stitches_margin = ((h-60) - 258)/4;
-  $(".stitches-inner").css({'margin-top':stitches_margin});
-}
-
-//PAGINATION & AFFICHAGE DES PAGES
-
-function pagination(var_compteur) {
-  if(var_compteur%2 == 0) {
-    num_page_gauche = var_compteur-1;
-    num_page_droite = var_compteur;
-  }
-  else {
-    num_page_gauche = var_compteur;
-    num_page_droite = var_compteur+1;
-  }
-  $('.lecture-page').hide();
-  $('#page-gauche-'+num_page_gauche).show();
-  $('#page-droite-'+num_page_droite).show();
-}
-
-// AFFICHAGE DES BOUTONS
-function next_prev(var_compteur, var_limite) {
-  $('#bt-next').show();
-  $('#bt-prev').show();
-  if(var_compteur >= var_limite-1){
-    $('#bt-next').hide();
-  }
-  else {};
-  
-  if(var_compteur == 1 || var_compteur == 2){$('#bt-prev').hide();} else {};
-}
-</script>
-
-
+                    </BOUCLE_titre_chapitre_1>
+                </div>
+            </div>
+        </div>
+    </body>
 </html>

@@ -7,37 +7,41 @@ RUBRIQUE.HTML > CHAPITRE-ECRITURE-SCRIPT.HTML
 
 <!-- AUTEUR DE L'ARTICLE -->
 <BOUCLE_auteur_script(AUTEURS){id_article}{0,1}>
-         #SET{var_auteur_article, #NOM}
+#SET{var_auteur_article, #NOM}
 </BOUCLE_auteur_script>
 
 <div class="script-forum-fleche">
-<img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
 </div>
 <BOUCLE_article_verrouille_script(ARTICLES){id_article}>
-	<div class="script-ecrivain script-ecrivain-edit">
-	    <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
-	    <div class="script-texte #EDIT{texte}">#TEXTE</div>
-	    <br /><hr />
-		<BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
-			<div style="clear: both; padding: 5px; margin-top: 10px;">
-				
-				[(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
-                    [<a href="(#URL_ACTION_AUTEUR{dissocier_document,#ID_ARTICLE-article-#ID_DOCUMENT-suppr-safe,#URL_SITE_SPIP/spip.php?article#_principale:ID_ARTICLE&var_mode=recalcul})"
-                        class='supprimer_couleur'
-                        onClick='return confirmation("Etes vous sûr de vouloir supprimer ce document ?")'
-                        title='supprimer ce document' >
-                        <div class='action_supprimer'></div>
-                    </a>]
-                ]
-                <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">
-					[(#LOGO_DOCUMENT|left||image_reduire{80,60})]
-				</a>
-				
-			</div>
-		</BOUCLE_doc>
-		<div style="clear: both; padding: 5px; class="ajax">
-			#FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ARTICLE,article}
-		</div>
-	</div>
+<div class="script-ecrivain script-ecrivain-edit">
+    <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
+    <div class="script-texte #EDIT{texte}">#TEXTE</div>
+    <br /><hr />
+
+    <!-- [(#REM) Cette boucle sert à afficher les lecteurs de fichiers audio]-->
+    <INCLURE{fond=inclure/lecteur_audio, id_article} />
+
+    <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
+    <div style="clear: both; padding: 5px; margin-top: 10px;">
+
+        [(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+        [<a href="(#URL_ACTION_AUTEUR{dissocier_document,#ID_ARTICLE-article-#ID_DOCUMENT-suppr-safe,#URL_SITE_SPIP/spip.php?article#_principale:ID_ARTICLE&var_mode=recalcul})"
+            class='supprimer_couleur'
+            onClick='return confirmation("Etes vous sûr de vouloir supprimer ce document ?")'
+            title='supprimer ce document' >
+        <div class='action_supprimer'></div>
+    </a>]
+        ]
+        <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">
+            [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
+        </a>
+
+    </div>
+    </BOUCLE_doc>
+    <div style="clear: both; padding: 5px; class="ajax">
+    #FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ARTICLE,article}
+</div>
+</div>
 
 </BOUCLE_article_verrouille_script>

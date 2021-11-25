@@ -29,43 +29,43 @@ RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
 
 <!-- TEXTE  -->
 <div class="texte_courant">
-	<!-- LONGUEUR DE L' ARTICLE-->
-    #SET{ma_regexp, [[:alpha:]]}
-   <span class="texte-masque">[(#DESCRIPTIF|couper{[(#DESCRIPTIF|textebrut|strlen|moins{200})], ''}|replace{#GET{ma_regexp}, x})]</span>
-   <span>[(#DESCRIPTIF|cleanCut)]</span>   
+    <span class="texte-masque">[(#DESCRIPTIF|textebrut|masquerTexteChapitre{325})]</span>
+    <span>[(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]</span>
 </div>
 
 
 <!-- SCRIPT  -->
 <div class="script-forum-fleche">
-<img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
 </div>
 <div class="script-ecrivain">
 	<div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
     <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
-    <div class="script-texte script-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
+    <div class="script-texte scrirecalculpt-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
         #TEXTE
-        <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
-            <div style="clear: both; padding: 5px;">
-                <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3}|?{class="mediabox boxIframe"})]>
-                    [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
-                </a>
-                <?php
-                    //phpinfo();
-                    include_spip('inc/securiser_action');
-                    include_spip('inc/autoriser');                                  
-                    if ((isset($GLOBALS['auteur_session']['nom']))&&(autoriser('modifier', 'article', #ID_ARTICLE)))
-                        {   $action="documenter";
-                            $redirect="#SELF";
-                            $arg="-#ID_ARTICLE/article/#ID_DOCUMENT";
-                            $confirmation= attribut_html("Etes vous sûr de vouloir supprimer ce document ?");
-                            echo "<a href='".securiser_action_auteur($action, $arg, $redirect, $mode=false, $att='')."' class='rouge droite ajax' onClick='return confirmation(\"$confirmation\")' title='supprimer ce document' ><div class='action_supprimer'></div></a>";
-                        }
-                ?>
-            </div>
-        </BOUCLE_doc>
-    </div>
+        <!-- [(#REM) Cette boucle sert à afficher les lecteurs de fichiers audio]-->
+        <INCLURE{fond=inclure/lecteur_audio, id_article} />
 
+        <!-- [(#REM) Cette boucle sert à afficher la liste des documents joints]-->
+        <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
+        <div style="clear: both; padding: 5px; margin-top: 10px;">
+            [(#AUTORISER{modifier,article,#ID_ARTICLE}|oui)
+            [<a href="(#URL_ACTION_AUTEUR{dissocier_document,#ID_ARTICLE-article-#ID_DOCUMENT-suppr-safe,#URL_SITE_SPIP/spip.php?article#_principale:ID_ARTICLE&var_mode=recalcul})"
+                class='supprimer_couleur'
+                onClick='return confirmation("Etes vous sûr de vouloir supprimer ce document ?")'
+                title='supprimer ce document' >
+            <div class='action_supprimer'></div>
+            </a>]
+            ]
+            <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">
+                [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
+            </a>
+        </div>
+        </BOUCLE_doc>
+        <div style="clear: both; padding: 5px; class="ajax">
+            #FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ARTICLE,article}
+        </div>
+    </div>
 </div>
 
 

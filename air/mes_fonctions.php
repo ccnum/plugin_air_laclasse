@@ -30,7 +30,7 @@ function balise_ANNEE_SCOLAIRE_dist($p) {
       &&($_COOKIE[_cookie_annee_scolaire]!='')
       &&($_COOKIE[_cookie_annee_scolaire]>2011))
       $p->code = $_COOKIE[_cookie_annee_scolaire];
-    else $p->code = 2015;
+    else $p->code = 2021;
   if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
   $p->code = $_GET['annee_scolaire'];
    return $p;
@@ -116,38 +116,130 @@ function afficher_options_date($annee,$mois,$annee_scolaire)
 }
 
 /**
- * Enregistre en session l'année que le visiteur souhaite afficher.
- * -> cette année ne peut être inférieure à 2021 car cette année est le début de fictions
- *      -> 2021 devient alors l'année choisie
- * -> cette année ne peut pas être supérieur à l'année en cours (on ne peut pas demander l'année 2022 si on est en 2021.
- *      -> 2021 devient l'année choisie
- * @param int $anneeDemandee
+ * Cette fonction reçoit une chaîne de caractère (un chapitre complet) et doit en retrancher les X derniers caractères.
+ * X étant l'entier reçu en deuxième argument. Puis chaque caractère doit être remplacé par un x.
+ *
+ * -> si le chapitre contient moins de caractères que le nb de caractères à tronquer, on ne renvoie qu'une chaîne vide.
+ *
+ * @param string $texteAMasquer
+ * @param int $nbDeCaracteresATronquerALaFin
+ * @return string
  */
-function setAnneeActuelle($anneeDemandee=2000){
-    if( intval($anneeDemandee)<2021 ){ // On ne peut pas demander de date avant 2021 (fictions n'existait pas)
-        $_SESSION['anneeActuelle']=2021;
-    } else{
-        (date('m')>=9)==true ? $annee_actuelle = date('Y') : $annee_actuelle = date('Y')-1;
-        if($anneeDemandee > $annee_actuelle){
-            $_SESSION['anneeActuelle']=2021; // On ne peut pas demander de date après l'année actuelle.
-        } else{
-            $_SESSION['anneeActuelle']=intval($anneeDemandee);
-        }
+function masquerTexteChapitre(string $texteAMasquer='', int $nbDeCaracteresATronquerALaFin=325): string
+{
+    if(strlen($texteAMasquer) < $nbDeCaracteresATronquerALaFin){
+        return '';
     }
+    $texteTronque = substr($texteAMasquer, 0, strlen($texteAMasquer)-$nbDeCaracteresATronquerALaFin);
+
+    // Remplace tous les caractères sauf les diacritiques.
+    // Les RegEx ne semblent pas vouloir fonctionner :/ Je soupçonne un pb d'encodage iso-latin/utf-8. AU SECOURS !
+    $caracteresAMasquer = array(
+        "à", "ä", "â",
+        "À", "Ä", "Â",
+        "ç",
+        "Ç",
+        "é", "è", "ë", "ê",
+        "É", "È", "Ë", "Ê",
+        "î", "ï",
+        "Î", "Ï",
+        "ô", "ö",
+        "Ô", "Ö",
+        "ù", "û", "ü",
+        "Ù", "û", "ü",
+        "ŷ", "ÿ",
+        "Ŷ", "Ÿ",
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z  ',
+    );
+    return str_replace($caracteresAMasquer, "X", $texteTronque);
 }
 
 /**
- * On renvoie l'année qui est demandée si elle existe. Sinon, on renvoie l'année scolaire en cours
- * (ex : 2021 pour l'année 2021-2022).
+ * Cette fonction reçoit une chaîne de caractères (un chapitre) et doit n'en retourner que les X derniers caractères. X
+ * étant le nombre de caractères finaux que nous désirons. Enfin avant de renvoyer la fin de chaîne ainsi tronquée, on
+ * lui concatènera (à son commencement) la chaîne de caractère éventuelle reçue en troisième argument (qui est sensée
+ * symboliser le texte manquant)
+ *
+ * Ex : recupererDernieresLignesChapitres('toto_titi_tutu_tata', 5, '...') renverra ...titi_tutu_tata
+ *
+ * -> Si le nombre de caractères voulus est supérieur à la taille du texte, on renverra le texte complet sans la chaîne
+ * à concaténer au début.
+ *
+ * @param string $texteChapitre
+ * @param int $nbDeDerniersCaracteresAAfficher
+ * @return string
+ */
+function recupererDernieresLignesChapitres($texteChapitre='', $nbDeDerniersCaracteresAAfficher=325, $chaineAConcatenerAuDebut='(...)'){
+    if( strlen($texteChapitre) < $nbDeDerniersCaracteresAAfficher ){
+        return $texteChapitre;
+    }
+    return $chaineAConcatenerAuDebut . substr($texteChapitre, strlen($texteChapitre)-$nbDeDerniersCaracteresAAfficher, -1);
+}
+
+/**
+ * Renvoie l'année scolaire en cours.
+ * Ex :
+ * - renverra 2021 si on est en décembre 2021
+ * - renverra 2021 si on est en mai 2022
+ * - renverra 2020 si on est en juin 2021
+ * --> Le mois qui permet de basculer d'une année scolaire à une autre est septembre (compris)
+ *
  * @return int
  */
-function getAnneeActuelle(): int
+function getAnneeScolaireCourante(){
+    return (date('m')>=9) ? intval(date('Y')) : intval(date('Y'))-1;
+}
+
+/**
+ * Génère le menu déroulant permettant de naviguer dans les années précédentes du site.
+ * @param int $anneePreSelectionnee
+ * @return string
+ */
+function creerMenuDeroulantAnnee(int $anneePreSelectionnee=2012):string
 {
-    if( isset($_SESSION['anneeActuelle']) ){
-        return $_SESSION['anneeActuelle'];
-    } else{
-        if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
-        $_SESSION['anneeActuelle'] = $annee_actuelle;
-        return $_SESSION['anneeActuelle'];
+    // Historiquement, la première année commence en 2012.
+    $anne_debut = 2012;
+    // La dernière année est l'année scolaire courante.
+    $annee_courante = getAnneeScolaireCourante();
+    $codeHTML = '<select name="annee_scolaire_voulue" onchange="redirigerPage(this.value)">';   // « redirigerPage » est une
+                                                                                                // fonction js présente dans le même
+                                                                                                // fragment qui appelle la balise.
+    for ($i = $annee_courante; $i >= $anne_debut; $i--) {
+        $selected = '';
+        if($anneePreSelectionnee==$i){
+            $selected= ' selected ';
+        }
+        $codeHTML .= '<option' . $selected . ' value="' . $i . '">' . $i . '-' . ($i+1) . '</option>';
     }
+    $codeHTML .= '</select>';
+    return $codeHTML;
+}
+
+
+/*
+ *  BALISES SPIP PERSONNALISÉES
+ *
+ * Il est possible de créer des balises SPIP personnalisées du type #MA_BALISE. Pour cela, il suffit de déclarer une
+ * fonction ici-même.
+ *
+ * DOCUMENTATION ICI :
+ * https://code.spip.net/fr/archives/compilateur/article/creer-des-balises-personnalisees-9
+ * https://passingcuriosity.com/2008/creating-custom-tags-spip-static/
+ *
+ */
+
+/**
+ * Lorsque cette fonction est appelée, elle renvoie l'année présente en paramètre de l'url si ce paramètre existe
+ * sinon, on renverra l'année courante.
+ * @param object $p
+ * @return object
+ */
+function balise_recuperer_annee_voulue(object $p){
+    if( isset($_GET['annee_scolaire']) ) {
+        $p->code = '\'' . $_GET['annee_scolaire'] . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
+    } else{
+        $p->code = '\'' . getAnneeScolaireCourante() . '\''; // Entourer le contenu d'apostrophes semble nécessaire à SPIP pour récupérer les données..
+    }
+    return $p;
 }

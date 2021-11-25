@@ -71,12 +71,12 @@ PAGE-TYPE.HTML
 		<div class="global-content">
         	
            <div class="content">
-           <BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
+           <BOUCLE_annee(RUBRIQUES){titre==2021}{tout}{0,1}>
             <BOUCLE_art(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 
              <div class="content-left-small">
                 <div id="titre_site">
-                    <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                    <a href="https://air.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
                 </div>
                 <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
                 <div id="texte-presentation" class="#EDIT{texte}">

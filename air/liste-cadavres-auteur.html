@@ -8,16 +8,18 @@ ID / NOM AUTEUR
 
 #SET{var_nom_auteur,#SESSION{nom}}
 #SET{i,0}
+<BOUCLE_annee(RUBRIQUES){titre==#ENV{annee_scolaire, 2021}}{tout}{0,1}>
+<BOUCLE_histoires_exclues(RUBRIQUES){id_parent=#ID_RUBRIQUE}{titre_mot=ne_pas_afficher}{tout}{doublons}>
+    <!-- [(#REM) On souhaite parfois masquer certaines histoires (celles faites par d'autres personnes par ex... ]-->
+</BOUCLE_histoires_exclues>
 
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{2021|getAnneeActuelle}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par num titre}>
+<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par titre}{tout}{doublons}>
 	#SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
 	<div class="liste-title">#GET{i}</div>
     
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
-
         <div class="liste-link">
         <!-- TOOL TIP CONTENT -->
             <div class="liste-tooltip-content">
@@ -29,7 +31,7 @@ ID / NOM AUTEUR
                         <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                         <div class="liste-tooltip-auteur">#NOM</div>
                         <div class="liste-tooltip-auteur">
-                            [(#DESCRIPTIF|cleanCut)]<br />
+                            [(#DESCRIPTIF|textebrut|recupererDernieresLignesChapitres{325, (...)})]<br />
                         </div>
                     </BOUCLE_auteur_tous>
                 </div>

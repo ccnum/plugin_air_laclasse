@@ -25,14 +25,18 @@ function annee_rub($idr){
 }
 
 function balise_ANNEE_SCOLAIRE_dist($p) {
+    /*
     if ((isset($_COOKIE[_cookie_annee_scolaire]))
         &&($_COOKIE[_cookie_annee_scolaire]!=0)
         &&($_COOKIE[_cookie_annee_scolaire]!='')
         &&($_COOKIE[_cookie_annee_scolaire]>2011))
         $p->code = $_COOKIE[_cookie_annee_scolaire];
     else $p->code = 2021;
-    if ((isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0)&&($_GET['annee_scolaire']!=''))
+*/
+    if ( (isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0) && ($_GET['annee_scolaire']!='') )
         $p->code = $_GET['annee_scolaire'];
+    else
+        $p->code = 2021;
     return $p;
 }
 

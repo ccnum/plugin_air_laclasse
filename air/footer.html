@@ -1,9 +1,9 @@
 #CACHE{0}
 #SET{id_art,0}
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-    <BOUCLE_id_forum(ARTICLES){titre_mot==agora}{id_rubrique}{0,1}>
-        #SET{id_art,#ID_ARTICLE}
-    </BOUCLE_id_forum>
+<BOUCLE_id_forum(ARTICLES){titre_mot==agora}{id_rubrique}{0,1}>
+#SET{id_art,#ID_ARTICLE}
+</BOUCLE_id_forum>
 </BOUCLE_annee>
 
 <script>
@@ -17,7 +17,7 @@
         }
         else {
             document.cookie = cookie_nom + "=" + escape(cookie_valeur);
-            url = 'http://air.laclasse.com/?annee_scolaire=' + cookie_valeur;
+            url = 'http://fictions.laclasse.com/?annee_scolaire=' + cookie_valeur;
         }
         reload(url);
     }
@@ -44,10 +44,10 @@
             <a href="https://www.laclasse.com/portail/#app.doc/node/481281">Espace doc</a>
             <a href="https://voyagepierre.blogs.laclasse.com/">Blog de Pierre</a>
         </div>
-        
+
         <div id="footer-nav">
             <BOUCLE_page_footer(ARTICLES){id_rubrique=12}{id_article !=49}>
-                <a href="#URL_SITE_SPIP/?page=page&id_article=#ID_ARTICLE">#TITRE</a>&nbsp;&nbsp;|
+            <a href="#URL_SITE_SPIP/?page=page&id_article=#ID_ARTICLE">#TITRE</a>&nbsp;&nbsp;|
             </BOUCLE_page_footer>
             <a href="http://www.laclasse.com/">Laclasse.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;
             [(#REM)[(#SESSION{login}|=={}|oui)<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>&nbsp;&nbsp;|]]
@@ -75,6 +75,6 @@
 <!-- Marqueur Google Analytics -->
 <script src="https://www.google-analytics.com/urchin.js" type="text/javascript"></script>
 <script type="text/javascript">
-_uacct = "UA-910479-6";
-urchinTracker();
+    _uacct = "UA-910479-6";
+    urchinTracker();
 </script>

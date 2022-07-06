@@ -22,14 +22,16 @@ SOMMAIRE.HTML > LISTE-CADAVRE-FIN.HTML
                 <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
                 [(#LOGO_RUBRIQUE|image_reduire{175,0})]
                 </a>
+                <!-- BOUTON TELECHARGEMENT -->
+                <div class="liste-book-bt" style="height: 70px;">
+                    <BOUCLE_doc(DOCUMENTS){id_rubrique = #ID_RUBRIQUE}{mode=document}{doublons}>
+                    <a href="#URL_DOCUMENT">#TYPE_DOCUMENT</a>
+                    </BOUCLE_doc>
+                </div>
+
             </div>
 
-            <!-- BOUTON TELECHARGEMENT -->
-            <div class="liste-book-bt">
-             <BOUCLE_doc(DOCUMENTS){id_rubrique = #ID_RUBRIQUE}{mode=document}{doublons}>
-             <a href="#URL_DOCUMENT">#TYPE_DOCUMENT</a>
-             </BOUCLE_doc>
-            </div>
+
 
         </div>
 

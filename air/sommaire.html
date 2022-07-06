@@ -40,19 +40,19 @@ header('Location: spip.php?page=mobile2');
         <INCLURE{fond=inclure/authentification} />
 
 <!-- ELEMENTS GRAPHIQUES-->
-        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16"  alt=""/></div>
+        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16"  alt=""/></div>
+        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16"  alt=""/></div>
+        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16"  alt=""/></div>
 
 
-        <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-        <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+        <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6"  alt=""/></div>
+        <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5"  alt=""/></div>
 
         <div class="stitches-ecriture">
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
         </div>
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
@@ -66,8 +66,9 @@ header('Location: spip.php?page=mobile2');
            <div class="content">
 
            <div class="content-left-small">
+               <!-- #EVAL{_annee_scolaire} -->
               <div id="titre_site">
-                <a href="http://air.laclasse.com" title="Accueil"><strong>air</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
               </div>
               <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
               <div id="texte-presentation" class="#EDIT{texte}">

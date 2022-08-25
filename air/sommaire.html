@@ -55,33 +55,27 @@ header('Location: spip.php?page=mobile2');
         <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
         </div>
 <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
+    <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">
-
-		<div id="global-spacer"></div>
-
-		<div class="global-content">
-
-           <div class="content">
-
-           <div class="content-left-small">
-              <div id="titre_site">
-                <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
-              </div>
-              <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
-              <div id="texte-presentation" class="#EDIT{texte}">
-                [(#TEXTE)]
-              </div>
-           </div>
-
-           <div class="content-right-large">
-
-            <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
-                [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">
-                  (#DESCRIPTIF)
-                </div>]
+    <div id="global-spacer"></div>
+    <div class="global-content">
+        <div class="content">
+            <div class="content-left-small">
+                <div id="titre_site">
+                    <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
+                </div>
+                <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
+                <div id="texte-presentation" class="#EDIT{texte}">
+                    [(#TEXTE)]
+                </div>
             </div>
+            <div class="content-right-large">
+                <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
+                    [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">
+                      (#DESCRIPTIF)
+                    </div>]
+                </div>
                 [(#REM) NOUVELLE MANIÈRE DE CHOISIR COMMENT AFFICHER LES DONNÉES.]
                 [(#REM) Soit on affiche la vue en mode « fabrication » -> des colonnes de carrés cliquables.]
                 [(#REM) Soit on affiche la vue en mode lecture -> une succession de couvertures de livres.]
@@ -95,7 +89,7 @@ header('Location: spip.php?page=mobile2');
                 [(#REM) rubrique année.]
                 <BOUCLE_rubrique_contenant_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
                     <BOUCLE_rubrique_annee(RUBRIQUES){id_parent}{!par titre}{titre==^[2]}{0,1}>
-                        #SET{annee_a_afficher, #TITRE|anneeAAfficher}
+                        #SET{annee_a_afficher, #TITRE|anneeAAfficher} [(#REM) TODO Penser à spipifier cette fonction PHP]
                     </BOUCLE_rubrique_annee>
                 </BOUCLE_rubrique_contenant_annees>
                 [(#REM) ÉTAPE 2 : DÉTECTION DU MODE D'AFFICHAGE.]
@@ -107,70 +101,27 @@ header('Location: spip.php?page=mobile2');
                     <BOUCLE_rubrique_annee_2(RUBRIQUES){id_parent}{titre=#GET{annee_a_afficher}}>
                         <BOUCLE_mots_clef_annee(MOTS){id_rubrique}>
                         [(#REM) Si le mot-clef est associé à l'année qu'on souhaite afficher, on passe la variable]
-                        [(#REM) de mode en « fbrication ».]
+                        [(#REM) de mode en « fabrication ».]
                         [(#TITRE|=={année_en_ecriture}|oui) #SET{mode_affichage,fabrication} ]
                         </BOUCLE_mots_clef_annee>
                     </BOUCLE_rubrique_annee_2>
                 </BOUCLE_rubrique_contenant_annees_2>
-               [(#REM) ÉTAPE 3 : CHOIX DU FICHIER À INCLURE.]
-               [(#REM) Nous savons quel est le mode d'affichage, il suffit d'appeler le bon squelette en fonction de]
-               [(#REM) cette valeur.]
+                [(#REM) ÉTAPE 3 : CHOIX DU FICHIER À INCLURE.]
+                [(#REM) Nous savons quel est le mode d'affichage, il suffit d'appeler le bon squelette en fonction de]
+                [(#REM) cette valeur.]
 
-
-
-
-
-
-            [(#ENV{mode}|=={fabrication}|oui)
-                <!--
-                  <div id="countdown-blog"></div>
-                  <script type="text/javascript" src="#CHEMIN{js/countdown.js}"></script>
-                -->
-              ]
-
-              <!-- LISTE DES CADAVRES -->
-
-                 <div id="liste-cadavres">
-                    #SET{var_fin, false}
-                    [(#ENV{mode}|=={fabrication}|non)
-                        <!-- FIN DU JEU / AFFICHAGE DES COUVERTURES ET LIENS DE TELECHARGEMENT -->
-                   				[(#FIN|=={#GET{var_fin}}|non)
-                            <INCLURE{fond=liste-cadavres-fin} />
-                          ]
-
-                   				[(#FIN|=={#GET{var_fin}}|oui)
-                            [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
-                              [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
-                              [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
-                              <INCLURE{fond=sommaire-legende} />
-                            ]
-                             [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
-                                <INCLURE{fond=liste-cadavres-fin} />
-                            ]
-                          ]
-                    ]
-                    [(#ENV{mode}|=={fabrication}|oui)
-                            [(#SESSION{id_auteur}|non)<INCLURE{fond=liste-cadavres-visiteur} />]
-                            [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur} />]
-                            <INCLURE{fond=sommaire-legende} />
-                    ]
-      			     </div>
-
-
-			<!-- FIN LISTE DES CADAVRES -->
-
-           </div>
-
-           </div>
-
+                [(#REM) 3 squelettes :]
+                [(#REM) liste-cadavres-visiteur]
+                [(#REM) liste-cadavres-auteur]
+                [(#REM) liste-cadavres-fin]
+            </div>
         </div>
-
-</div>
-</BOUCLE_article>
+    </div>
+    </BOUCLE_article>
 </BOUCLE_annee>
 
 <INCLURE{fond=footer}/>
-</body>
+    </body>
 
 <script type="text/javascript">
 $(document).ready(function() {

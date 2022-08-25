@@ -82,6 +82,44 @@ header('Location: spip.php?page=mobile2');
                   (#DESCRIPTIF)
                 </div>]
             </div>
+                [(#REM) NOUVELLE MANIÈRE DE CHOISIR COMMENT AFFICHER LES DONNÉES.]
+                [(#REM) Soit on affiche la vue en mode « fabrication » -> des colonnes de carrés cliquables.]
+                [(#REM) Soit on affiche la vue en mode lecture -> une succession de couvertures de livres.]
+                [(#REM) Comment discriminer ces deux cas ?]
+                [(#REM) Je choisis de tester si l'année choisie possède un mot-clef nommé : « année_en_cours »]
+                [(#REM) - Pas de mot-clef -> on considère que l'année est finie (rétro-compatibilité avec les anciennes années qui n'ont pas ce mot-clef).)]
+                [(#REM) - Mot-clef présent -> on considère que l'année est dite « en cours ».]
+
+                [(#REM) ÉTAPE 1 : DÉTECTION DE L'ANNÉE AFFICHÉE SUR LA PAGE.]
+                [(#REM) L'année est soit retrouvable dans le paramètre «annee_scolaire» de l'url soit est la dernière]
+                [(#REM) rubrique année.]
+                <BOUCLE_rubrique_contenant_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+                    <BOUCLE_rubrique_annee(RUBRIQUES){id_parent}{!par titre}{titre==^[2]}{0,1}>
+                        #SET{annee_a_afficher, #TITRE|anneeAAfficher}
+                    </BOUCLE_rubrique_annee>
+                </BOUCLE_rubrique_contenant_annees>
+                [(#REM) ÉTAPE 2 : DÉTECTION DU MODE D'AFFICHAGE.]
+                [(#REM) On a le titre de l'année que l'on souhaite afficher. La rubrique correspondante a-t-elle le]
+                [(#REM) mot-clef affirmant que l'année est en modification ? -> «année_en_ecriture».]
+                [(#REM) Par défaut, les années sont en mode visualisation.]
+                #SET{mode_affichage,visualisation}
+                <BOUCLE_rubrique_contenant_annees_2(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+                    <BOUCLE_rubrique_annee_2(RUBRIQUES){id_parent}{titre=#GET{annee_a_afficher}}>
+                        <BOUCLE_mots_clef_annee(MOTS){id_rubrique}>
+                        [(#REM) Si le mot-clef est associé à l'année qu'on souhaite afficher, on passe la variable]
+                        [(#REM) de mode en « fbrication ».]
+                        [(#TITRE|=={année_en_ecriture}|oui) #SET{mode_affichage,fabrication} ]
+                        </BOUCLE_mots_clef_annee>
+                    </BOUCLE_rubrique_annee_2>
+                </BOUCLE_rubrique_contenant_annees_2>
+               [(#REM) ÉTAPE 3 : CHOIX DU FICHIER À INCLURE.]
+               [(#REM) Nous savons quel est le mode d'affichage, il suffit d'appeler le bon squelette en fonction de]
+               [(#REM) cette valeur.]
+
+
+
+
+
 
             [(#ENV{mode}|=={fabrication}|oui)
                 <!--

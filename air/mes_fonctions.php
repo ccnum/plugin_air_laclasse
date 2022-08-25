@@ -36,7 +36,7 @@ function balise_ANNEE_SCOLAIRE_dist($p) {
     if ( (isset($_GET['annee_scolaire']))&&($_GET['annee_scolaire']!=0) && ($_GET['annee_scolaire']!='') )
         $p->code = $_GET['annee_scolaire'];
     else
-        $p->code = 2021;
+        $p->code = 2022;
     return $p;
 }
 
@@ -54,7 +54,7 @@ function balise_NOM_AUTEUR_dist($p) {
 // Si balise_FIN_dist = true -> affichage des couvertures et liens pdf sur la page d'accueil
 
 function balise_FIN_dist($p) {
-    $p->code = "'true'";
+    $p->code = "'false'";
     return $p;
 }
 
@@ -62,7 +62,7 @@ function balise_FIN_dist($p) {
 // Si balise_LECTURE_dist = true -> les textes sont affichés dans la vue lecture
 
 function balise_LECTURE_dist($p) {
-    $p->code = "'true'";
+    $p->code = "'false'";
     return $p;
 }
 
@@ -108,8 +108,8 @@ function cleanCut($string,$length=200,$cutString = '(...)')
 function afficher_options_date($annee,$mois,$annee_scolaire)
 {
     $texte='';
-    if (date('m')>=9) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
-    if ($mois<9) $annee = $annee--;
+    if (date('m')>=8) $annee_actuelle = date('Y'); else $annee_actuelle = date('Y')-1;
+    if ($mois<8) $annee = $annee--;
     for ($i=$annee_actuelle;$i>=$annee;$i--) {
         $j=$i+1;
         $texte .= "<option style='' value='$i'";
@@ -187,12 +187,12 @@ function recupererDernieresLignesChapitres($texteChapitre='', $nbDeDerniersCarac
  * - renverra 2021 si on est en décembre 2021
  * - renverra 2021 si on est en mai 2022
  * - renverra 2020 si on est en juin 2021
- * --> Le mois qui permet de basculer d'une année scolaire à une autre est septembre (compris)
+ * --> Le mois qui permet de basculer d'une année scolaire à une autre est août (compris)
  *
  * @return int
  */
 function getAnneeScolaireCourante(){
-    return (date('m')>=9) ? intval(date('Y')) : intval(date('Y'))-1;
+    return (date('m')>=8) ? intval(date('Y')) : intval(date('Y'))-1;
 }
 
 /**
@@ -218,6 +218,13 @@ function creerMenuDeroulantAnnee(int $anneePreSelectionnee=2012):string
     }
     $codeHTML .= '</select>';
     return $codeHTML;
+}
+
+function anneeAAfficher($derniereRubriqueAnneeTrouveeDansSpip=''){
+    if( isset($_GET['annee_scolaire'])){
+        return $_GET['annee_scolaire'];
+    }
+    return  $derniereRubriqueAnneeTrouveeDansSpip;
 }
 
 

@@ -1,21 +1,26 @@
 [(#REM)
 SOMMAIRE.HTML > LISTE-CADAVRE-AUTEUR.HTML
-(grille des cadavres affiché dans le cas ou un utilisateur est connecté)
+(grille des cadavres affichée dans le cas ou un utilisateur est connecté)
 
-ID / NOM AUTEUR 
+ID / NOM AUTEUR
 ]
-#CACHE{0}
 
 #SET{var_nom_auteur,#SESSION{nom}}
 #SET{i,0}
 
-<BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
-<BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par titre}>
-	#SET{i,#GET{i}|plus{1}}
+<BOUCLE_rubrique_contenant_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+    <BOUCLE_rubrique_annee(RUBRIQUES){id_parent}{!par titre}{titre==^[2]}{0,1}>
+        #SET{annee_a_afficher, #TITRE|anneeAAfficher} [(#REM) TODO Penser à spipifier cette fonction PHP]
+    </BOUCLE_rubrique_annee>
+</BOUCLE_rubrique_contenant_annees>
+
+<BOUCLE_annee(RUBRIQUES){titre==#GET{annee_a_afficher}}{tout}{0,1}>
+    <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent=#ID_RUBRIQUE}{id_rubrique != 12}{par titre}>
+	    #SET{i,#GET{i}|plus{1}}
 	<div class="liste-colonnes">
 	<div class="liste-title">#GET{i}</div>
     <!-- LISTE CADAVRES -->
-    <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
+        <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
     <!-- mettre boucle ci-dessus par date -->
         <div class="liste-link">
         <!-- TOOL TIP CONTENT -->
@@ -35,7 +40,7 @@ ID / NOM AUTEUR
                 <div id="liste-tooltip-bulle">
                 </div>
             </div>
-            
+
         	#SET{var_oui, oui}
             <B_auteur_actif>
             	<BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
@@ -48,6 +53,7 @@ ID / NOM AUTEUR
             <//B_auteur_actif>
 
 
+            [(#REM) À quoi sert le code ci-dessous ? ]
             [(#COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|oui)
                  [(#SESSION{login}|match{pvincent|heleroy|chmonnet}|oui)
                     <!--
@@ -58,10 +64,10 @@ ID / NOM AUTEUR
 
         </div>
     <div class="liste-link-spacer-5"></div>
-    </BOUCLE_articles_tous>
+        </BOUCLE_articles_tous>
     <!-- FIN LISTE CADAVRES -->
-    
+
 	</div>
-    
-</BOUCLE_rubriques_toutes>
+
+    </BOUCLE_rubriques_toutes>
 </BOUCLE_annee>

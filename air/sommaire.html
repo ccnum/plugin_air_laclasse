@@ -109,14 +109,18 @@ header('Location: spip.php?page=mobile2');
                 [(#REM) ÉTAPE 3 : CHOIX DU FICHIER À INCLURE.]
                 [(#REM) Nous savons quel est le mode d'affichage, il suffit d'appeler le bon squelette en fonction de]
                 [(#REM) cette valeur.]
-
-                [(#REM) 3 squelettes :]
-                [(#REM) liste-cadavres-visiteur]
-                [(#REM) liste-cadavres-auteur]
-                [(#REM) liste-cadavres-fin]
+                <div id="liste-cadavres">
+                    [(#REM) 3 squelettes :]
+                    [(#REM) liste-cadavres-visiteur--> À quoi sert-il ? Est-il vraiment utile ?]
+                    [(#REM) liste-cadavres-auteur]
+                    [(#REM) liste-cadavres-fin]
+                [(#GET{mode_affichage}|=={fabrication}|oui) <INCLURE{fond=liste-cadavres-auteur} />]
+                [(#GET{mode_affichage}|=={fabrication}|non) <INCLURE{fond=liste-cadavres-fin} />]
+                </div>
             </div>
         </div>
     </div>
+</div>
     </BOUCLE_article>
 </BOUCLE_annee>
 

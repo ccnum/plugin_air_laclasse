@@ -93,7 +93,7 @@
            		</div>
            
                 <div id="ecriture-en-cours">
-                <INCLURE{fond=rubrique-bouton}>
+                    <!--[(#REM) Pas la moindre foutue idée d'à quoi sert ce rubrique-bouton... Je supprile son inclure fond=rubrique-bouton]-->
                 </div>
                 
                 <!-- LISTE CADAVRE SMALL-->
@@ -157,7 +157,7 @@
                                    <!-- Affichage du chapitre N VERROUILLE -->
                                     [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
                                         <!-- precedent chapitre VERROUILLE-->
-                                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>] 
+                                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-visible, id_article,fin=non}>]
                                         <!-- dernier chapitre ECRITURE-->
                                         [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
                                     ]
@@ -172,7 +172,7 @@
                                             <!-- Si l'utilisateur est l'auteur du chapitre N-1  --> 
                                             [(#NOM|=={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-visible, id_article}>] 
                                             <!-- Si l'utilisateur n'est pas l'auteur du chapitre N-1  --> 
-                                            [(#NOM|!={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>] 
+                                            [(#NOM|!={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-visible, id_article,fin=non}>]
                                         
                                         ] 
                 
@@ -183,7 +183,7 @@
                                             <!-- Si l'utilisateur est webmestre -->
                                             [(#SESSION{webmestre}|=={#GET{var_oui}}|oui)
                                                 <!-- precedent chapitre VERROUILLE-->
-                                                [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>] 
+                                                [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-visible, id_article,fin=non}>]
                                                 <!-- dernier chapitre ECRITURE -->
                                                 [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>] 
                                             ]
@@ -191,9 +191,9 @@
                                             <!-- Si l'utilisateur n'est pas webmestre -->
                                             [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
                                                 <!-- precedent chapitre VERROUILLE-->
-                                                [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article, fin=non}>] 
+                                                [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-visible, id_article, fin=non}>]
                                                 <!-- dernier chapitre ECRITURE -->
-                                                [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille,fin=oui,id_article}>]
+                                                [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture,fin=oui,id_article}>]
 
                                             ]
 

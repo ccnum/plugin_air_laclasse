@@ -2,12 +2,157 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <title>[(#NOM_SITE_SPIP|textebrut)]</title>
+        [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+        <INCLURE{fond=inclure/head} />
+        <script type="text/javascript" src="#CHEMIN{js/jquery.nicescroll.min.js}"></script>
+        <meta name="viewport" content="width=980, user-scalable=no" />
     </head>
+
     <body>
-        <p>
-            test petitfablab
-        </p>
-        <script>
-        </script>
+    <!-- ID/NOM AUTEUR-->
+
+    <!-- Le cache est a zero pour pouvoir récupérer l'id de l'auteur connecté-->
+    #CACHE{0}
+    <!-- ID et nom de l'auteur connecté -->
+    #SET{var_id_auteur,#SESSION{id_auteur}}
+    #SET{var_nom_auteur,#SESSION{nom}}
+
+    <!-- TOOLTIP -->
+    <div id="liste-tooltip">
+    </div>
+
+    <!-- BOUTON CONNEXION -->
+    <INCLURE{fond=inclure/authentification} />
+
+    <!-- ELEMENTS GRAPHIQUES-->
+    <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16"  alt=""/></div>
+    <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16"  alt=""/></div>
+    <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16"  alt=""/></div>
+    <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16"  alt=""/></div>
+
+
+    <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6"  alt=""/></div>
+    <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5"  alt=""/></div>
+
+    <div class="stitches-ecriture">
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86"  alt=""/></div>
+    </div>
+    <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+    <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
+    <!-- BOOK -->
+    <div id="global-ecriture">
+        <div id="global-spacer"></div>
+        <div class="global-content">
+            <div class="content">
+                <div class="content-left-small">
+                    <div id="titre_site">
+                        <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
+                    </div>
+                    <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
+                    <div id="texte-presentation" class="#EDIT{texte}">
+                        [(#TEXTE)]
+                    </div>
+                </div>
+                <div class="content-right-large">
+                    <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
+                        [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">
+                        (#DESCRIPTIF)
+                    </div>]
+                    </div>
+                    [(#REM) NOUVELLE MANIÈRE DE CHOISIR COMMENT AFFICHER LES DONNÉES.]
+                    [(#REM) Soit on affiche la vue en mode « fabrication » -> des colonnes de carrés cliquables.]
+                    [(#REM) Soit on affiche la vue en mode lecture -> une succession de couvertures de livres.]
+                    [(#REM) Comment discriminer ces deux cas ?]
+                    [(#REM) Je choisis de tester si l'année choisie possède un mot-clef nommé : « année_en_cours »]
+                    [(#REM) - Pas de mot-clef -> on considère que l'année est finie (rétro-compatibilité avec les anciennes années qui n'ont pas ce mot-clef).)]
+                    [(#REM) - Mot-clef présent -> on considère que l'année est dite « en cours ».]
+
+                    [(#REM) ÉTAPE 1 : DÉTECTION DE L'ANNÉE AFFICHÉE SUR LA PAGE.]
+                    [(#REM) L'année est soit retrouvable dans le paramètre «annee_scolaire» de l'url soit est la dernière]
+                    [(#REM) rubrique année.]
+                    <BOUCLE_rubrique_contenant_annees(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+                    <BOUCLE_rubrique_annee(RUBRIQUES){id_parent}{!par titre}{titre==^[2]}{0,1}>
+                    #SET{annee_a_afficher, #TITRE|anneeAAfficher} [(#REM) TODO Penser à spipifier cette fonction PHP]
+                    </BOUCLE_rubrique_annee>
+                    </BOUCLE_rubrique_contenant_annees>
+                    [(#REM) ÉTAPE 2 : DÉTECTION DU MODE D'AFFICHAGE.]
+                    [(#REM) On a le titre de l'année que l'on souhaite afficher. La rubrique correspondante a-t-elle le]
+                    [(#REM) mot-clef affirmant que l'année est en modification ? -> «année_en_ecriture».]
+                    [(#REM) Par défaut, les années sont en mode visualisation.]
+                    #SET{mode_affichage,visualisation}
+                    <BOUCLE_rubrique_contenant_annees_2(RUBRIQUES){titre_mot=rubrique-contenant-annees}>
+                    <BOUCLE_rubrique_annee_2(RUBRIQUES){id_parent}{titre=#GET{annee_a_afficher}}>
+                    <BOUCLE_mots_clef_annee(MOTS){id_rubrique}>
+                    [(#REM) Si le mot-clef est associé à l'année qu'on souhaite afficher, on passe la variable]
+                    [(#REM) de mode en « fabrication ».]
+                    [(#TITRE|=={année_en_ecriture}|oui) #SET{mode_affichage,fabrication} ]
+                    </BOUCLE_mots_clef_annee>
+                    </BOUCLE_rubrique_annee_2>
+                    </BOUCLE_rubrique_contenant_annees_2>
+                    [(#REM) ÉTAPE 3 : CHOIX DU FICHIER À INCLURE.]
+                    [(#REM) Nous savons quel est le mode d'affichage, il suffit d'appeler le bon squelette en fonction de]
+                    [(#REM) cette valeur.]
+                    <div id="liste-cadavres">
+                        [(#REM) 3 squelettes :]
+                        [(#REM) liste-cadavres-visiteur--> À quoi sert-il ? Est-il vraiment utile ?]
+                        [(#REM) liste-cadavres-auteur]
+                        [(#REM) liste-cadavres-fin]
+                        [(#GET{mode_affichage}|=={fabrication}|oui) <INCLURE{fond=liste-cadavres-auteur} />]
+                        [(#GET{mode_affichage}|=={fabrication}|non) <INCLURE{fond=liste-cadavres-fin} />]
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </BOUCLE_article>
+    </BOUCLE_annee>
+
+    <INCLURE{fond=footer}/>
     </body>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+// RESIZE
+            window.onresize = resize_global_content;
+            resize_global_content();
+
+// NICESCROLL
+            $(".global-content").niceScroll({cursorcolor:"#ff6b6b", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
+            $('#ascrail2000').css({'cursor':'pointer'});
+
+//
+            $('.liste-link').mouseover(function() {
+                var offset = $(this).offset();
+                var content_tooltip = $(this).find('.liste-tooltip-content').html();
+                $('#liste-tooltip').show();
+                $('#liste-tooltip').html(content_tooltip);
+                var hauteur_tooltip = $('#liste-tooltip-content').height();
+                $('#liste-tooltip').height(hauteur_tooltip);
+                var toptooltip = Math.round(offset.top);
+                toptooltip = toptooltip - hauteur_tooltip;
+                var lefttooltip = Math.round(offset.left);
+                lefttooltip -= 95;
+                $('#liste-tooltip').css('top', toptooltip -5);
+                $('#liste-tooltip').css('left', lefttooltip + 2);
+            });
+            $('.liste-link').mouseout(function() {
+                $('#liste-tooltip').hide();
+            });
+
+        });
+
+        // RESIZE
+        function resize_global_content() {
+            h = $(window).height();
+            h -=61;
+            $('.global-content').height(h);
+            stitches_margin = ((h-60) - 258)/4;
+            $(".stitches-inner").css({'margin-top':stitches_margin});
+        }
+
+    </script>
 </html>

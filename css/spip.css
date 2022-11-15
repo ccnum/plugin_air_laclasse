@@ -1,3 +1,90 @@
-/*
-toto
- */
+/* -------------------- */
+/* BOOK GRAPHIQUES */
+/* -------------------- */
+
+#book-top-left {
+    position:absolute;
+    top:20px;
+    left:50%;
+    margin-left:-490px;
+    z-index:100;
+}
+#book-top-right {
+    position:absolute;
+    top:20px;
+    left:50%;
+    margin-left:476px;
+    z-index:100;
+}
+#book-bottom-left {
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    margin-left:-490px;
+    z-index:100;
+}
+#book-bottom-right {
+    position:absolute;
+    bottom:40px;
+    left:50%;
+    margin-left:476px;
+    z-index:100;
+}
+
+#book-middle-top {
+    position:absolute;
+    width:300px;
+    left:50%;
+    top:20px;
+    margin-left: -150px;
+    z-index:20;
+}
+#book-middle-top-ecriture {
+    position:absolute;
+    width:300px;
+    left:50%;
+    top:20px;
+    margin-left: -365px;
+    z-index:20;
+}
+
+#book-middle-bottom {
+    position:absolute;
+    width:300px;
+    left:50%;
+    bottom:40px;
+    margin-left: -150px;
+    z-index:20;
+}
+#book-middle-bottom-ecriture {
+    position:absolute;
+    width:300px;
+    left:50%;
+    bottom:40px;
+    margin-left: -365px;
+    z-index:20;
+}
+
+.stitches {
+    position:absolute;
+    left:50%;
+    margin-left:-2px;
+    margin-top:20px;
+}
+
+.stitches-ecriture {
+    position:absolute;
+    left:50%;
+    margin-left:-212px;
+    margin-top:20px;
+}
+
+#bouton-retour {
+    width:54px;
+    height:54px;
+    position:absolute;
+    left:50%;
+    top:20px;
+    margin-left:-480px;
+    z-index:100;
+}

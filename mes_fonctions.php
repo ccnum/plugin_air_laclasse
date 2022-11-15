@@ -7,5 +7,6 @@ function enleverParenthesesTexte($texte=''): string
             $texte = substr($texte, 1, strlen($texte) - 1);
         }
     }
+
     return $texte;
 }

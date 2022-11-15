@@ -1,6 +1,16 @@
 <?php
 
-function enleverParenthesesTexte($texte=''): string
+
+/*                                      FONCTIONS TEXTUELLES                                                          */
+
+/**
+ * Cette fonction absurde sert à supprimer les premiers et derniers caractères d'une chaîne si ce sont des parenthèses.
+ * Elle a été créée car je ne parviens pas à passer en argument du texte avec des virgules sans les envelopper dans des
+ * parenthèses...
+ * @param string $texte
+ * @return string
+ */
+function enleverParenthesesTexte(string $texte=''): string
 {
     if (strlen($texte) > 1) {
         if ($texte[0] === '(') {

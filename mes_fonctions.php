@@ -5,8 +5,8 @@
 
 /**
  * Cette fonction absurde sert à supprimer les premiers et derniers caractères d'une chaîne si ce sont des parenthèses.
- * Elle a été créée car je ne parviens pas à passer en argument du texte avec des virgules sans les envelopper dans des
- * parenthèses...
+ * Elle a été créée car je ne parviens pas, sur SPIP, à passer en argument du texte avec des virgules sans les
+ * envelopper dans des parenthèses...
  * @param string $texte
  * @return string
  */

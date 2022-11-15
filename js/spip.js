@@ -1,1 +1,3 @@
-alert('toto');
+/*
+    CODE JAVASCRIPT COMMUN À TOUTES LES PAGES SPIP.
+ */

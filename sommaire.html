@@ -2,7 +2,8 @@
 <html lang="fr">
     [(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]
     #SET{mots_clef, 'Laboratoire ERASME, Métropole de Lyon, Cadavre exquis'}
-    <INCLURE{fond=inclure/enTeteHTML}{mots_clef=#GET{mots_clef}}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
+    #GET{mots_clef}
+    <INCLURE{fond=inclure/enTeteHTML}{mots_clef=}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
     </body>
 </html>

@@ -7,6 +7,7 @@
 
         [(#REM) Quelle est la session/année que l'on souhaite afficher ? ]
         [(#REM) Soit on a un identifiant de rubrique dans l'url. Soit on choisit une session par défaut. ]
+        [(#REM) Comment choisir la session par défaut ? TODO ]
 
         <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>
@@ -17,7 +18,7 @@
                 <div class="content">
                     <div class="content-left-small">
                         <div id="titre_site">
-                            <a href="https://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
+                            <a href="#URL_SITE_SPIP" title="Accueil"><strong>[#URL_SITE_SPIP|extraireSousDomaine]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
                         </div>
                         <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
                         <div id="texte-presentation" class="#EDIT{texte}">

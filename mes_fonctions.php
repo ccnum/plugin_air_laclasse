@@ -22,3 +22,15 @@ function enleverParenthesesTexte(string $texte=''): string
     }
     return $texte;
 }
+
+
+/*                                      FONCTIONS USUELLES                                                            */
+
+/**
+ * @param string $url_site
+ * @return string
+ */
+function extraireSousDomaine(string $url_site=''): string
+{
+    return 'toto';
+}

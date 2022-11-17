@@ -28,12 +28,20 @@ function enleverParenthesesTexte(string $texte=''): string
 
 /**
  * Renvoie le sous-domaine d'une url reçue.
- * Ex : extraireSousDomaine(petitfablab.laclasse.com) -> petitfablab
+ * Ex :
+ * - extraireSousDomaine(petitfablab.laclasse.com) -> petitfablab
+ * - extraireSousDomaine(https://petitfablab.laclasse.com) -> petitfablab
+ * - extraireSousDomaine(http://www.petitfablab.laclasse.com) -> petitfablab
  * @param string $url_site
  * @return string
  */
 function extraireSousDomaine(string $url_site=''): string
 {
+    $parsedUrl = parse_url($url_site);
+    $host = explode('.', $parsedUrl['host']);
+
+    return $host[0];
+    /*
     $url_site = str_replace('https://www.', '', $url_site);
     $url_site = str_replace('http://www.', '', $url_site);
     $url_site = str_replace('https://', '', $url_site);
@@ -42,6 +50,6 @@ function extraireSousDomaine(string $url_site=''): string
     $morceaux = explode('.', $url_site);
     if (sizeof($morceaux) >= 1){
         return $morceaux[0];
-    }
+    }*/
     return '';
 }

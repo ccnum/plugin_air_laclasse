@@ -17,3 +17,5 @@ todo wiki
 ![Activer descriptif des rubriques](/img/doc/activer_descriptif_rubriques.avif "Activer descriptif des rubriques")
 [Activer champs articles](https://petitfablab.laclasse.com/ecrire/?exec=configurer_contenu)
 ![Activer champs articles](/img/doc/contenus_supplementaires_articles.avif "Activer champs articles")
+[Activer mots-clef](https://petitfablab.laclasse.com/ecrire/?exec=configurer_contenu)
+![Activer mots-clef](/img/doc/activer_mots_clef.avif "Activer mots-clef")

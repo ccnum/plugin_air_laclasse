@@ -1,5 +1,22 @@
 @charset "UTF-8";
 
+
+#titre_site {
+    width:100%;
+    float:left;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size:22px;
+    margin:50px 0 0 0;
+}
+
+#titre_site a{
+    color:#ff6b6b;
+}
+
+#titre_site a:hover {
+    color:#ff6b6b;
+}
+
 /* 
 ------------------
 @1. HTML5 CSS RESET
@@ -310,21 +327,6 @@ body.mobile {
 /* SOMMAIRE */
 /* -------------------- */
 
-#titre_site {
-    width:100%;
-    float:left;
-    font-family:Arial, Helvetica, sans-serif;
-    font-size:22px;
-    margin:50px 0px 0px 0px;
-}
-
-#titre_site a{
-    color:#556270;
-}
-
-#titre_site a:hover {
-    color:#ff6b6b;
-}
 
 #texte-presentation {
     width:100%;

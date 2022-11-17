@@ -34,7 +34,11 @@ function enleverParenthesesTexte(string $texte=''): string
  */
 function extraireSousDomaine(string $url_site=''): string
 {
+    $url_site = str_replace('https://www.', '', $url_site);
+    $url_site = str_replace('http://www.', '', $url_site);
     $url_site = str_replace('https://', '', $url_site);
+    $url_site = str_replace('http://', '', $url_site);
+
     $morceaux = explode('.', $url_site);
     if (sizeof($morceaux) >= 1){
         return $morceaux[0];

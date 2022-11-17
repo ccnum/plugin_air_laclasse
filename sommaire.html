@@ -3,11 +3,11 @@
     [(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
-        <INCLURE{fond=inclure/decoLivre} />
+        <INCLURE{fond=inclure/decoLivre} /> [(#REM) Content simplement la décoration du livre (comme les agrafes et les pages par ex. ]
 
 
         <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
-        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE presentation}{tout}{0,1}>
+        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>
         <!-- BOOK -->
         <div id="global-ecriture">
             <div id="global-spacer"></div>

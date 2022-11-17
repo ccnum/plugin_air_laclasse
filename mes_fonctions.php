@@ -27,10 +27,16 @@ function enleverParenthesesTexte(string $texte=''): string
 /*                                      FONCTIONS USUELLES                                                            */
 
 /**
+ * Renvoie le sous-domaine d'une url reçue.
+ * Ex : extraireSousDomaine(petitfablab.laclasse.com) -> petitfablab
  * @param string $url_site
  * @return string
  */
 function extraireSousDomaine(string $url_site=''): string
 {
-    return 'toto';
+    $morceaux = explode('.', $url_site);
+    if (sizeof($morceaux) >= 1){
+        return $morceaux[0];
+    }
+    return '';
 }

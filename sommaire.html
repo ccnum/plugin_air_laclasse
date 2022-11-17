@@ -5,6 +5,8 @@
     <body>
         <INCLURE{fond=inclure/decoLivre} /> [(#REM) Content simplement la décoration du livre (comme les agrafes et les pages par ex. ]
 
+        [(#REM) Quelle est la session/année que l'on souhaite afficher ? ]
+        [(#REM) Soit on a un identifiant de rubrique dans l'url. Soit on choisit une session par défaut. ]
 
         <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>

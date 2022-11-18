@@ -9,10 +9,15 @@
  *
  * Comment savoir dans quel mode on se trouve ? Impossible de le prédire assurément : il s'agit d'une confiuration à
  * faire ici.
- * @return void
+ * @return string
  */
-function quelModeDeCCN(){
-    var_dump($_SERVER['HTTP_HOST']);
+function quelModeDeCCN(): string
+{
+    $jeu = array('petitfablab');
+    if ( in_array(extraireSousDomaine($_SERVER['HTTP_HOST']), $jeu) ){
+        return 'jeu';
+    }
+    return 'college';
 }
 
 

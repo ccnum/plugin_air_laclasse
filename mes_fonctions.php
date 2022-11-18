@@ -14,7 +14,7 @@
 function quelModeDeCCN(): string
 {
     $jeu = array('petitfablab');
-    $morceaux = explode('.', parse_url($_SERVER['HTTP_HOST']));
+    $morceaux = explode('.', parse_url($_SERVER['HTTP_HOST'])['path']);
     var_dump($morceaux[0]);
     return 'toto';
     /*

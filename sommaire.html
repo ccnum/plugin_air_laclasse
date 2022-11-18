@@ -1,51 +1,12 @@
 <!DOCTYPE html>
 <html lang="fr">
-    [(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]
+    <!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
-        <INCLURE{fond=inclure/decoLivre} /> [(#REM) Content simplement la décoration du livre (comme les agrafes et les pages par ex. ]
+        <INCLURE{fond=inclure/decoLivre} /> <!--[(#REM) Content simplement la décoration du livre (comme les agrafes et les pages par ex. ]-->
+        <INCLURE{fond=inclure/sommaireEncartPresentation} />
 
-        [(#REM) Quelle est la session/année que l'on souhaite afficher ? ]
-        [(#REM) Soit on a un identifiant de rubrique dans l'url. Soit on choisit une session par défaut. ]
-        [(#REM) Comment choisir la session par défaut ? TODO ]
 
-        [(#URL_SITE_SPIP|quelModeDeCCN|=={jeu}|oui)
-        <INCLURE{fond=inclure/sommaireEncartPresentationJeu} />
-            ]
-        [(#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui)
-        mode college
-        ]
-
-        <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
-        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>
-        <!-- BOOK -->
-        <div id="global-ecriture">
-            <div id="global-spacer"></div>
-            <div class="global-content">
-                <div class="content">
-                    <div class="content-left-small">
-                        <div id="titre_site">
-                            <a href="#URL_SITE_SPIP" title="Accueil"><strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
-                        </div>
-                        <div id="image-presentation">[(#LOGO_ARTICLE||image_reduire{100})]</div>
-                        <div id="texte-presentation" class="#EDIT{texte}">
-                            [(#TEXTE)]
-                        </div>
-                    </div>
-                    <div class="content-right-large">
-                        <div class="texte-presentation" style="position: relative; margin: 60px 20px 0px 100px ;">
-                            [<div class="#EDIT{descriptif}" style="border-left: 5px #ff6b6b solid; padding-left: 15px; padding-right: 5px;">
-                            (#DESCRIPTIF)
-                        </div>]
-                        </div>
-                        <div id="liste-cadavres">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </BOUCLE_article>
-        </BOUCLE_annee>
 
 
 

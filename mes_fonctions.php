@@ -14,7 +14,8 @@
 function quelModeDeCCN(): string
 {
     $jeu = array('petitfablab');
-    var_dump(parse_url($_SERVER['HTTP_HOST']));
+    $morceaux = explode('.', parse_url($_SERVER['HTTP_HOST']));
+    return $morceaux[0];
     /*
     if ( in_array(extraireSousDomaine($_SERVER['HTTP_HOST']), $jeu) ){
         return 'jeu';

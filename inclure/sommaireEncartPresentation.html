@@ -25,13 +25,12 @@ sera vide.]
 #SET{texte, ''}
 #SET{descriptif, ''}
 
-#GET{id_article}
-
-[(#URL_SITE_SPIP|quelModeDeCCN|=={jeu}|oui)
-
+<!-- [(#REM) Avons-nous un identifiant de session valide ?]-->
+[(#GET{id_article}|!={0}|oui)
+    informations à récupérer dans
 ]
-[(#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui)
-<INCLURE{fond=inclure/sommaireEncartPresentationCollege} />
+[(#GET{id_article}|=={0}|oui)
+informations par défaut
 ]
 
 <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>

@@ -10,6 +10,13 @@
         [(#REM) Soit on a un identifiant de rubrique dans l'url. Soit on choisit une session par défaut. ]
         [(#REM) Comment choisir la session par défaut ? TODO ]
 
+        [(#URL_SITE_SPIP|quelModeDeCCN|=={jeu}|oui)
+        mode jeu
+            ]
+        [(#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui)
+        mode college
+        ]
+
         <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>
         <!-- BOOK -->

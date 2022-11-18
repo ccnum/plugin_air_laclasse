@@ -1,5 +1,20 @@
 <?php
 
+/*                                      CONFIGURATION DE LA CCN                                                       */
+
+/**
+ * Les CCN de type « cadavre exquis » ont deux modes de fonctionnements :
+ * - par année dans des collèges
+ * - par session/jeu dans des musées/évènements
+ *
+ * Comment savoir dans quel mode on se trouve ? Impossible de le prédire assurément : il s'agit d'une confiuration à
+ * faire ici.
+ * @return void
+ */
+function quelModeDeCCN(){
+    var_dump($_SERVER['HTTP_HOST']);
+}
+
 
 /*                                      FONCTIONS TEXTUELLES                                                          */
 

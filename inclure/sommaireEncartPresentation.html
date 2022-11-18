@@ -29,10 +29,13 @@ sera vide.]
 [(#GET{id_article}|!={0}|oui)
     informations à récupérer dans #GET{id_article}
 ]
-<!-- [(#REM) Cas où on est sur la page par défaut]-->
-[(#GET{id_article}|=={0}|oui|et{#URL_SITE_SPIP|quelModeDeCCN|=={jeu}|oui})
-informations par défaut sur le mode jeu
+<!-- [(#REM) Cas où on est sur la page par défaut ET en mode collège]-->
+[(#GET{id_article}|=={0}|oui|et{#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui})
+informations par défaut sur le mode collège
+<!-- [(#REM) TODO pour version CCN collège] -->
 ]
+<!-- [(#REM) Cas où on est sur la page par défaut ET en mode jeu : inutile, car c'est le cas par défaut.]-->
+
 
 <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>

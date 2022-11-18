@@ -1,8 +1,35 @@
 <!--
 [(#REM) Quelle est la session/année que l'on souhaite afficher ? ]
 [(#REM) Soit on a un identifiant de rubrique dans l'url. Soit on choisit une session par défaut. ]
-[(#REM) Comment choisir la session par défaut ? TODO ]
+[(#REM) Comment choisir la session par défaut ? Pour le mode collège, ce sera la dernière année. Pour le mode jeu, ce
+sera vide.]
 -->
+
+<!-- [(#REM) Le but est de mutualiser au maximum le code des deux modes. ]
+     [(#REM) Avons-nous un identifiant de rubrique ? -> oui, on va en extraire les données. ]
+     [(#REM)                                         -> non, on discrimine via le mode : ]
+     [(#REM)                                                                -> mode collège=dernière année ]
+     [(#REM)                                                                -> mode jeu=infos vides ]
+
+     [(#REM) Les données à récupérer sont :]
+     [(#REM) - le logo de présentation ]
+     [(#REM) - le texte de présentation ]
+     [(#REM) - le descriptif de présentation]
+-->
+#SET{logo, ''}
+#SET{texte, ''}
+#SET{descriptif, ''}
+
+toto
+#GET{texte}
+titi
+[(#URL_SITE_SPIP|quelModeDeCCN|=={jeu}|oui)
+
+]
+[(#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui)
+<INCLURE{fond=inclure/sommaireEncartPresentationCollege} />
+]
+
 <BOUCLE_annee(RUBRIQUES){titre==Session 1}{tout}{0,1}>
 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE Présentation}{tout}{0,1}>
 <!-- BOOK -->

@@ -4,24 +4,25 @@
 
 /**
  * Les CCN de type « cadavre exquis » ont deux modes de fonctionnements :
- * - par année dans des collèges
- * - par session/jeu dans des musées/évènements
+ * - par année dans des collèges                -> renverra 'college'
+ * - par session/jeu dans des musées/évènements -> renverra 'jeu'
  *
- * Comment savoir dans quel mode on se trouve ? Impossible de le prédire assurément : il s'agit d'une confiuration à
+ * Comment savoir dans quel mode on se trouve ? Impossible de le prédire assurément : il s'agit d'une configuration à
  * faire ici.
  * @return string
  */
 function quelModeDeCCN(): string
 {
-    $jeu = array('petitfablab');
-    $morceaux = explode('.', parse_url($_SERVER['HTTP_HOST'])['path']);
-    var_dump($morceaux[0]);
-    return 'toto';
-    /*
-    if ( in_array(extraireSousDomaine($_SERVER['HTTP_HOST']), $jeu) ){
-        return 'jeu';
+    $listeDesCCNEnModeJeu = array('petitfablab');
+
+    $urlParsee = parse_url($_SERVER['HTTP_HOST']);
+    if ( isset($urlParsee['path']) ){
+        $morceaux = explode('.', $urlParsee['path']);
+        if (sizeof($morceaux)>0 && in_array($morceaux[0], $listeDesCCNEnModeJeu) ){
+            return 'jeu';
+        }
     }
-    return 'college';*/
+    return 'college';
 }
 
 

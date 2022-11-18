@@ -66,3 +66,20 @@ function extraireSousDomaine(string $url_site=''): string
     $domaines = explode('.', $urlParsee['host']);
     return $domaines[0];
 }
+
+/**
+ * Renvoie la valeur du paramètre 'session' se trouvant dans l'url. Si ce paramètre n'existe pas, renverra 0.
+ * Ex :
+ * - getValeurIdSessionCCN(petitfablab.laclasse.com?session=6) -> 6
+ * - getValeurIdSessionCCN(petitfablab.laclasse.com?var_mode=recalcul) -> 0
+ * - getValeurIdSessionCCN(petitfablab.laclasse.com?var_mode=recalcul&sessions=4) -> 4
+ * - getValeurIdSessionCCN(petitfablab.laclasse.com?var_mode=recalcul&sessions=toto) -> 0
+ * @return int
+ */
+function getValeurIdSessionCCN(): int
+{
+    if ( isset($_GET['session']) ){
+        return intval($_GET['session']);
+    }
+    return 0;
+}

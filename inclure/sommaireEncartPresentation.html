@@ -27,7 +27,7 @@ sera vide.]
 
 <!-- [(#REM) Avons-nous un identifiant de session valide ?]-->
 [(#GET{id_article}|!={0}|oui)
-    informations à récupérer dans
+    informations à récupérer dans #GET{id_article}
 ]
 [(#GET{id_article}|=={0}|oui)
 informations par défaut

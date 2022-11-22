@@ -14,11 +14,11 @@
 
                     <!--[(#REM) Enfin on affiche les histoires écrites. ] -->
                     <!--[(#REM) Elles peuvent être affichées sous deux formes : en mode dit d'écriture ou en mode lecture. ] -->
-                    <!--[(#REM) Mode lecture par défaut. Mode écriture si présence d'un mot-clef : année_en_ecriture. ] -->
+                    <!--[(#REM) Mode lecture par défaut. Mode écriture si présence d'un mot-clef : en_ecriture. ] -->
                     #SET{mode, 'lecture'}
                     <BOUCLE_test_existence_mot_clef(RUBRIQUES){id_rubrique=#URL_SITE_SPIP|getValeurIdSessionCCN}>
                         <BOUCLE_mots(MOTS){id_rubrique}>
-                            [(#TITRE|=={année_en_ecriture}|oui) todo en écriture
+                            [(#TITRE|=={en_ecriture}|oui)
                                 #SET{mode, 'écriture'}
                             ]
                         </BOUCLE_mots>

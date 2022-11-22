@@ -3,19 +3,8 @@
     <!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
-        <INCLURE{fond=inclure/decoLivre} /> <!--[(#REM) Content simplement la décoration du livre (comme les agrafes et les pages par ex. ]-->
-        <INCLURE{fond=inclure/sommaireEncartPresentation} /> <!--[(#REM) Content les informations sur la session choisie. ]-->
-
-
-
-
-
-
-
-
-
-        <footer>
-            <div id="footer"></div>
-        </footer>
+        <INCLURE{fond=inclure/decoLivre} /> <!--[(#REM) Contient simplement la décoration du livre (comme les agrafes et les pages par ex. ]-->
+        <INCLURE{fond=inclure/sommaireEncartPresentation} /> <!--[(#REM) Contient les informations sur la session choisie. ]-->
+        <INCLURE{fond=inclure/piedDePage} /> <!--[(#REM) Contient la ribambelle d'infos à placer dans le pied de page. ]-->
     </body>
 </html>

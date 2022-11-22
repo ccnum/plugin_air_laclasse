@@ -1,0 +1,36 @@
+<div id="footer">
+    <div id="footer-inner">
+
+        <div id="footer-nav-left">
+            [(#SESSION{id_auteur}|oui)
+            Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>
+            [(#GET{id_art}|=={0}|non|et{#SESSION{statut}|=={0minirezo}|oui}|oui)&nbsp;&nbsp;|&nbsp;&nbsp;<a href="#URL_SITE_SPIP/?page=forum&id_article=#GET{id_art}" class="mediabox boxIframe boxWidth-730px boxHeight-97pc">Accéder au forum<img src="[(#CHEMIN{img/lecture/bt_forum.png})]" onmouseover="this.src='#CHEMIN{img/lecture/bt_forum_hover.png}';" onmouseout="this.src='[(#CHEMIN{img/lecture/bt_forum.png})]';" width="20" height="20" title="forum" style="height: 20px; line-height: 20px; vertical-align: middle; padding-left: 5px; display: none;"/></a>]
+            ]
+            [(#SESSION{id_auteur}|non)<a href="[(#PLUGIN{CICAS}|oui|?{'?url=spip.php%3Fpage%3Dsommaire&cicas=oui','?page=login&url=.%2F'})]" class="">Se connecter</a>&nbsp;&nbsp;|<a href="http://www.laclasse.com/pls/public/!page.laclasse?contexte=QUESTION&rubrique=0">Mot de passe oublié ?</a>]
+            <!-- url_espace_doc [(#GET{url_espace_doc}|extraire_attribut{href})] -->
+            <a href="[(#GET{url_espace_doc}|extraire_attribut{href})]">Espace doc</a>
+            <a href="[(#GET{url_blog_auteur}|extraire_attribut{href})]">Blog de l'auteur</a>
+        </div>
+
+        <div id="footer-nav">
+            <BOUCLE_page_footer(ARTICLES){id_rubrique=12}{id_article !=49}>
+            <a href="#URL_SITE_SPIP/?page=page&id_article=#ID_ARTICLE">#TITRE</a>&nbsp;&nbsp;|
+            </BOUCLE_page_footer>
+            <a href="http://www.laclasse.com/">Laclasse.com</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            [(#REM)[(#SESSION{login}|=={}|oui)<a href="#URL_SITE_SPIP?scenario=jeu">Vers la version jeu</a>&nbsp;&nbsp;|]]
+            <span id="annee_scolaire" title="Choisir l'année scolaire">
+                Année scolaire :
+                <form name="annee_scolaire" style="display:inline;">
+                    <select onchange="reload_cookie('[(#URL_SITE_SPIP)]','[(#EVAL{_cookie_annee_scolaire})]',document.annee_scolaire.annee_scolaire.value)" name="annee_scolaire">
+                        <option value="#" style="">---</option>
+                        <BOUCLE_vieux(ARTICLES){par date}{date!=0000-00-00 00:00:00}{0,1}{tout}>
+                        [(#DATE|annee|afficher_options_date{[(#DATE|mois)],#EVAL{_annee_scolaire}})]
+                        </BOUCLE_vieux>
+                        <option style="" value="2011">2011/2012</option>
+                        <option style="" value="2010">2010/2011</option>
+            		</select>
+                </form>
+            </span>
+        </div>
+    </div>
+</div>

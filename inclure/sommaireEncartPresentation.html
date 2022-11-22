@@ -20,24 +20,24 @@ sera vide.]
 -->
 
 <!-- [(#REM) Commençons par récupérer et assigner les données dans ces variables :]-->
-#SET{id_article, #URL_SITE_SPIP|getValeurIdSessionCCN}
+#SET{id_session, #URL_SITE_SPIP|getValeurIdSessionCCN}
 #SET{logo, ''}
 #SET{texte, ''}
 #SET{descriptif, ''}
 
 <!-- [(#REM) Avons-nous un identifiant de session valide ?]-->
-[(#GET{id_article}|!={0}|oui)
-    informations à récupérer dans #GET{id_article}
+[(#GET{id_session}|!={0}|oui)
+    informations à récupérer dans #GET{id_session}
 ]
 <!-- [(#REM) Cas où on est sur la page par défaut ET en mode collège]-->
-[(#GET{id_article}|=={0}|oui|et{#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui})
+[(#GET{id_session}|=={0}|oui|et{#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui})
 informations par défaut sur le mode collège
 <!-- [(#REM) TODO pour version CCN collège] -->
 ]
 <!-- [(#REM) Cas où on est sur la page par défaut ET en mode jeu : inutile, car c'est le cas par défaut.]-->
 
 
-<BOUCLE_session_jeu(RUBRIQUES){titre==Session 1}{tout}{0,1}>
+<BOUCLE_session_jeu(RUBRIQUES){id_rubrique=#GET{id_session}}{0,1}>
     <BOUCLE_article_presentation(ARTICLES){id_rubrique}{titre==Présentation}{tout}{0,1}>
 <!-- BOOK -->
 <div id="global-ecriture">

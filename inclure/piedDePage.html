@@ -19,7 +19,7 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
                     <select onchange="window.location.href = '#URL_SITE_SPIP'+'/?var_mode=recalcul&session='+this.value;" name="annee_scolaire">
-                        <option disabled>---</option>
+                        <option [({#URL_SITE_SPIP|getValeurIdSessionCCN}|=={0})selected] selected>---</option>
                         <BOUCLE_rub_racine(RUBRIQUES){racine}>
                             <BOUCLE_rub_mediatheque(RUBRIQUES){id_parent}>
                                 <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>

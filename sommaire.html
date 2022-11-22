@@ -18,17 +18,17 @@
                     #SET{mode, 'lecture'}
                     <BOUCLE_test_existence_mot_clef(RUBRIQUES){id_rubrique=#URL_SITE_SPIP|getValeurIdSessionCCN}>
                         <BOUCLE_mots(MOTS){id_rubrique}>
-                            [(#TITRE|=={année_en_ecriture}|oui)
+                            [(#TITRE|=={année_en_ecriture}|oui) todo en écriture
                                 #SET{mode, 'écriture'}
                             ]
                         </BOUCLE_mots>
                     </BOUCLE_test_existence_mot_clef>
                     <!--[(#REM) Nous sommes certains du mode d'affichage. Incluons-les squelettes correspondants. ] -->
                     [(#GET{mode}|=={écriture}|oui)
-                    <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture} />
+                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture} />
                     ]
                     [(#GET{mode}|=={lecture}|oui)
-                    <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture} />
+                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture} />
                     ]
                 </div>
             </div>

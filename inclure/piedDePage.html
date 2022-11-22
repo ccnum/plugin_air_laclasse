@@ -18,7 +18,8 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    <select onchange="alert('#URL_SITE_SPIP'+'/?session='+this.value);" name="annee_scolaire">
+                    <select onchange="window.location.href = 'google.com';" name="annee_scolaire">
+                    <!-- '#URL_SITE_SPIP'+'/?session='+this.value -->
                         <BOUCLE_rub_racine(RUBRIQUES){racine}>
                             <BOUCLE_rub_mediatheque(RUBRIQUES){id_parent}>
                                 <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>

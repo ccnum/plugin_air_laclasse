@@ -1,6 +1,15 @@
-<div id="footer">
+<!--
+    Le footer doit contenir plusieurs informations. Certaines varient en fonction du genre de CCN qui tourne.
+    - nom de l'utilisateur connecté <-> lien pour se connecter
+    - lien vers un espace doc -> réservé aux ccns collège, utilité pour petitfablab ?
+    - lien vers le blog de l'auteur -> réservé aux ccns collège, utilité pour petitfablab ?
+    - mode d'emploi -> réservé aux ccns collège, utilité pour petitfablab ?
+    - le projet -> réservé aux ccns collège, utilité pour petitfablab ?
+    - laclasse.com -> réservé aux ccns collège, utilité pour petitfablab ?
+    - menu déroulant permettant de voir, sélectionner et parcourir les sessions déjà faites ou en cours.
+-->
+<div id="footer"> <!-- todo remplacer par balise footer et corriger le css historique en conséquence si possible -->
     <div id="footer-inner">
-
         <div id="footer-nav-left">
             [(#SESSION{id_auteur}|oui)
             Bonjour <b><a class="mediabox boxIframe boxWidth-730px boxHeight-550px" href="spip.php?page=auteur_editer&id_auteur=#SESSION{id_auteur}">#SESSION{nom}</a></b>

@@ -17,7 +17,10 @@
                     <!--[(#REM) Mode lecture par défaut. Mode écriture si présence d'un mot-clef : année_en_ecriture. ] -->
                     <BOUCLE_test_existence_mot_clef(RUBRIQUES){id_rubrique=#URL_SITE_SPIP|getValeurIdSessionCCN}>
                         <BOUCLE_mots(MOTS){id_rubrique}>
-                            #ID_MOT
+                            [(#TITRE|=={année_en_ecriture}|oui)
+                            le mot-clef est présent
+                            ]
+
                         </BOUCLE_mots>
                     </BOUCLE_test_existence_mot_clef>
                 </div>

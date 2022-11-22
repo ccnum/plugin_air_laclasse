@@ -24,3 +24,9 @@ UPDATE petitfablab_meta SET valeur='oui' WHERE nom='rubriques_descriptif';
 ![Activer champs articles](/img/doc/contenus_supplementaires_articles.avif "Activer champs articles")
 [Activer mots-clef](https://petitfablab.laclasse.com/ecrire/?exec=configurer_contenu)
 ![Activer mots-clef](/img/doc/activer_mots_clef.avif "Activer mots-clef")
+
+
+TODO
+Activer dépôts
+Modules supplémentaires optionnels
+- duplicator

@@ -10,7 +10,14 @@
             <div id="global-spacer"></div>
             <div class="global-content">
                 <div class="content">
-        <INCLURE{fond=inclure/sommaireEncartPresentation} /> <!--[(#REM) Contient les informations sur la session choisie. ]-->
+                    <INCLURE{fond=inclure/sommaireEncartPresentation} /> <!--[(#REM) Contient les informations sur la session choisie. ]-->
+
+                    <!--[(#REM) Enfin on affiche les histoires écrites. ] -->
+                    <!--[(#REM) Elles peuvent être affichées sous deux formes : en mode dit d'écriture ou en mode lecture. ] -->
+                    <!--[(#REM) Mode lecture par défaut. Mode écriture si présence d'un mot-clef : année_en_ecriture. ] -->
+                    <BOUCLE_test_existence_mot_clef(RUBRIQUES){id_rubrique=#URL_SITE_SPIP|getValeurIdSessionCCN}>
+                        #ID_RUBRIQUE
+                    </BOUCLE_test_existence_mot_clef>
                 </div>
             </div>
         </div>

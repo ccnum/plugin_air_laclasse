@@ -23,7 +23,13 @@
                             ]
                         </BOUCLE_mots>
                     </BOUCLE_test_existence_mot_clef>
-                    Affichage du mode : #GET{mode}
+                    <!--[(#REM) Nous sommes certains du mode d'affichage. Incluons-les squelettes correspondants. ] -->
+                    [(#GET{mode}|=={écriture}|oui)
+                    <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture} />
+                    ]
+                    [(#GET{mode}|=={lecture}|oui)
+                    <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture} />
+                    ]
                 </div>
             </div>
         </div>

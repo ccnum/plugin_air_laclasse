@@ -19,11 +19,12 @@
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
                     <select onchange="window.location.href = '#URL_SITE_SPIP'+'/?var_mode=recalcul&session='+this.value;" name="annee_scolaire">
+                        <option disabled>---</option>
                         <BOUCLE_rub_racine(RUBRIQUES){racine}>
                             <BOUCLE_rub_mediatheque(RUBRIQUES){id_parent}>
                                 <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>
                         <!-- [(#REM) Voir la doc ici : https://programmer.spip.net/Contenu-de-boucles-parentes ]-->
-                        <option [(#ID_RUBRIQUE|=={#URL_SITE_SPIP|getValeurIdSessionCCN}|oui)selected] value="#ID_RUBRIQUE" style="" >#_rub_mediatheque:TITRE -- #TITRE</option>
+                        <option [(#ID_RUBRIQUE|=={#URL_SITE_SPIP|getValeurIdSessionCCN}|oui)selected] value="#ID_RUBRIQUE">#_rub_mediatheque:TITRE -- #TITRE</option>
                                 </BOUCLE_rub_sessions>
                             </BOUCLE_rub_mediatheque>
                         </BOUCLE_rub_racine>

@@ -27,7 +27,7 @@ sera vide.]
 
 <!-- [(#REM) Avons-nous un identifiant de session valide ?]-->
 [(#GET{id_session}|!={0}|oui)
-    informations à récupérer dans #GET{id_session}
+    <!--informations à récupérer dans #GET{id_session}-->
 ]
 <!-- [(#REM) Cas où on est sur la page par défaut ET en mode collège]-->
 [(#GET{id_session}|=={0}|oui|et{#URL_SITE_SPIP|quelModeDeCCN|=={college}|oui})

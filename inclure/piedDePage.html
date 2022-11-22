@@ -18,12 +18,12 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    <select onchange="alert('changement d\'année');" name="annee_scolaire">
+                    <select onchange="alert(this.value);" name="annee_scolaire">
                         <BOUCLE_rub_racine(RUBRIQUES){racine}>
                             <BOUCLE_rub_mediatheque(RUBRIQUES){id_parent}>
                                 <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>
                         <!-- [(#REM) Voir la doc ici : https://programmer.spip.net/Contenu-de-boucles-parentes ]-->
-                        <option [(#ID_RUBRIQUE|=={#URL_SITE_SPIP|getValeurIdSessionCCN}|oui)selected] value="#" style="" >#_rub_mediatheque:TITRE -- #TITRE</option>
+                        <option [(#ID_RUBRIQUE|=={#URL_SITE_SPIP|getValeurIdSessionCCN}|oui)selected] value="#ID_RUBRIQUE" style="" >#_rub_mediatheque:TITRE -- #TITRE</option>
                                 </BOUCLE_rub_sessions>
                             </BOUCLE_rub_mediatheque>
                         </BOUCLE_rub_racine>

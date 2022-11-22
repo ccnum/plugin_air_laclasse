@@ -16,7 +16,9 @@
                     <!--[(#REM) Elles peuvent être affichées sous deux formes : en mode dit d'écriture ou en mode lecture. ] -->
                     <!--[(#REM) Mode lecture par défaut. Mode écriture si présence d'un mot-clef : année_en_ecriture. ] -->
                     <BOUCLE_test_existence_mot_clef(RUBRIQUES){id_rubrique=#URL_SITE_SPIP|getValeurIdSessionCCN}>
-                        #ID_RUBRIQUE
+                        <BOUCLE_mots(MOTS){id_rubrique}>
+                            #ID_MOT
+                        </BOUCLE_mots>
                     </BOUCLE_test_existence_mot_clef>
                 </div>
             </div>

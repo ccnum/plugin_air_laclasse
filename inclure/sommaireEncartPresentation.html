@@ -38,12 +38,7 @@ informations par défaut sur le mode collège
 
 
 <BOUCLE_session_jeu(RUBRIQUES){id_rubrique=#GET{id_session}}{0,1}>
-    <BOUCLE_article_presentation(ARTICLES){id_rubrique}{titre==Présentation}{tout}{0,1}>
-<!-- BOOK -->
-<div id="global-ecriture">
-    <div id="global-spacer"></div>
-    <div class="global-content">
-        <div class="content">
+    <BOUCLE_article_presentation(ARTICLES){id_rubrique}{titre==Présentation}{tout}{0,1}>Z
             <div class="content-left-small">
                 <div id="titre_site">
                     <a href="#URL_SITE_SPIP" title="Accueil"><strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
@@ -62,8 +57,5 @@ informations par défaut sur le mode collège
                 <div id="liste-cadavres">
                 </div>
             </div>
-        </div>
-    </div>
-</div>
     </BOUCLE_article_presentation>
 </BOUCLE_session_jeu>

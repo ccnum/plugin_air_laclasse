@@ -18,10 +18,10 @@
             <span id="annee_scolaire" title="Choisir l'année scolaire">
                 Année scolaire :
                 <form name="annee_scolaire" style="display:inline;">
-                    <select onchange="alert('toto');" name="annee_scolaire">
+                    <select onchange="alert('changement d\'année');" name="annee_scolaire">
                         <BOUCLE_rub_racine(RUBRIQUES){racine}>
                             <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>
-                                #TITRE toto
+                        <option value="#" style="">#TITRE</option>
                             </BOUCLE_rub_sessions>
                         </BOUCLE_rub_racine>
                         <option value="#" style="">---</option>

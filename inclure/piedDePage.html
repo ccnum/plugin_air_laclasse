@@ -23,8 +23,6 @@
                             <BOUCLE_rub_mediatheque(RUBRIQUES){id_parent}>
                                 <BOUCLE_rub_sessions(RUBRIQUES){id_parent}>
                         <!-- [(#REM) Voir la doc ici : https://programmer.spip.net/Contenu-de-boucles-parentes ]-->
-                        <!-- id rubrique boucle : #ID_RUBRIQUE -->
-                        <!-- getValeurIdSessionCCN : [(#URL_SITE_SPIP|getValeurIdSessionCCN)] -->
                         <option [(#ID_RUBRIQUE|=={#URL_SITE_SPIP|getValeurIdSessionCCN}|oui)selected] value="#ID_RUBRIQUE" style="" >#_rub_mediatheque:TITRE -- #TITRE</option>
                                 </BOUCLE_rub_sessions>
                             </BOUCLE_rub_mediatheque>

@@ -25,10 +25,10 @@
                     </BOUCLE_test_existence_mot_clef>
                     <!--[(#REM) Nous sommes certains du mode d'affichage. Incluons-les squelettes correspondants. ] -->
                     [(#GET{mode}|=={écriture}|oui)
-                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture} />
+                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture}{id_session_a_afficher=#URL_SITE_SPIP|getValeurIdSessionCCN} />
                     ]
                     [(#GET{mode}|=={lecture}|oui)
-                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture} />
+                        <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture}{id_session_a_afficher=#URL_SITE_SPIP|getValeurIdSessionCCN} />
                     ]
                 </div>
             </div>

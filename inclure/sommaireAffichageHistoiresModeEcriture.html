@@ -4,11 +4,15 @@
     Les histoires sont les sous-rubriques de cette rubrique_là.
     ]
 -->
+
+<!-- Ce compteur sert juste à assigner un numéro aux histoires.  -->
+#SET{compteur_histoire,0}
+
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}>
     <BOUCLE_histoires(RUBRIQUES){id_parent}{par titre}>
-        #TITRE
+        #SET{i,#GET{compteur_histoire}|plus{compteur_histoire}} <!-- [(#REM) Le compteur commence à 1 et on incrémente. -->
 <div class="liste-colonnes">
-    <div class="liste-title">#GET{i}</div>
+    <div class="liste-title">#GET{compteur_histoire}</div>
     <!-- LISTE CADAVRES -->
     <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
     <!-- mettre boucle ci-dessus par date -->
@@ -16,7 +20,7 @@
         <!-- TOOL TIP CONTENT -->
         <div class="liste-tooltip-content">
             <div id="liste-tooltip-content">
-                <div class="liste-tooltip-num-cadavre">Histoire #GET{i}</div>
+                <div class="liste-tooltip-num-cadavre">Histoire #GET{compteur_histoire}</div>
                 <!--<div class="liste-tooltip-num-chapitre">#SURTITRE</div>-->
                 <div class="liste-tooltip-titre-chapitre">#TITRE</div>
                 <BOUCLE_auteur_tous(AUTEURS){id_article = #ID_ARTICLE}{0,1}>

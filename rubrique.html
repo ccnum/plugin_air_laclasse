@@ -3,20 +3,10 @@
     <!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
+
 <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-affichage de la rubrique #ID_RUBRIQUE nommée #TITRE
 
 
-<!-- On recupere l'id du chapitre à masquer -->
-<BOUCLE_max_cadavres(ARTICLES){id_rubrique}{par date}>
-#SET{var_max_cadavres, #TOTAL_BOUCLE}
-</BOUCLE_max_cadavres>
-#SET{id_cadavre_hidden, #SOUSTRACTION{#GET{var_max_cadavres}, 1}}
-
-<!-- on recupere l'id de la rubrique de travail -->
-<BOUCLE_id_zone(spip_auteurs_liens){objet = rubrique}{spip_auteurs_liens.id_auteur =  #GET{var_id_auteur}}{0,1}>
-#SET{var_id_zone, #ID_OBJET}
-</BOUCLE_id_zone>
 
 <!-- TOOLTIP -->
 <div id="liste-tooltip">

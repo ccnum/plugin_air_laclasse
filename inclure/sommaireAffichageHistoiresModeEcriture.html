@@ -31,6 +31,15 @@
             </div>
         </div>
 
+        <B_auteur_actif>
+            <BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
+            <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single auteur [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
+            </BOUCLE_auteur_actif>
+        </B_auteur_actif>
+        <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
+            <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
+        </BOUCLE_auteur_actif1>
+        <//B_auteur_actif>
 
 
     [(#REM) À quoi sert le code ci-dessous ? ]

@@ -60,9 +60,8 @@
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>
-
-                            <BOUCLE_annee(RUBRIQUES){titre==#EVAL{""}}{tout}{0,1}>
-                            <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
+                            <BOUCLE_annee(RUBRIQUES){id_rubrique}>
+                                <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>
                                 <div class="ecriture-chapitre-titre">#TITRE</div>
@@ -76,7 +75,7 @@
                                 #TEXTE<br />
                             </div>
 
-                            </BOUCLE_article>
+                                </BOUCLE_article>
                             </BOUCLE_annee>
 
                         </div>

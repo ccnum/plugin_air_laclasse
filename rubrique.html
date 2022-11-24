@@ -61,6 +61,13 @@
                                 </div>
                             </div>
                             <BOUCLE_annee(RUBRIQUES){id_rubrique}>
+                                <!--
+                                    [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
+                                            histoires d'une même session, le prologue est simplement indiqué dans le
+                                            descriptif de la rubrique histoire (un simple id d'article).
+                                    ]
+                                -->
+                                Le prologue se trouve à l'id : #DESCRIPTIF
                                 <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>

@@ -4,8 +4,8 @@
     Les histoires sont les sous-rubriques de cette rubrique_là.
     ]
 -->
-<BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}{tout}{0,1}>
-    <BOUCLE_histoires(RUBRIQUES){id_rubrique=id_parent}{par titre}>
+<BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}>
+    <BOUCLE_histoires(RUBRIQUES){id_parent}{par titre}>
         #TITRE
 <div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>

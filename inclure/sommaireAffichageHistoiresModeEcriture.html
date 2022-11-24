@@ -1,5 +1,12 @@
+<!-- [(#REM)
+ ** On souhaite afficher la liste des histoires de la session en cours (l'id de cette rubrique est le
+    id_session_a_afficher transmis en env)
+    Les histoires sont les sous-rubriques de cette rubrique_là.
+    ]
+-->
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}{tout}{0,1}>
     <BOUCLE_histoires(RUBRIQUES){id_rubrique}{par titre}>
+        #TITRE
 <div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>
     <!-- LISTE CADAVRES -->

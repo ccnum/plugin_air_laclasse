@@ -5,48 +5,30 @@
     <body>
 
 <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-
-
-
-<!-- TOOLTIP -->
-<div id="liste-tooltip">
-</div>
-
-<!-- BOUTON CONNEXION -->
-<div id="bouton-connexion">
-    [(#SESSION{id_auteur}|non)<span id="bouton-connexion-texte"><a href="#URL_SITE_SPIP/?page=popup-login" class="mediabox boxIframe boxWidth-330px boxHeight-350px">se connecter</a></span>]
-    [(#SESSION{id_auteur}|oui)<span id="bouton-connexion-texte"><a href="#URL_LOGOUT" rel="nofollow"><:icone_deconnecter:></a></span>]
-    <span id="bouton-connexion-picto"><img src="#CHEMIN{img/global/picto-login.png}" width="17" height="18" /></span>
-</div>
-
-<!-- ELEMENTS GRAPHIQUES-->
-<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
-
-
-<div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-<div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
-
-<div class="stitches-ecriture">
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-</div>
-
-<!-- RETOUR INDEX -->
-<div id="bouton-retour">
-    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-</div>
-
-<!-- NAVIGATION ANCRE-->
-<div id="ecriture-navigation">
-    <a href="#" id="nav-top"><img src="#CHEMIN{img/ecriture/fleche-top.png}" width="9" height="12" /></a>
-    <a href="#" id="nav-script">script</a>
-    <a href="#" id="nav-forum">forum</a>
-    <a href="#" id="nav-ecrire">écrire</a>
-</div>
+    <div id="liste-tooltip"></div>
+    <!-- ÉLÉMENTS GRAPHIQUES-->
+    <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+    <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+    <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+    <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+    <div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+    <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+    <div class="stitches-ecriture">
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+    </div>
+    <!-- RETOUR INDEX -->
+    <div id="bouton-retour">
+        <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+    </div>
+    <!-- NAVIGATION ANCRE-->
+    <div id="ecriture-navigation">
+        <a href="#" id="nav-top"><img src="#CHEMIN{img/global/fleche-top.png}" width="9" height="12" /></a>
+        <a href="#" id="nav-script">script</a>
+        <a href="#" id="nav-forum">forum</a>
+        <a href="#" id="nav-ecrire">écrire</a>
+    </div>
 
 <!-- BOOK -->
 <div id="global-ecriture">

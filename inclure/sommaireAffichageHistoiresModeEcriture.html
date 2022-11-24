@@ -11,56 +11,58 @@
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}>
     <BOUCLE_histoires(RUBRIQUES){id_parent}{par titre}>
         #SET{i,#GET{compteur_histoire}|plus{1}} <!-- [(#REM) Le compteur commence à 1 et on incrémente.] -->
-<div class="liste-colonnes">
-    <div class="liste-title">#GET{compteur_histoire}</div>
-    <!-- LISTE CADAVRES -->
-    <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
-    <!-- mettre boucle ci-dessus par date -->
-    <div class="liste-link">
-        <!-- TOOL TIP CONTENT -->
-        <div class="liste-tooltip-content">
-            <div id="liste-tooltip-content">
-                <div class="liste-tooltip-num-cadavre">Histoire #GET{compteur_histoire}</div>
-                <!--<div class="liste-tooltip-num-chapitre">#SURTITRE</div>-->
-                <div class="liste-tooltip-titre-chapitre">#TITRE</div>
-                <BOUCLE_auteur_tous(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
-                <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                <div class="liste-tooltip-auteur">#NOM</div>
-                <div class="liste-tooltip-auteur">
-                    [(#DESCRIPTIF)]<br />
+<div id="liste-cadavres">
+    <div class="liste-colonnes">
+        <div class="liste-title">#GET{compteur_histoire}</div>
+        <!-- LISTE CADAVRES -->
+        <BOUCLE_articles_tous(ARTICLES){id_rubrique}{par date}>
+        <!-- mettre boucle ci-dessus par date -->
+        <div class="liste-link">
+            <!-- TOOL TIP CONTENT -->
+            <div class="liste-tooltip-content">
+                <div id="liste-tooltip-content">
+                    <div class="liste-tooltip-num-cadavre">Histoire #GET{compteur_histoire}</div>
+                    <!--<div class="liste-tooltip-num-chapitre">#SURTITRE</div>-->
+                    <div class="liste-tooltip-titre-chapitre">#TITRE</div>
+                    <BOUCLE_auteur_tous(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
+                    <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                    <div class="liste-tooltip-auteur">#NOM</div>
+                    <div class="liste-tooltip-auteur">
+                        [(#DESCRIPTIF)]<br />
+                    </div>
+                    </BOUCLE_auteur_tous>
                 </div>
-                </BOUCLE_auteur_tous>
+                <div id="liste-tooltip-bulle">
+                </div>
             </div>
-            <div id="liste-tooltip-bulle">
-            </div>
-        </div>
 
-        #SET{var_oui, oui}
-        <B_auteur_actif>
-            <BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
-            <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single auteur [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
-            </BOUCLE_auteur_actif>
-        </B_auteur_actif>
-        <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
-        <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
-        </BOUCLE_auteur_actif1>
-    <//B_auteur_actif>
+            #SET{var_oui, oui}
+            <B_auteur_actif>
+                <BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
+                <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single auteur [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
+                </BOUCLE_auteur_actif>
+            </B_auteur_actif>
+            <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
+            <a href="#_articles_tous:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_articles_tous:COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|?{'last',''})]"></a>
+            </BOUCLE_auteur_actif1>
+        <//B_auteur_actif>
 
 
-    [(#REM) À quoi sert le code ci-dessous ? ]
-    [(#COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|oui)
-    [(#SESSION{login}|match{pvincent|heleroy|chmonnet}|oui)
-    <!--
-    <a target="_blank" href="spip.php?page=textetravail&id_rubrique=#ID_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})]"></a>
-    -->
-    ]
-    ]
+        [(#REM) À quoi sert le code ci-dessous ? ]
+        [(#COMPTEUR_BOUCLE|=={#_articles_tous:TOTAL_BOUCLE}|oui)
+        [(#SESSION{login}|match{pvincent|heleroy|chmonnet}|oui)
+        <!--
+        <a target="_blank" href="spip.php?page=textetravail&id_rubrique=#ID_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})]"></a>
+        -->
+        ]
+        ]
 
-</div>
-<div class="liste-link-spacer-5"></div>
-</BOUCLE_articles_tous>
-<!-- FIN LISTE CADAVRES -->
+    </div>
+    <div class="liste-link-spacer-5"></div>
+    </BOUCLE_articles_tous>
+    <!-- FIN LISTE CADAVRES -->
 
+    </div>
 </div>
 
     </BOUCLE_histoires>

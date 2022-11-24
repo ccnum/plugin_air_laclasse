@@ -24,14 +24,12 @@
                         </BOUCLE_mots>
                     </BOUCLE_test_existence_mot_clef>
                     <!--[(#REM) Nous sommes certains du mode d'affichage. Incluons-les squelettes correspondants. ] -->
-                    <div id="liste-cadavres">
                     [(#GET{mode}|=={écriture}|oui)
                         <INCLURE{fond=inclure/sommaireAffichageHistoiresModeEcriture}{id_session_a_afficher=#URL_SITE_SPIP|getValeurIdSessionCCN} />
                     ]
                     [(#GET{mode}|=={lecture}|oui)
                         <INCLURE{fond=inclure/sommaireAffichageHistoiresModeLecture}{id_session_a_afficher=#URL_SITE_SPIP|getValeurIdSessionCCN} />
                     ]
-                    </div>
                 </div>
             </div>
         </div>

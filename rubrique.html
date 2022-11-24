@@ -99,7 +99,7 @@ affichage de la rubrique #ID_RUBRIQUE nommée #TITRE
                             </div>
                         </div>
 
-                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{""}}{tout}{0,1}>
                         <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
                         <div class="ecriture-chapitre-texte">
                             <div class="ecriture-chapitre-surtitre">—</div>

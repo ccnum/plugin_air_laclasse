@@ -29,167 +29,165 @@
         <a href="#" id="nav-forum">forum</a>
         <a href="#" id="nav-ecrire">écrire</a>
     </div>
+    <!-- BOOK -->
+    <div id="global-ecriture">
 
-<!-- BOOK -->
-<div id="global-ecriture">
+        <div id="global-spacer">
+        </div>
 
-    <div id="global-spacer">
-    </div>
+        <div class="global-content">
 
-    <div class="global-content">
+            <div class="content">
 
-        <div class="content">
+                <div class="content-left-small">
 
-            <div class="content-left-small">
+                    <div id="titre_site">
+                        <a href="http://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                    </div>
 
-                <div id="titre_site">
-                    <a href="http://fictions.laclasse.com" title="Accueil"><strong>fictions</strong></a><a href="http://www.laclasse.com" title="http://www.laclasse.com">.laclasse.com</a>
+                    <div id="ecriture-en-cours">
+                        <INCLURE{fond=rubrique-bouton}>
+                    </div>
+
+                    <!-- LISTE CADAVRE SMALL-->
+                    <div id="ecriture-liste">
+                        [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur-small} />]
+                    </div>
                 </div>
 
-                <div id="ecriture-en-cours">
-                    <INCLURE{fond=rubrique-bouton}>
-                </div>
+                <div class="content-right-large">
+                    <div id="ecriture">
 
-                <!-- LISTE CADAVRE SMALL-->
-                <div id="ecriture-liste">
-                    [(#SESSION{id_auteur}|oui)<INCLURE{fond=liste-cadavres-auteur-small} />]
-                </div>
-            </div>
+                        <!-- PROLOGUE -->
+                        <div class="ecriture-chapitre">
+                            <div class="ecriture-chapitre-picto">
+                                <div id="open_prologue">
+                                    <img src="#CHEMIN{img/ecriture/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-open-prologue.png}';" width="25" height="25" />
+                                </div>
 
-            <div class="content-right-large">
-                <div id="ecriture">
-
-                    <!-- PROLOGUE -->
-                    <div class="ecriture-chapitre">
-                        <div class="ecriture-chapitre-picto">
-                            <div id="open_prologue">
-                                <img src="#CHEMIN{img/ecriture/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-open-prologue.png}';" width="25" height="25" />
+                                <div id="close_prologue">
+                                    <img src="#CHEMIN{img/ecriture/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-close-prologue.png}';" width="25" height="25" />
+                                </div>
                             </div>
 
-                            <div id="close_prologue">
-                                <img src="#CHEMIN{img/ecriture/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/ecriture/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/ecriture/bt-close-prologue.png}';" width="25" height="25" />
+                            <BOUCLE_annee(RUBRIQUES){titre==#EVAL{""}}{tout}{0,1}>
+                            <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
+                            <div class="ecriture-chapitre-texte">
+                                <div class="ecriture-chapitre-surtitre">—</div>
+                                <div class="ecriture-chapitre-titre">#TITRE</div>
                             </div>
+
+                            <div class="ecriture-chapitre-auteur">
+
+                            </div>
+
+                            <div class="texte_courant #EDIT{texte}" id="texte_prologue">
+                                #TEXTE<br />
+                            </div>
+
+                            </BOUCLE_article>
+                            </BOUCLE_annee>
+
                         </div>
+                        <hr />
 
-                        <BOUCLE_annee(RUBRIQUES){titre==#EVAL{""}}{tout}{0,1}>
-                        <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
-                        <div class="ecriture-chapitre-texte">
-                            <div class="ecriture-chapitre-surtitre">—</div>
-                            <div class="ecriture-chapitre-titre">#TITRE</div>
-                        </div>
+                        <!-- END PROLOGUE -->
 
-                        <div class="ecriture-chapitre-auteur">
+                        <!-- Boucle affichage des cadavres -->
+                        <BOUCLE_cadavres(ARTICLES){id_rubrique}{id_rubrique !=12}{par date}>
 
-                        </div>
+                        <!-- L'UTILISATEUR N'EST PAS WEBMESTRE / ECRIVAIN -->
+                        #SET{var_oui, oui}
+                        [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
+                        <!-- L'utilisateur est sur son espace de travail -->
+                        [(#GET{var_id_zone}|=={#ID_RUBRIQUE}|oui)
 
-                        <div class="texte_courant #EDIT{texte}" id="texte_prologue">
-                            #TEXTE<br />
-                        </div>
+                        <!-- Affichage du chapitre masque N-1 -->
+                        [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
+                        <INCLURE{fond=chapitre-visible, id_article}>
+                        ]
 
-                        </BOUCLE_article>
-                        </BOUCLE_annee>
+                        <!-- Affichage du chapitre N VERROUILLE -->
+                        [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
+                        <!-- precedent chapitre VERROUILLE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
+                        <!-- dernier chapitre ECRITURE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
+                        ]
+                        ]
+
+                        <!-- L'utilisateur n'est pas sur son espace de travail -->
+                        [(#GET{var_id_zone}|!={#ID_RUBRIQUE}|oui)
+
+                        <!-- Affichage du chapitre masque N-1 -->
+                        [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
+
+                        <!-- Si l'utilisateur est l'auteur du chapitre N-1  -->
+                        [(#NOM|=={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-visible, id_article}>]
+                        <!-- Si l'utilisateur n'est pas l'auteur du chapitre N-1  -->
+                        [(#NOM|!={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
+
+                        ]
+
+                        <!-- Affichage du chapitre masque N VERROUILLE -->
+                        [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
+
+                        #SET{var_oui, oui}
+                        <!-- Si l'utilisateur est webmestre -->
+                        [(#SESSION{webmestre}|=={#GET{var_oui}}|oui)
+                        <!-- precedent chapitre VERROUILLE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
+                        <!-- dernier chapitre ECRITURE -->
+                        [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
+                        ]
+
+                        <!-- Si l'utilisateur n'est pas webmestre -->
+                        [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
+                        <!-- precedent chapitre VERROUILLE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article, fin=non}>]
+                        <!-- dernier chapitre ECRITURE -->
+                        [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille,fin=oui,id_article}>]
+
+                        ]
+
+                        ]
+
+                        ]
+
+                        ]
+
+                        <!-- L'UTILISATEUR EST PAS WEBMESTRE / ECRIVAIN -->
+                        [(#SESSION{webmestre}|=={#GET{var_oui}}|oui)
+
+                        <!-- Affichage du chapitre masque N-1 -->
+                        [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
+                        <INCLURE{fond=chapitre-visible, id_article}>
+                        ]
+
+                        <!-- Affichage du chapitre N VERROUILLE -->
+                        [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
+                        <!-- precedent chapitre VERROUILLE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
+                        <!-- dernier chapitre ECRITURE-->
+                        [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
+
+                        ]
+
+                        ]
+
+
+                        </BOUCLE_cadavres>
 
                     </div>
-                    <hr />
-
-                    <!-- END PROLOGUE -->
-
-                    <!-- Boucle affichage des cadavres -->
-                    <BOUCLE_cadavres(ARTICLES){id_rubrique}{id_rubrique !=12}{par date}>
-
-                    <!-- L'UTILISATEUR N'EST PAS WEBMESTRE / ECRIVAIN -->
-                    #SET{var_oui, oui}
-                    [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
-                    <!-- L'utilisateur est sur son espace de travail -->
-                    [(#GET{var_id_zone}|=={#ID_RUBRIQUE}|oui)
-
-                    <!-- Affichage du chapitre masque N-1 -->
-                    [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
-                    <INCLURE{fond=chapitre-visible, id_article}>
-                    ]
-
-                    <!-- Affichage du chapitre N VERROUILLE -->
-                    [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
-                    <!-- precedent chapitre VERROUILLE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
-                    <!-- dernier chapitre ECRITURE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
-                    ]
-                    ]
-
-                    <!-- L'utilisateur n'est pas sur son espace de travail -->
-                    [(#GET{var_id_zone}|!={#ID_RUBRIQUE}|oui)
-
-                    <!-- Affichage du chapitre masque N-1 -->
-                    [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
-
-                    <!-- Si l'utilisateur est l'auteur du chapitre N-1  -->
-                    [(#NOM|=={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-visible, id_article}>]
-                    <!-- Si l'utilisateur n'est pas l'auteur du chapitre N-1  -->
-                    [(#NOM|!={#GET{var_nom_auteur}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
-
-                    ]
-
-                    <!-- Affichage du chapitre masque N VERROUILLE -->
-                    [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
-
-                    #SET{var_oui, oui}
-                    <!-- Si l'utilisateur est webmestre -->
-                    [(#SESSION{webmestre}|=={#GET{var_oui}}|oui)
-                    <!-- precedent chapitre VERROUILLE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
-                    <!-- dernier chapitre ECRITURE -->
-                    [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
-                    ]
-
-                    <!-- Si l'utilisateur n'est pas webmestre -->
-                    [(#SESSION{webmestre}|!={#GET{var_oui}}|oui)
-                    <!-- precedent chapitre VERROUILLE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article, fin=non}>]
-                    <!-- dernier chapitre ECRITURE -->
-                    [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille,fin=oui,id_article}>]
-
-                    ]
-
-                    ]
-
-                    ]
-
-                    ]
-
-                    <!-- L'UTILISATEUR EST PAS WEBMESTRE / ECRIVAIN -->
-                    [(#SESSION{webmestre}|=={#GET{var_oui}}|oui)
-
-                    <!-- Affichage du chapitre masque N-1 -->
-                    [(#GET{id_cadavre_hidden}|=={#_cadavres:COMPTEUR_BOUCLE}|oui)
-                    <INCLURE{fond=chapitre-visible, id_article}>
-                    ]
-
-                    <!-- Affichage du chapitre N VERROUILLE -->
-                    [(#GET{id_cadavre_hidden}|!={#_cadavres:COMPTEUR_BOUCLE}|oui)
-                    <!-- precedent chapitre VERROUILLE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|!={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-verrouille, id_article,fin=non}>]
-                    <!-- dernier chapitre ECRITURE-->
-                    [(#_cadavres:COMPTEUR_BOUCLE|=={#GET{var_max_cadavres}}|oui)<INCLURE{fond=chapitre-ecriture, id_article}>]
-
-                    ]
-
-                    ]
-
-
-                    </BOUCLE_cadavres>
-
                 </div>
+
             </div>
 
         </div>
 
     </div>
 
-</div>
-
-<INCLURE{fond=footer}/>
-
-</body>
+    <INCLURE{fond=inclure/piedDePage} /> <!--[(#REM) Contient la ribambelle d'infos à placer dans le pied de page. ]-->
+    </body>
 </html>
 </BOUCLE_session_courante>

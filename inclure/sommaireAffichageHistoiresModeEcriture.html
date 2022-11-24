@@ -10,7 +10,7 @@
 
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}>
     <BOUCLE_histoires(RUBRIQUES){id_parent}{par titre}>
-        #SET{i,#GET{compteur_histoire}|plus{compteur_histoire}} <!-- [(#REM) Le compteur commence à 1 et on incrémente. -->
+        #SET{i,#GET{compteur_histoire}|plus{1}} <!-- [(#REM) Le compteur commence à 1 et on incrémente. -->
 <div class="liste-colonnes">
     <div class="liste-title">#GET{compteur_histoire}</div>
     <!-- LISTE CADAVRES -->

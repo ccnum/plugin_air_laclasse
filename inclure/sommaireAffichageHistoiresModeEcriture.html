@@ -5,7 +5,7 @@
     ]
 -->
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}{tout}{0,1}>
-    <BOUCLE_histoires(RUBRIQUES){id_rubrique}{par titre}>
+    <BOUCLE_histoires(RUBRIQUES){id_rubrique=id_parent}{par titre}>
         #TITRE
 <div class="liste-colonnes">
     <div class="liste-title">#GET{i}</div>
@@ -23,7 +23,7 @@
                 <div class="liste-tooltip-photo">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
                 <div class="liste-tooltip-auteur">#NOM</div>
                 <div class="liste-tooltip-auteur">
-                    [(#DESCRIPTIF|cleanCut)]<br />
+                    [(#DESCRIPTIF)]<br />
                 </div>
                 </BOUCLE_auteur_tous>
             </div>

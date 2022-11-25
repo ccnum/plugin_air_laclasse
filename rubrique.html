@@ -97,17 +97,12 @@
 
                         <!-- Chapitres -->
                         <BOUCLE_chapitres(ARTICLES){id_rubrique}{par date}>
-                        #_session_courante:ID_RUBRIQUE
-                        <INCLURE{fond=inclure/chapitre-ecriture}{id_chapitre=#ID_ARTICLE} />
+                            <INCLURE{fond=inclure/chapitre-visible}{id_chapitre=#ID_ARTICLE} />
                         </BOUCLE_chapitres>
-
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     <INCLURE{fond=inclure/piedDePage} /> <!--[(#REM) Contient la ribambelle d'infos à placer dans le pied de page. ]-->

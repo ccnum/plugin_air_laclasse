@@ -2,6 +2,11 @@
 <html lang="fr">
     <!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
+    <script>
+        function toggleVisibility(id_objet){
+            alert(id_objet);
+        }
+    </script>
     <body>
 
     <div id="liste-tooltip"></div>
@@ -51,11 +56,12 @@
                         <!-- PROLOGUE -->
                         <div class="ecriture-chapitre">
                             <div class="ecriture-chapitre-picto">
-                                <div id="open_prologue">
+                                <!-- todo refaire proprement ce truc ! Ça n'a pas de sens de faire deux boutons !!! -->
+                                <div id="open_prologue" onclick="toggleVisibility(this.id);toggleVisibility('texte-prologue');">
                                     <img src="#CHEMIN{img/global/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-open-prologue.png}';" width="25" height="25" />
                                 </div>
 
-                                <div id="close_prologue">
+                                <div id="close_prologue" onclick="toggleVisibility(this.id);toggleVisibility('texte-prologue');">
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>

@@ -5,8 +5,11 @@
     <script>
         function toggleVisibility(id_objet){
             let domObjet = document.getElementById(id_objet);
-            console.log(domObjet.style.display);
-            domObjet.style.display = 'block';
+            if (domObjet.style.display==='' || domObjet.style.display==='hidden'){
+                domObjet.style.display = 'block';
+            } else{
+                domObjet.style.display = 'hidden';
+            }
         }
     </script>
     <body>
@@ -59,11 +62,11 @@
                         <div class="ecriture-chapitre">
                             <div class="ecriture-chapitre-picto">
                                 <!-- todo refaire proprement ce truc ! Ça n'a pas de sens de faire deux boutons !!! -->
-                                <div id="open_prologue" onclick="toggleVisibility(this.id);toggleVisibility('texte_prologue');">
+                                <div id="open_prologue" onclick="toggleVisibility(this.id);toggleVisibility('close_prologue');toggleVisibility('texte_prologue');">
                                     <img src="#CHEMIN{img/global/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-open-prologue.png}';" width="25" height="25" />
                                 </div>
 
-                                <div id="close_prologue" onclick="toggleVisibility(this.id);toggleVisibility('texte_prologue');">
+                                <div id="close_prologue" onclick="toggleVisibility(this.id);toggleVisibility('open_prologue');toggleVisibility('texte_prologue');">
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>

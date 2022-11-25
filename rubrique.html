@@ -60,8 +60,8 @@
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>
-                            <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
                             Le prologue se trouve à l'id : #DESCRIPTIF
+                                <BOUCLE_prologue(ARTICLES){id_article=#_rub_session_courante:DESCRIPTIF}>
                                     <!--
                                     [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
                                             histoires d'une même session, le prologue est simplement indiqué dans le
@@ -81,7 +81,7 @@
                             <div class="texte_courant #EDIT{texte}" id="texte_prologue">
                                 #TEXTE<br />
                             </div>
-                            </BOUCLE_session_courante>
+                                </BOUCLE_prologue>
 
                         </div>
                         <hr />

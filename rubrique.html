@@ -98,7 +98,7 @@
                         <!-- Chapitres -->
                         <BOUCLE_chapitres(ARTICLES){id_rubrique}{par date}>
                         #_session_courante:ID_RUBRIQUE
-                        <INCLURE{fond=inclure/chapitre-verrouille} />
+                        <INCLURE{fond=inclure/chapitre-verrouille}{id_chapitre=#_session_courante:ID_RUBRIQUE} />
                         </BOUCLE_chapitres>
 
                     </div>

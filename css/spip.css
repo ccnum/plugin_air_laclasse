@@ -19,7 +19,9 @@
     color:#ff6b6b;
 }
 
-
+.global-content{
+    overflow-y: hidden;
+}
 
 
 

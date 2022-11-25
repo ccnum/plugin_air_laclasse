@@ -20,8 +20,10 @@
 }
 .content-right-large {
     float:left;
+    height: 100%;
     width:640px;
     margin:0 20px 0 0;
+    overflow-y: scroll;
 }
 
 

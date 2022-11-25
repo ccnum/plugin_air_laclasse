@@ -12,17 +12,13 @@
         <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
         <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
         <div class="ecriture-chapitre-nom">#NOM</div>
-        #SET{var_auteur_article, #NOM}
         </BOUCLE_auteur_article>
     </div>
-
 </div>
 
 <!-- TEXTE  -->
 <div class="texte_courant">
-    <!-- LONGUEUR DE L' ARTICLE-->
-    #SET{ma_regexp, [[:alpha:]]}
-    <span class="texte-masque">[(#TEXTE|couper{[(#TEXTE|textebrut|strlen|moins{200})], ''}|replace{#GET{ma_regexp}, x})]</span>
+    <span class="texte-masque"></span> <!-- partie du texte masqué ici -->
     <span>[(#TEXTE)]</span>
 </div>
 
@@ -33,7 +29,7 @@
 </div>
 <div class="script-ecrivain">
     <div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
-    <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
+    <div class="script-titre">SCRIPT</div>
     <div class="script-texte script-texte-hide #EDIT{texte}" id="slideup-script-ecrivain">
         #TEXTE
         <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>

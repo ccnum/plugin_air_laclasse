@@ -26,7 +26,7 @@
     <!-- LONGUEUR DE L' ARTICLE-->
     #SET{ma_regexp, [[:alpha:]]}
     <span class="texte-masque">[(#DESCRIPTIF|couper{[(#DESCRIPTIF|textebrut|strlen|moins{200})], ''}|replace{#GET{ma_regexp}, x})]</span>
-    <span>[(#DESCRIPTIF|cleanCut)]</span>
+    <span>[(#DESCRIPTIF)]</span>
 </div>
 
 

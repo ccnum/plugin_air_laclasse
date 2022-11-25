@@ -59,14 +59,12 @@
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>
-
                             <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
                                 <!--
                                         [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
                                                 histoires d'une même session, le prologue est simplement indiqué dans le
                                                 descriptif de la rubrique histoire (un simple id d'article).
                                         ]
-
                                     -->
                                 #SET{id_article_prologue, #DESCRIPTIF|textebrut}
                             </BOUCLE_session_courante>
@@ -75,14 +73,8 @@
                                 <div class="ecriture-chapitre-surtitre">—</div>
                                 <div class="ecriture-chapitre-titre">#TITRE</div>
                             </div>
-
-                            <div class="ecriture-chapitre-auteur">
-
-                            </div>
-
-                            <div class="texte_courant #EDIT{texte}" id="texte_prologue">
-                                #TEXTE<br />
-                            </div>
+                            <div class="ecriture-chapitre-auteur"></div>
+                            <div class="texte_courant #EDIT{texte}" id="texte_prologue">#TEXTE<br /></div>
                             </BOUCLE_prologue>
                         </div>
                         <hr />

@@ -1,0 +1,35 @@
+<!--
+RUBRIQUE.HTML > CHAPITRE-VERROUILLE.HTML
+(le chapitre n'est pas visible)
+
+ -->
+
+<BOUCLE_article_verrouille(ARTICLES){id_article}>
+<div class="ecriture-chapitre">
+
+    <div class="ecriture-chapitre-picto">
+        <img src="#CHEMIN{img/ecriture/picto-verrou.png}" width="50" height="50" />
+    </div>
+
+    <div class="ecriture-chapitre-texte">
+        <div class="ecriture-chapitre-surtitre bleu-opacity">#SURTITRE</div>
+        <div class="ecriture-chapitre-titre gris">#TITRE</div>
+    </div>
+
+    <div class="ecriture-chapitre-auteur">
+
+        <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
+        <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+        <div class="ecriture-chapitre-nom">#NOM</div>
+        </BOUCLE_auteur_article>
+
+        [(#ENV{fin}|=={oui}|non)
+        <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+        [<div class="ecriture-chapitre-nom">(#DESCRIPTIF|cleanCut)</div>]
+        ]
+
+    </div>
+
+</div>
+</BOUCLE_article_verrouille>
+<hr/>

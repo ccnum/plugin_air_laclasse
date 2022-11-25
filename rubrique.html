@@ -61,13 +61,13 @@
                                 </div>
                             </div>
                             <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-                                <BOUCLE_prologue(ARTICLES){id_article=#_rub_session_courante:DESCRIPTIF}>
+                            Le prologue se trouve à l'id : #DESCRIPTIF
                                     <!--
                                     [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
                                             histoires d'une même session, le prologue est simplement indiqué dans le
                                             descriptif de la rubrique histoire (un simple id d'article).
                                     ]
-                                Le prologue se trouve à l'id : #DESCRIPTIF
+
                                 -->
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>
@@ -81,7 +81,6 @@
                             <div class="texte_courant #EDIT{texte}" id="texte_prologue">
                                 #TEXTE<br />
                             </div>
-                                </BOUCLE_prologue>
                             </BOUCLE_session_courante>
 
                         </div>

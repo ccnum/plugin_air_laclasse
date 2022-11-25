@@ -61,7 +61,9 @@
                             </div>
 
                             <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-                            Le prologue se trouve à l'id : #DESCRIPTIF
+                            #SET{id_article_prologue, #DESCRIPTIF|textebrut}
+                            Le prologue se trouve à l'id : #GET{id_article_prologue}
+                            </BOUCLE_session_courante>
                             <BOUCLE_prologue(ARTICLES){tout}{id_article==#_session_courante:DESCRIPTIF}>
                             test #ID_ARTICLE
                             toto #_session_courante:DESCRIPTIF
@@ -85,7 +87,6 @@
                                 #TEXTE<br />
                             </div>
                                 </BOUCLE_prologue>
-                            </BOUCLE_session_courante>
 
                         </div>
                         <hr />

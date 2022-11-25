@@ -26,6 +26,7 @@
     overflow-y:scroll;
 }
 .content-right-large{
+    position: fixed;
     overflow-y:scroll;
 }
 

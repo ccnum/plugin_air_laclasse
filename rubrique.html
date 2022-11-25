@@ -4,6 +4,9 @@
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <script>
         function toggleVisibility(id_objet){
+            /*
+            todo refaire complèement : ça marche mal
+             */
             let domObjet = document.getElementById(id_objet);
             console.log(id_objet + ' a une visibilité de ' + domObjet.style.display)
             if (domObjet.style.display==='' || domObjet.style.display==='hidden'){
@@ -90,10 +93,10 @@
                             </BOUCLE_prologue>
                         </div>
                         <hr />
-                        <!-- END PROLOGUE -->
+                        <!-- FIN PROLOGUE -->
 
-                        <!-- Boucle affichage des cadavres -->
-                        <BOUCLE_cadavres(ARTICLES){id_rubrique}{id_rubrique !=12}{par date}>
+                        <!-- Chapitres -->
+                        <BOUCLE_chapitres(ARTICLES){id_rubrique}{par date}>
 
                         <!-- L'UTILISATEUR N'EST PAS WEBMESTRE / ECRIVAIN -->
                         #SET{var_oui, oui}
@@ -175,7 +178,7 @@
                         ]
 
 
-                        </BOUCLE_cadavres>
+                        </BOUCLE_chapitres>
 
                     </div>
                 </div>

@@ -4,7 +4,8 @@
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <script>
         function toggleVisibility(id_objet){
-            alert(id_objet);
+            let domObjet = document.getElementById(id_objet);
+            alert(domObjet.style.display);
         }
     </script>
     <body>

@@ -82,6 +82,7 @@
                                         ]
                                     -->
                                 #SET{id_article_prologue, #DESCRIPTIF|textebrut}
+                            </BOUCLE_session_courante>
                             <BOUCLE_prologue(ARTICLES){id_article=#GET{id_article_prologue}}>
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>
@@ -94,12 +95,11 @@
                         <hr />
                         <!-- FIN PROLOGUE -->
 
-                        <!-- Chapitres -->ID_RUBRIQUE
+                        <!-- Chapitres -->
                         <BOUCLE_chapitres(ARTICLES){id_rubrique}{par date}>
-                        #
+                        #_session_courante:ID_RUBRIQUE
                         <INCLURE{fond=inclure/chapitre-verrouille} />
                         </BOUCLE_chapitres>
-                        </BOUCLE_session_courante>
 
                     </div>
                 </div>

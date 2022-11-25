@@ -25,7 +25,9 @@
 .global-content{
     overflow-y:scroll;
 }
-
+.content-right-large{
+    overflow-y:scroll;
+}
 
 
 

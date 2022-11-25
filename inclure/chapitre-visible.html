@@ -21,57 +21,6 @@
     <span class="texte-masque"></span> <!-- todo : partie du texte masqué ici -->
     <span>[(#TEXTE)]</span>
 </div>
-
-
-<!-- SCRIPT  -->
-<div class="script-forum-fleche">
-    <img src="#CHEMIN{img/global/fleche_script_ecrivain.png}" width="44" height="17" />
-</div>
-<div class="script-ecrivain">
-    <div class="script-open-close" id="open-script-ecrivain" style="display: block;"></div>
-    <div class="script-titre">SCRIPT</div>
-    <div class="script-texte script-texte-hide" id="slideup-script-ecrivain">
-        <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
-        <div style="clear: both; padding: 5px;">
-            <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3}|?{class="mediabox boxIframe"})]>
-                [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
-            </a>
-            <?php
-                    //phpinfo();
-                    include_spip('inc/securiser_action');
-                    include_spip('inc/autoriser');
-                    if ((isset($GLOBALS['auteur_session']['nom']))&&(autoriser('modifier', 'article', #ID_ARTICLE)))
-                        {   $action="documenter";
-                            $redirect="#SELF";
-                            $arg="-#ID_ARTICLE/article/#ID_DOCUMENT";
-                            $confirmation= attribut_html("Etes vous sûr de vouloir supprimer ce document ?");
-                            echo "<a href='".securiser_action_auteur($action, $arg, $redirect, $mode=false, $att='')."' class='rouge droite ajax' onClick='return confirmation(\"$confirmation\")' title='supprimer ce document' ><div class='action_supprimer'></div></a>";
-            }
-            ?>
-        </div>
-        </BOUCLE_doc>
-    </div>
-
-</div>
-
-
-
-
-
-<!-- FORUM -->
-
-<!-- NB DE MESSAGE -->
-
-
-<a href="#URL_SITE_SPIP/?page=forum&id_article=#ID_ARTICLE" class="mediabox boxIframe boxWidth-730px boxHeight-80pc">
-    <div class="forum_bt">
-        <div class="forum-titre">FORUM</div>
-        <div class="forum-nb-message"><BOUCLE_combien(FORUMS){id_article}{plat}></BOUCLE_combien>[(#TOTAL_BOUCLE)]<//B_combien></div>
-    </div>
-</a>
-
-
 </BOUCLE_article_verrouille>
-
 
 <hr/>

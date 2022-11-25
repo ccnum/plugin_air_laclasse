@@ -5,7 +5,7 @@
     <script>
         function toggleVisibility(id_objet){
             /*
-            todo refaire complèement : ça marche mal
+            todo refaire complètement : ça marche mal
              */
             let domObjet = document.getElementById(id_objet);
             console.log(id_objet + ' a une visibilité de ' + domObjet.style.display)
@@ -87,7 +87,7 @@
                             <BOUCLE_prologue(ARTICLES){id_article=#GET{id_article_prologue}}>
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>
-                                <div class="ecriture-chapitre-titre">#TITRE</div>
+                                <div class="ecriture-chapitre-titre #EDIT{titre}">#TITRE</div>
                             </div>
                             <div class="ecriture-chapitre-auteur"></div>
                             <div class="texte_courant #EDIT{texte}" id="texte_prologue">#TEXTE<br /></div>

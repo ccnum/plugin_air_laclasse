@@ -30,3 +30,4 @@ TODO
 Activer dépôts
 Modules supplémentaires optionnels
 - duplicator
+- crayons

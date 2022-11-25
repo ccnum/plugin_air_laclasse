@@ -5,6 +5,7 @@
     <script>
         function toggleVisibility(id_objet){
             let domObjet = document.getElementById(id_objet);
+            console.log(id_objet + ' a une visibilité de ' + domObjet.style.display)
             if (domObjet.style.display==='' || domObjet.style.display==='hidden'){
                 domObjet.style.display = 'block';
             } else{

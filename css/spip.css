@@ -19,8 +19,11 @@
     color:#ff6b6b;
 }
 
+.global-ecriture{
+    overflow-y:scroll;
+}
 .global-content{
-    overflow-y: hidden;
+    overflow-y:scroll;
 }
 
 

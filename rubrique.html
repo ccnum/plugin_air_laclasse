@@ -61,19 +61,16 @@
                             </div>
 
                             <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-                            #SET{id_article_prologue, #DESCRIPTIF|textebrut}
-                            Le prologue se trouve à l'id : #GET{id_article_prologue}
+                                <!--
+                                        [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
+                                                histoires d'une même session, le prologue est simplement indiqué dans le
+                                                descriptif de la rubrique histoire (un simple id d'article).
+                                        ]
+
+                                    -->
+                                #SET{id_article_prologue, #DESCRIPTIF|textebrut}
                             </BOUCLE_session_courante>
                             <BOUCLE_prologue(ARTICLES){id_article==#GET{id_article_prologue}}>
-                            test #ID_ARTICLE
-                            toto #_session_courante:DESCRIPTIF
-                                    <!--
-                                    [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
-                                            histoires d'une même session, le prologue est simplement indiqué dans le
-                                            descriptif de la rubrique histoire (un simple id d'article).
-                                    ]
-
-                                -->
                             <div class="ecriture-chapitre-texte">
                                 <div class="ecriture-chapitre-surtitre">—</div>
                                 <div class="ecriture-chapitre-titre">#TITRE</div>
@@ -86,11 +83,9 @@
                             <div class="texte_courant #EDIT{texte}" id="texte_prologue">
                                 #TEXTE<br />
                             </div>
-                                </BOUCLE_prologue>
-
+                            </BOUCLE_prologue>
                         </div>
                         <hr />
-
                         <!-- END PROLOGUE -->
 
                         <!-- Boucle affichage des cadavres -->

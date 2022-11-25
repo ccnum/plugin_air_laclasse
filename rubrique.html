@@ -4,7 +4,6 @@
     <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
 
-<BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
     <div id="liste-tooltip"></div>
     <!-- ÉLÉMENTS GRAPHIQUES-->
     <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
@@ -60,6 +59,8 @@
                                     <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
                                 </div>
                             </div>
+
+                            <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
                             Le prologue se trouve à l'id : #DESCRIPTIF
                             <BOUCLE_prologue(ARTICLES){tout}{id_article==#_session_courante:DESCRIPTIF}>
                             test #ID_ARTICLE
@@ -84,6 +85,7 @@
                                 #TEXTE<br />
                             </div>
                                 </BOUCLE_prologue>
+                            </BOUCLE_session_courante>
 
                         </div>
                         <hr />
@@ -187,4 +189,3 @@
     <INCLURE{fond=inclure/piedDePage} /> <!--[(#REM) Contient la ribambelle d'infos à placer dans le pied de page. ]-->
     </body>
 </html>
-</BOUCLE_session_courante>

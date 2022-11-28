@@ -3,63 +3,52 @@
 <!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
 <INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
     <body>
+        <!-- TOOLTIP -->
+        <div id="liste-tooltip"></div>
 
-<!-- TOOLTIP -->
-<div id="liste-tooltip">
-</div>
+        <!-- ELEMENTS GRAPHIQUES-->
+        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+        <div id="book-middle-top"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+        <div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+        <div class="stitches">
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        </div>
+        <!-- PAGE SUIVANT PRECEDENTE-->
+        <div  class="bt-next-prev" id="bt-prev">
+            <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+        </div>
+        <div  class="bt-next-prev" id="bt-next">
+            <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-next.png}" onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';" width="54" height="54" /></a>
+        </div>
+        <!-- RETOUR HOME -->
+        <div id="retour-home">
+            <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-home.png}" onmouseover="this.src='#CHEMIN{img/global/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-home.png}';" width="60" height="60" /></a>
+        </div>
+        <!-- BOOK -->
+        <div id="global">
+            <div id="global-spacer"></div>
+            <div class="global-content">
+                <div class="content">
+                    <!-- PAGE GAUCHE -->
+                    <div class="content-left">
+                        <!-- PPROLOGUE -->
+                        <div class="lecture-page" id="page-gauche-1" data-num="1">
+                            <!-- [(#REM) Le prologue d'une histoire est retrouvable via son identifiant stocké dans le ]-->
+                            <!-- descriptif de l'histoire. ] -->
+                            <BOUCLE_recuperer_id_prologue(ARTICLES){id_rubrique}>
+                            <span class="lecture-titre-cadavre">toto #DESCRIPTIF titi</span>
+                            </BOUCLE_recuperer_id_prologue>
 
-
-<!-- ELEMENTS GRAPHIQUES-->
-<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
-
-
-<div id="book-middle-top"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
-<div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
-
-<div class="stitches">
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-</div>
-
-<!-- PAGE SUIVANT PRECEDENTE-->
-<div  class="bt-next-prev" id="bt-prev">
-    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-</div>
-
-<div  class="bt-next-prev" id="bt-next">
-    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-next.png}" onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';" width="54" height="54" /></a>
-</div>
-
-<!-- RETOUR HOME -->
-<div id="retour-home">
-    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-home.png}" onmouseover="this.src='#CHEMIN{img/global/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-home.png}';" width="60" height="60" /></a>
-</div>
-
-<!-- BOOK -->
-<div id="global">
-
-    <div id="global-spacer">
-    </div>
-
-    <div class="global-content">
-
-        <div class="content">
-
-            <!-- PAGE GAUCHE -->
-            <div class="content-left">
-
-                <!-- PPROLOGUE -->
-                <div class="lecture-page" id="page-gauche-1" data-num="1">
-
-                    <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                            <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
                     <span class="lecture-titre-cadavre">#TITRE</span>
                     </BOUCLE_lecture_titre_rubrique_prologue>
 
-                    <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+                    <BOUCLE_annee(RUBRIQUES){id_rubrique}>
                     <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
                     <h1 class="prologue">#TITRE</h1>
                     <h2></h2>
@@ -98,10 +87,10 @@
                     <h1 class="nettoyeur">#SURTITRE</h1>
                     <h2>#TITRE</h2>
                     #SET{var_lecture, false}
-                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
+                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
                     <INCLURE{fond=lecture-texte-visible, id_article}>
                     ]
-                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
+                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
                     [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                     [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                     ]
@@ -141,10 +130,10 @@
                     <!-- CONTENT GAUCHE -->
                     <h1 class="nettoyeur">#SURTITRE</h1>
                     <h2>#TITRE</h2>
-                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
+                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
                     <INCLURE{fond=lecture-texte-visible, id_article}>
                     ]
-                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
+                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
                     [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
                     [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
                     ]

@@ -41,26 +41,15 @@
                             <!-- [(#REM) Le prologue d'une histoire est retrouvable via son identifiant stocké dans le ]-->
                             <!-- [(#REM) descriptif de l'histoire. ] -->
                             <BOUCLE_recuperer_id_prologue(RUBRIQUES){id_rubrique}>
+                            <span class="lecture-titre-cadavre">#TITRE</span>
                                 #SET{id_article_prologue, #DESCRIPTIF|textebrut}
                                 <BOUCLE_titre_prologue(ARTICLES){id_article=#GET{id_article_prologue}}{tout}>
-                            <span class="lecture-titre-cadavre">#TITRE</span>
+                            <h1 class="prologue">#TITRE</h1>
+                            <h2></h2>
+                            <div class="texte-courant-lecture texte-prologue">#TEXTE</div>
                                 </BOUCLE_titre_prologue>
                             </BOUCLE_recuperer_id_prologue>
-
-                            <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                    <span class="lecture-titre-cadavre">#TITRE</span>
-                    </BOUCLE_lecture_titre_rubrique_prologue>
-
-                    <BOUCLE_annee(RUBRIQUES){id_rubrique}>
-                    <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
-                    <h1 class="prologue">#TITRE</h1>
-                    <h2></h2>
-                    <div class="texte-courant-lecture texte-prologue">
-                        #TEXTE
-                    </div>
-                    </BOUCLE_article>
-                    </BOUCLE_annee>
-                </div>
+                        </div>
 
                 <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>
 

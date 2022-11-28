@@ -51,98 +51,77 @@
                             </BOUCLE_recuperer_id_prologue>
                         </div>
 
-                <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>
-
-                <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-
-                    <!-- BOUTONS OPTIONS GAUCHE-->
-                    <div class="lecture-options">
-                        <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                        <span class="lecture-titre-cadavre">#TITRE</span>
-                        </BOUCLE_lecture_titre_rubrique_droite2>
-
-                        <div class="lecture-chapitre-auteur">
-
-                            <BOUCLE_auteur_article2(AUTEURS){id_article}{0,1}>
-                            <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                            <div class="ecriture-chapitre-nom">#NOM</div>
-                            </BOUCLE_auteur_article2>
+                        <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>
+                        <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
+                            <!-- BOUTONS OPTIONS GAUCHE-->
+                            <div class="lecture-options">
+                                <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                                <span class="lecture-titre-cadavre">#TITRE</span>
+                                </BOUCLE_lecture_titre_rubrique_droite2>
+                                <div class="lecture-chapitre-auteur">
+                                    <BOUCLE_auteur_article2(AUTEURS){id_article}{0,1}>
+                                    <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                                    <div class="ecriture-chapitre-nom">#NOM</div>
+                                    </BOUCLE_auteur_article2>
 
                             [(#ENV{fin}|=={oui}|non)
                             <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
                             ]
-
-                        </div>
-                    </div>
-
-                    <!-- CONTENT GAUCHE -->
-                    <h1 class="nettoyeur">#SURTITRE</h1>
-                    <h2>#TITRE</h2>
-                    #SET{var_lecture, false}
-                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
-                    <INCLURE{fond=lecture-texte-visible, id_article}>
-                    ]
-                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
-                    [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
-                    [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
-                    ]
-
-                </div>
-                </BOUCLE_lecture_gauche>
-
-            </div>
-
-            <!-- PAGE DROITE -->
-            <div class="content-right">
-
-                <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
-
-                <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
-
-                    <!-- BOUTONS OPTIONS GAUCHE-->
-                    <div class="lecture-options">
-                        <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
-                        <span class="lecture-titre-cadavre">#TITRE</span>
-                        </BOUCLE_lecture_titre_rubrique_droite>
-
-                        <div class="lecture-chapitre-auteur">
-
-                            <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
-                            <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
-                            <div class="ecriture-chapitre-nom">#NOM</div>
-                            </BOUCLE_auteur_article>
-
-                            [(#ENV{fin}|=={oui}|non)
-                            <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                                </div>
+                            </div>
+                            <!-- CONTENT GAUCHE -->
+                            <h1 class="nettoyeur">#SURTITRE</h1>
+                            <h2>#TITRE</h2>
+                            #SET{var_lecture, false}
+                            [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
+                            <INCLURE{fond=lecture-texte-visible, id_article}>
                             ]
-
+                            [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
+                                [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
+                                [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
+                            ]
                         </div>
+                        </BOUCLE_lecture_gauche>
                     </div>
 
-                    <!-- CONTENT GAUCHE -->
-                    <h1 class="nettoyeur">#SURTITRE</h1>
-                    <h2>#TITRE</h2>
-                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
-                    <INCLURE{fond=lecture-texte-visible, id_article}>
-                    ]
-                    [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
-                    [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
-                    [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
-                    ]
+                    <!-- PAGE DROITE -->
+                    <div class="content-right">
+                        <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
+                        <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
+                            <!-- BOUTONS OPTIONS GAUCHE-->
+                            <div class="lecture-options">
+                                <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                                <span class="lecture-titre-cadavre">#TITRE</span>
+                                </BOUCLE_lecture_titre_rubrique_droite>
 
+                                <div class="lecture-chapitre-auteur">
+                                    <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
+                                    <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                                    <div class="ecriture-chapitre-nom">#NOM</div>
+                                    </BOUCLE_auteur_article>
+                                    [(#ENV{fin}|=={oui}|non)
+                                    <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                                    ]
+                                </div>
+                            </div>
+                            <!-- CONTENT GAUCHE -->
+                            <h1 class="nettoyeur">#SURTITRE</h1>
+                            <h2>#TITRE</h2>
+                            [(#ANNEE_ACTUELLE|=={#EVAL{}}|non)
+                            <INCLURE{fond=lecture-texte-visible, id_article}>
+                            ]
+                            [(#ANNEE_ACTUELLE|=={#EVAL{}}|oui)
+                                [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
+                                [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
+                            ]
+                        </div>
+                        </BOUCLE_lecture_droite>
+                    </div>
                 </div>
-                </BOUCLE_lecture_droite>
             </div>
-
         </div>
-
     </div>
-
-</div>
-
-</div>
-
-<INCLURE{fond=footer}/>
+    <INCLURE{fond=footer}/>
 </body>
 
 <script type="text/javascript">

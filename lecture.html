@@ -41,8 +41,7 @@
                             <!-- [(#REM) Le prologue d'une histoire est retrouvable via son identifiant stocké dans le ]-->
                             <!-- descriptif de l'histoire. ] -->
                             <BOUCLE_recuperer_id_prologue(RUBRIQUES){id_rubrique}>
-                                #SET{id_prologue, #DESCRIPTIF|textebrut}
-                                <BOUCLE_titre_prologue(ARTICLES){id_article=[#_recuperer_id_prologue:DESCRIPTIF|textebrut]}>
+                                <BOUCLE_titre_prologue(ARTICLES){id_article=[#_recuperer_id_prologue:DESCRIPTIF|textebrut]}{tout}>
                                     titre prologue : #TITRE
                                 </BOUCLE_titre_prologue>
                             <span class="lecture-titre-cadavre">toto #DESCRIPTIF titi</span>

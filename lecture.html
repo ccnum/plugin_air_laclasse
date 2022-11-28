@@ -41,7 +41,6 @@
                             <!-- [(#REM) Le prologue d'une histoire est retrouvable via son identifiant stocké dans le ]-->
                             <!-- descriptif de l'histoire. ] -->
                             <BOUCLE_recuperer_id_prologue(RUBRIQUES){id_rubrique}>
-                            [(#DESCRIPTIF|textebrut)]
                             #SET{id_prologue, 40}
                                 <BOUCLE_titre_prologue(ARTICLES){id_article=#GET{id_prologue}>
                                     titre prologue : #TITRE

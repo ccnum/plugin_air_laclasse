@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<!--[(#REM) DOCUMENTATION POUR BALISE INCLURE : https://www.spip.net/fr_article1828.html et https://programmer.spip.net/Transmettre-des-parametres ]-->
+<INCLURE{fond=inclure/enTeteHTML}{mots_clef=(Laboratoire ERASME, Métropole de Lyon, Cadavre exquis)}{description=#DESCRIPTIF_SITE_SPIP|textebrut} />
+    <body>
+
+<!-- TOOLTIP -->
+<div id="liste-tooltip">
+</div>
+
+
+<!-- ELEMENTS GRAPHIQUES-->
+<div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+<div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+<div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+<div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+
+
+<div id="book-middle-top"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>
+<div id="book-middle-bottom"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+
+<div class="stitches">
+    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+    <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+</div>
+
+<!-- PAGE SUIVANT PRECEDENTE-->
+<div  class="bt-next-prev" id="bt-prev">
+    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+</div>
+
+<div  class="bt-next-prev" id="bt-next">
+    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-next.png}" onmouseover="this.src='#CHEMIN{img/global/bt-next-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-next.png}';" width="54" height="54" /></a>
+</div>
+
+<!-- RETOUR HOME -->
+<div id="retour-home">
+    <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-home.png}" onmouseover="this.src='#CHEMIN{img/global/bt-home-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-home.png}';" width="60" height="60" /></a>
+</div>
+
+<!-- BOOK -->
+<div id="global">
+
+    <div id="global-spacer">
+    </div>
+
+    <div class="global-content">
+
+        <div class="content">
+
+            <!-- PAGE GAUCHE -->
+            <div class="content-left">
+
+                <!-- PPROLOGUE -->
+                <div class="lecture-page" id="page-gauche-1" data-num="1">
+
+                    <BOUCLE_lecture_titre_rubrique_prologue(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                    <span class="lecture-titre-cadavre">#TITRE</span>
+                    </BOUCLE_lecture_titre_rubrique_prologue>
+
+                    <BOUCLE_annee(RUBRIQUES){titre==#EVAL{_annee_scolaire}}{tout}{0,1}>
+                    <BOUCLE_article(ARTICLES){id_rubrique}{titre LIKE prologue}{tout}{0,1}>
+                    <h1 class="prologue">#TITRE</h1>
+                    <h2></h2>
+                    <div class="texte-courant-lecture texte-prologue">
+                        #TEXTE
+                    </div>
+                    </BOUCLE_article>
+                    </BOUCLE_annee>
+                </div>
+
+                <BOUCLE_lecture_gauche(ARTICLES){id_rubrique}{par date}>
+
+                <div class="lecture-page" id="page-gauche-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
+
+                    <!-- BOUTONS OPTIONS GAUCHE-->
+                    <div class="lecture-options">
+                        <BOUCLE_lecture_titre_rubrique_droite2(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                        <span class="lecture-titre-cadavre">#TITRE</span>
+                        </BOUCLE_lecture_titre_rubrique_droite2>
+
+                        <div class="lecture-chapitre-auteur">
+
+                            <BOUCLE_auteur_article2(AUTEURS){id_article}{0,1}>
+                            <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                            <div class="ecriture-chapitre-nom">#NOM</div>
+                            </BOUCLE_auteur_article2>
+
+                            [(#ENV{fin}|=={oui}|non)
+                            <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                            ]
+
+                        </div>
+                    </div>
+
+                    <!-- CONTENT GAUCHE -->
+                    <h1 class="nettoyeur">#SURTITRE</h1>
+                    <h2>#TITRE</h2>
+                    #SET{var_lecture, false}
+                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
+                    <INCLURE{fond=lecture-texte-visible, id_article}>
+                    ]
+                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
+                    [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
+                    [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
+                    ]
+
+                </div>
+                </BOUCLE_lecture_gauche>
+
+            </div>
+
+            <!-- PAGE DROITE -->
+            <div class="content-right">
+
+                <BOUCLE_lecture_droite(ARTICLES){id_rubrique}{par date}>
+
+                <div class="lecture-page" id="page-droite-[(#COMPTEUR_BOUCLE|plus{1})]" data-num="[(#COMPTEUR_BOUCLE|plus{1})]">
+
+                    <!-- BOUTONS OPTIONS GAUCHE-->
+                    <div class="lecture-options">
+                        <BOUCLE_lecture_titre_rubrique_droite(RUBRIQUES){id_rubrique = #ID_RUBRIQUE}>
+                        <span class="lecture-titre-cadavre">#TITRE</span>
+                        </BOUCLE_lecture_titre_rubrique_droite>
+
+                        <div class="lecture-chapitre-auteur">
+
+                            <BOUCLE_auteur_article(AUTEURS){id_article}{0,1}>
+                            <div class="ecriture-chapitre-avatar">[(#LOGO_AUTEUR||image_reduire{42,42})]</div>
+                            <div class="ecriture-chapitre-nom">#NOM</div>
+                            </BOUCLE_auteur_article>
+
+                            [(#ENV{fin}|=={oui}|non)
+                            <INCLURE{fond=logos-script-forum,id_article,class=ecriture-chapitre-liens}>
+                            ]
+
+                        </div>
+                    </div>
+
+                    <!-- CONTENT GAUCHE -->
+                    <h1 class="nettoyeur">#SURTITRE</h1>
+                    <h2>#TITRE</h2>
+                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|non)
+                    <INCLURE{fond=lecture-texte-visible, id_article}>
+                    ]
+                    [(#ANNEE_ACTUELLE|=={#EVAL{_annee_scolaire}}|oui)
+                    [(#LECTURE|!={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte-visible, id_article}>]
+                    [(#LECTURE|=={#GET{var_lecture}}|oui)<INCLURE{fond=lecture-texte, id_article}>]
+                    ]
+
+                </div>
+                </BOUCLE_lecture_droite>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</div>
+
+<INCLURE{fond=footer}/>
+</body>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+
+// RESIZE
+        window.onresize = resize_global_content;
+        resize_global_content();
+
+// NICESCROLL
+        $(".global-content").niceScroll({cursorcolor:"#ff6b6b", cursoropacitymin:'0.2',cursoropacitymax:'1', scrollspeed:'100', cursorborder:'0px'});
+        $('#ascrail2000').css({'cursor':'pointer'});
+
+// AFFICHAGES DES PAGES
+        var compteur = '#ENV{compteur}';
+        compteur = parseFloat(compteur);
+        var num_page_gauche;
+        var num_page_droite;
+        var num_page_limite = $('.content-left > div').size();
+
+        $('.lecture-page').hide();
+        pagination(compteur);
+        next_prev(compteur,num_page_limite);
+
+
+// BOUTON PAGE SUIVANTE
+        $('#bt-prev').click(function(event) {
+            event.preventDefault();
+            compteur -= 2;
+            pagination(compteur);
+            next_prev(compteur,num_page_limite);
+        });
+        $('#bt-next').click(function(event) {
+            event.preventDefault();
+            compteur += 2;
+            pagination(compteur);
+            next_prev(compteur,num_page_limite);
+        });
+
+// ROLLOVER AUTEUR
+        $('.lecture-tooltip').mouseover(function() {
+            var offset = $(this).offset();
+            var content_tooltip = $(this).prev().html();
+            $('#liste-tooltip').show();
+            $('#liste-tooltip').html(content_tooltip);
+            var hauteur_tooltip = $('#liste-tooltip-content').height();
+            $('#liste-tooltip').height(hauteur_tooltip);
+            var toptooltip = Math.round(offset.top);
+            toptooltip = toptooltip - hauteur_tooltip;
+            var lefttooltip = Math.round(offset.left);
+            lefttooltip -= 100;
+            $('#liste-tooltip').css('top', 75);
+            $('#liste-tooltip').css('left', lefttooltip + 2);
+        });
+        $('.lecture-tooltip').mouseout(function() {
+            $('#liste-tooltip').hide();
+        });
+
+    });
+
+    // RESIZE
+    function resize_global_content() {
+        h = $(window).height();
+        h -=61;
+        $('.global-content').height(h);
+        stitches_margin = ((h-60) - 258)/4;
+        $(".stitches-inner").css({'margin-top':stitches_margin});
+    }
+
+    //PAGINATION & AFFICHAGE DES PAGES
+
+    function pagination(var_compteur) {
+        if(var_compteur%2 == 0) {
+            num_page_gauche = var_compteur-1;
+            num_page_droite = var_compteur;
+        }
+        else {
+            num_page_gauche = var_compteur;
+            num_page_droite = var_compteur+1;
+        }
+        $('.lecture-page').hide();
+        $('#page-gauche-'+num_page_gauche).show();
+        $('#page-droite-'+num_page_droite).show();
+    }
+
+    // AFFICHAGE DES BOUTONS
+    function next_prev(var_compteur, var_limite) {
+        $('#bt-next').show();
+        $('#bt-prev').show();
+        if(var_compteur >= var_limite-1){
+            $('#bt-next').hide();
+        }
+        else {};
+
+        if(var_compteur == 1 || var_compteur == 2){$('#bt-prev').hide();} else {};
+    }
+</script>
+
+
+</html>

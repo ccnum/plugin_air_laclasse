@@ -743,12 +743,6 @@ hr {
     background-color:#CCC;
     color:#CCC;
 }
-
-#texte_prologue {
-    display:none;
-
-}
-
 #open_prologue {
     cursor:pointer;
     padding:15px 0px 0px 10px;

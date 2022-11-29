@@ -50,7 +50,7 @@ function enleverParenthesesTexte(string $texte=''): string
 
 function masquerTexte($texteAMasquer='', $derniersCaracteresAAfficher=200): string
 {
-    return 'toto';
+    return 'toto'. $derniersCaracteresAAfficher;
 }
 
 

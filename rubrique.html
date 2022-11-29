@@ -96,10 +96,14 @@
                         <hr />
                         <!-- FIN PROLOGUE -->
 
-                        <!-- Chapitres -->
-                        <BOUCLE_chapitres(ARTICLES){id_rubrique}{par date}>
+                        <!-- Chapitres publiés -->
+                        <BOUCLE_chapitres_publies(ARTICLES){id_rubrique}{par date}>
                             <INCLURE{fond=inclure/chapitre-visible}{id_chapitre=#ID_ARTICLE} />
-                        </BOUCLE_chapitres>
+                        </BOUCLE_chapitres_publies>
+                        <!-- Chapitres non publiés -->
+                        <BOUCLE_chapitres_non_publies(ARTICLES){id_rubrique}{statut=prepa}{par date}>
+                            <INCLURE{fond=chapitre-ecriture, id_article}>
+                        </BOUCLE_chapitres_non_publies>
                     </div>
                 </div>
             </div>

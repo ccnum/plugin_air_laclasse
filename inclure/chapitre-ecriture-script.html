@@ -4,12 +4,12 @@
 </BOUCLE_auteur_script>
 
 <div class="script-forum-fleche">
-    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+    <img src="#CHEMIN{img/global/fleche_script_ecrivain.png}" width="44" height="17" />
 </div>
-<BOUCLE_article_verrouille_script(ARTICLES){id_article}>
+<BOUCLE_article_verrouille_script(ARTICLES){id_article=#ENV{id_chapitre}}>
 <div class="script-ecrivain script-ecrivain-edit">
     <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
-    <div class="script-texte #EDIT{texte}">#TEXTE</div>
+    <div class="script-texte #EDIT{descriptif}">#DESCRIPTIF</div>
     <br /><hr />
     <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
     <div style="clear: both; padding: 5px; margin-top: 10px;">

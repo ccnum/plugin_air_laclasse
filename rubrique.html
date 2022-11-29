@@ -17,99 +17,96 @@
         }
     </script>
     <body>
-
-    <div id="liste-tooltip"></div>
-    <!-- ÉLÉMENTS GRAPHIQUES-->
-    <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
-    <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
-    <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
-    <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
-    <!--<div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>-->
-    <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
-    <div class="stitches-ecriture">
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-        <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
-    </div>
-    <!-- RETOUR INDEX -->
-    <div id="bouton-retour">
-        <a href="#URL_SITE_SPIP"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-    </div>
-    <!-- NAVIGATION ANCRE-->
-    <div id="ecriture-navigation">
-        <a href="#" id="nav-top"><img src="#CHEMIN{img/global/fleche-top.png}" width="9" height="12" /></a>
-        <a href="#" id="nav-script">script</a>
-        <a href="#" id="nav-forum">forum</a>
-        <a href="#" id="nav-ecrire">écrire</a>
-    </div>
-    <!-- BOOK -->
-    <div id="global-ecriture">
-        <div id="global-spacer"></div>
-        <div class="global-content" tabindex="5000">
-
-            <div class="content">
-                <div class="content-left-small">
-                    <div id="titre_site">
-                        <a href="#URL_SITE_SPIP" title="Accueil"><strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
-                    </div>
-                    <div id="ecriture-en-cours">
-                        <!-- [(#REM) TODO réimplémenter la liste en haut à gauche : ancien squelette rubrique-bouton et à quoi ça sert ?-->
-                    </div>
-                    <!-- LISTE CADAVRE SMALL-->
-                    <div id="ecriture-liste">
-                        <!-- [(#REM) TODO réimplémenter la liste en haut à gauche : ancien squelette liste-cadavres-auteur-small -->
-                    </div>
-                </div>
-
-                <div class="content-right-large">
-                    <div id="ecriture">
-                        <!-- PROLOGUE -->
-                        <div class="ecriture-chapitre">
-                            <div class="ecriture-chapitre-picto">
-                                <div id="open_prologue" onclick="">
-                                    <img src="#CHEMIN{img/global/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-open-prologue.png}';" width="25" height="25" />
-                                </div>
-<!--
-                                <div id="close_prologue" onclick="toggleVisibility(this.id);toggleVisibility('open_prologue');toggleVisibility('texte_prologue');">
-                                    <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
-                                </div>
-                                -->
-                            </div>
-                            <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
-                                <!--
-                                        [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
-                                                histoires d'une même session, le prologue est simplement indiqué dans le
-                                                descriptif de la rubrique histoire (un simple id d'article).
-                                        ]
-                                    -->
-                                #SET{id_article_prologue, #DESCRIPTIF|textebrut}
-                            </BOUCLE_session_courante>
-                            <BOUCLE_prologue(ARTICLES){id_article=#GET{id_article_prologue}}>
-                            <div class="ecriture-chapitre-texte">
-                                <div class="ecriture-chapitre-surtitre">—</div>
-                                <div class="ecriture-chapitre-titre #EDIT{titre}">#TITRE</div>
-                            </div>
-                            <div class="ecriture-chapitre-auteur"></div>
-                            <div class="texte_courant #EDIT{texte}" id="texte_prologue">#TEXTE<br /></div>
-                            </BOUCLE_prologue>
+        <div id="liste-tooltip"></div>
+        <!-- ÉLÉMENTS GRAPHIQUES-->
+        <div id="book-top-left"><img src="#CHEMIN{img/global/border-book-top-left.png}" width="14" height="16" /></div>
+        <div id="book-top-right"><img src="#CHEMIN{img/global/border-book-top-right.png}" width="14" height="16" /></div>
+        <div id="book-bottom-left"><img src="#CHEMIN{img/global/border-book-bottom-left.png}" width="14" height="16" /></div>
+        <div id="book-bottom-right"><img src="#CHEMIN{img/global/border-book-bottom-right.png}" width="14" height="16" /></div>
+        <!--<div id="book-middle-top-ecriture"><img src="#CHEMIN{img/global/book-middle-top.png}" width="300" height="6" /></div>-->
+        <div id="book-middle-bottom-ecriture"><img src="#CHEMIN{img/global/book-middle-bottom.png}" width="300" height="5" /></div>
+        <div class="stitches-ecriture">
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+            <div class="stitches-inner"><img src="#CHEMIN{img/global/stitches.png}" width="5" height="86" /></div>
+        </div>
+        <!-- RETOUR INDEX -->
+        <div id="bouton-retour">
+            <a href="#URL_SITE_SPIP?var_mode=recalcul&session=11"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+        </div>
+        <!-- NAVIGATION ANCRE-->
+        <div id="ecriture-navigation">
+            <a href="#" id="nav-top"><img src="#CHEMIN{img/global/fleche-top.png}" width="9" height="12" /></a>
+            <a href="#" id="nav-script">script</a>
+            <a href="#" id="nav-forum">forum</a>
+            <a href="#" id="nav-ecrire">écrire</a>
+        </div>
+        <!-- BOOK -->
+        <div id="global-ecriture">
+            <div id="global-spacer"></div>
+            <div class="global-content" tabindex="5000">
+                <div class="content">
+                    <div class="content-left-small">
+                        <div id="titre_site">
+                            <a href="#URL_SITE_SPIP" title="Accueil"><strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
                         </div>
-                        <hr />
-                        <!-- FIN PROLOGUE -->
+                        <div id="ecriture-en-cours">
+                            <!-- [(#REM) TODO réimplémenter la liste en haut à gauche : ancien squelette rubrique-bouton et à quoi ça sert ?-->
+                        </div>
+                        <!-- LISTE CADAVRE SMALL-->
+                        <div id="ecriture-liste">
+                            <!-- [(#REM) TODO réimplémenter la liste en haut à gauche : ancien squelette liste-cadavres-auteur-small -->
+                        </div>
+                    </div>
 
-                        <!-- Chapitres publiés -->
-                        <BOUCLE_chapitres_publies(ARTICLES){id_rubrique}{par date}>
-                            <INCLURE{fond=inclure/chapitre-visible}{id_chapitre=#ID_ARTICLE} />
-                        </BOUCLE_chapitres_publies>
-                        <!-- Chapitres non publiés -->
-                        <BOUCLE_chapitres_non_publies(ARTICLES){id_rubrique}{statut=prepa}{par date}>
-                            <INCLURE{fond=inclure/chapitre-ecriture}{id_chapitre=#ID_ARTICLE}>
-                        </BOUCLE_chapitres_non_publies>
+                    <div class="content-right-large">
+                        <div id="ecriture">
+                            <!-- PROLOGUE -->
+                            <div class="ecriture-chapitre">
+                                <div class="ecriture-chapitre-picto">
+                                    <div id="open_prologue" onclick="">
+                                        <img src="#CHEMIN{img/global/bt-open-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-open-prologue-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-open-prologue.png}';" width="25" height="25" />
+                                    </div>
+    <!--
+                                    <div id="close_prologue" onclick="toggleVisibility(this.id);toggleVisibility('open_prologue');toggleVisibility('texte_prologue');">
+                                        <img src="#CHEMIN{img/global/bt-close-prologue.png}" onmouseover="this.src='#CHEMIN{img/global/bt-close-prologue_hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-close-prologue.png}';" width="25" height="25" />
+                                    </div>
+                                    -->
+                                </div>
+                                <BOUCLE_session_courante(RUBRIQUES){id_rubrique}>
+                                    <!--
+                                            [(#REM) Dorénavant, et afin de permettre d'assigner des prologues différents aux
+                                                    histoires d'une même session, le prologue est simplement indiqué dans le
+                                                    descriptif de la rubrique histoire (un simple id d'article).
+                                            ]
+                                        -->
+                                    #SET{id_article_prologue, #DESCRIPTIF|textebrut}
+                                </BOUCLE_session_courante>
+                                <BOUCLE_prologue(ARTICLES){id_article=#GET{id_article_prologue}}>
+                                <div class="ecriture-chapitre-texte">
+                                    <div class="ecriture-chapitre-surtitre">—</div>
+                                    <div class="ecriture-chapitre-titre #EDIT{titre}">#TITRE</div>
+                                </div>
+                                <div class="ecriture-chapitre-auteur"></div>
+                                <div class="texte_courant #EDIT{texte}" id="texte_prologue">#TEXTE<br /></div>
+                                </BOUCLE_prologue>
+                            </div>
+                            <hr />
+                            <!-- FIN PROLOGUE -->
+
+                            <!-- Chapitres publiés -->
+                            <BOUCLE_chapitres_publies(ARTICLES){id_rubrique}{par date}>
+                                <INCLURE{fond=inclure/chapitre-visible}{id_chapitre=#ID_ARTICLE} />
+                            </BOUCLE_chapitres_publies>
+                            <!-- Chapitres non publiés -->
+                            <BOUCLE_chapitres_non_publies(ARTICLES){id_rubrique}{statut=prepa}{par date}>
+                                <INCLURE{fond=inclure/chapitre-ecriture}{id_chapitre=#ID_ARTICLE}>
+                            </BOUCLE_chapitres_non_publies>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
     <INCLURE{fond=inclure/piedDePage} /> <!--[(#REM) Contient la ribambelle d'infos à placer dans le pied de page. ]-->
     </body>
 </html>

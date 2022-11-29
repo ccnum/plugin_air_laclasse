@@ -3,8 +3,6 @@
     <!-- [(#REM) Ce nombre de caractères existe-t-il ? Si oui, mémorisons-le, sinon ce sera 100 par défaut. ]-->
     #SET{nombre_de_caracteres_a_afficher, 100}
     [(#DESCRIPTIF|textebrut|!={''}) #SET{nombre_de_caracteres_a_afficher, #DESCRIPTIF|textebrut} ]
-
-    nb de caractères à afficher : #GET{nombre_de_caracteres_a_afficher}
 <div class="ecriture-chapitre">
     <div class="ecriture-chapitre-picto">
         <img src="#CHEMIN{img/global/picto-oeil.png}" width="50" height="50" />
@@ -25,7 +23,7 @@
 <!-- TEXTE  -->
 <div class="texte_courant">
     <span class="texte-masque"></span> <!-- todo : partie du texte masqué ici -->
-    <span class="#EDIT{texte}">[(#TEXTE|masquerTexte{50})]</span>
+    <span class="#EDIT{texte}">[(#TEXTE|masquerTexte{#GET{nombre_de_caracteres_a_afficher}})]</span>
 </div>
 </BOUCLE_article>
 

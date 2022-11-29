@@ -68,17 +68,33 @@ function masquerTexte(string $texteAMasquer='', int $derniersCaracteresAAfficher
     }
     $partieAMasquer = substr($texteAMasquer, 0, strlen($texteAMasquer)-$derniersCaracteresAAfficher);
     $partieAAfficher = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
-    return $partieAMasquer.$partieAAfficher;
+    return remplacerCaracteres($partieAMasquer, 'X').$partieAAfficher;
 }
 
 /**
+ * On souhaite remplacer tous les caractères alphanumériques d'une chaîne (donc pas les signes de ponctuation ni les
+ * espaces).
  * @param string $texteARemplacer
  * @param string $signeDeRemplacement
  * @return string
  */
 function remplacerCaracteres(string $texteARemplacer='', string $signeDeRemplacement='X'): string
 {
-    return $texteARemplacer;
+    $caracteresARemplacer=array(
+        'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z',
+        'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z',
+        // N'oublions pas les diacritiques !
+        'à','â','ä','À','Â','Ä',
+        'ç','Ç',
+        'é','è','ê','ë','É','È','Ê','Ë',
+        'î','ï','Î','Ï',
+        'ô','ö','Ô','Ö',
+        'ù','û','ü','Ù','Û','Ü',
+        'ŷ','ÿ','Ŷ','Ÿ',
+        // Ainsi que certains caractères spéciaux.
+        '@','-','_','(',')','&','€','%','*'
+    );
+    return str_replace($caracteresARemplacer,$signeDeRemplacement,$texteARemplacer);
 }
 
 

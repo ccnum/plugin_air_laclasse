@@ -66,8 +66,8 @@ function masquerTexte(string $texteAMasquer='', int $derniersCaracteresAAfficher
     if( $derniersCaracteresAAfficher>=strlen($texteAMasquer) || $derniersCaracteresAAfficher<=0 ){
         return remplacerCaracteres($texteAMasquer, 'X');
     }
-    $partieAMasquer = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
-    $partieAAfficher = 'titi';
+    $partieAMasquer = substr($texteAMasquer, strlen($texteAMasquer)-$derniersCaracteresAAfficher);
+    $partieAAfficher = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
     return $partieAMasquer.$partieAAfficher;
 }
 

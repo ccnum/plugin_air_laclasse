@@ -48,6 +48,11 @@ function enleverParenthesesTexte(string $texte=''): string
     return $texte;
 }
 
+function masquerTexte($texteAMasquer='', $derniersCaracteresAAfficher=200): string
+{
+    return 'toto';
+}
+
 
 /*                                      FONCTIONS USUELLES                                                            */
 

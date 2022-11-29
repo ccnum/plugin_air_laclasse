@@ -1,5 +1,11 @@
 <BOUCLE_article(ARTICLES){id_article=#ENV{id_chapitre}}>
+    <!-- [(#REM) Le nombre de caractères à ne pas masquer est stocké dans la description de l'article. ]-->
+    <!-- [(#REM) Ce nombre de caractères existe-t-il ? Si oui, mémorisons-le, sinon ce sera 100 par défaut. ]-->
     #SET{nombre_de_caracteres_a_afficher, 100}
+    [(#DESCRIPTIF)
+        Il y a un descriptif !
+    ]
+
 <div class="ecriture-chapitre">
     <div class="ecriture-chapitre-picto">
         <img src="#CHEMIN{img/global/picto-oeil.png}" width="50" height="50" />

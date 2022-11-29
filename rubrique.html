@@ -103,7 +103,7 @@
                                 <INCLURE{fond=inclure/chapitre-visible}{id_chapitre=#ID_ARTICLE} />
                             </BOUCLE_chapitres_publies>
                             <!-- Chapitres non publiés -->
-                            <BOUCLE_chapitres_non_publies(ARTICLES){id_rubrique}{statut=prepa}{par date}>
+                            <BOUCLE_chapitres_non_publies(ARTICLES){id_rubrique}{statut=prepa}{par titre}>
                                 <INCLURE{fond=inclure/chapitre-ecriture}{id_chapitre=#ID_ARTICLE}>
                             </BOUCLE_chapitres_non_publies>
                         </div>

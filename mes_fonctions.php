@@ -48,9 +48,37 @@ function enleverParenthesesTexte(string $texte=''): string
     return $texte;
 }
 
-function masquerTexte($texteAMasquer='', $derniersCaracteresAAfficher=200): string
+/**
+ * Renvoie le texte reçu en paramètre, mais remplace tous les caractères par des X sauf une certaine quantité de
+ * caractères finaux (dont la quantité est donnée en second paramètre).
+ *
+ * -> Le nombre de caractères à masquer est supérieur ou égal au nombre de caractères de la chaîne -> on transforme tout.
+ * -> Le nombre de caractères à masquer est inférieur ou égal à 0 -> on transforme tout
+ * -> Dans le reste des cas, on coupe le texte en deux en fonction du nb de caractères voulus. On transforme la première
+ *    partie, puis on concatène les deux parties que l'on renverra.
+ *
+ * @param string $texteAMasquer
+ * @param int $derniersCaracteresAAfficher
+ * @return string
+ */
+function masquerTexte(string $texteAMasquer='', int $derniersCaracteresAAfficher=200): string
 {
-    return 'toto'. $derniersCaracteresAAfficher;
+    if( $derniersCaracteresAAfficher>=strlen($texteAMasquer) || $derniersCaracteresAAfficher<=0 ){
+        return remplacerCaracteres($texteAMasquer, 'X');
+    }
+    $partieAMasquer = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
+    $partieAAfficher = 'titi';
+    return $partieAMasquer.$partieAAfficher;
+}
+
+/**
+ * @param string $texteARemplacer
+ * @param string $signeDeRemplacement
+ * @return string
+ */
+function remplacerCaracteres(string $texteARemplacer='', string $signeDeRemplacement='X'): string
+{
+    return $texteARemplacer;
 }
 
 

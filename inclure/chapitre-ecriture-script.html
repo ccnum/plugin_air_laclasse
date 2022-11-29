@@ -8,7 +8,6 @@
 </div>
 
 <BOUCLE_article_verrouille_script(ARTICLES){tout}{id_article=#ENV{id_chapitre}}>
-test
 <div class="script-ecrivain script-ecrivain-edit">
     <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
     <div class="script-texte #EDIT{descriptif}">#DESCRIPTIF</div>
@@ -19,7 +18,7 @@ test
     </div>
     </BOUCLE_doc>
     <div style="clear: both; padding: 5px; class="ajax">
-    #FORMULAIRE_JOINDRE_DOCUMENT{new,#ID_ARTICLE,article}
+    <!-- Ici se trouvait une interface pour ajouter des documents : la balise SPIP FORMULAIRE_JOINDRE_DOCUMENT -->
     </div>
 </div>
 

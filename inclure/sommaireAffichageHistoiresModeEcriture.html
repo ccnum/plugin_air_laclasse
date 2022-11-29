@@ -30,19 +30,7 @@
             <div id="liste-tooltip-bulle">
             </div>
         </div>
-
-        <!-- [(#REM) Cette boucle affiche les carrés d'une couleur différente si on est connecté ou pas.
-                     Pourquoi ? Je l'ignore... ]
-        -->
-            <B_auteur_actif>
-                <BOUCLE_auteur_actif(AUTEURS){id_article = #ID_ARTICLE}{id_auteur=#SESSION{id_auteur}}{0,1}>
-            <a href="#_chapitres:URL_RUBRIQUE" class="liste-link-single auteur [(#_chapitres:COMPTEUR_BOUCLE|=={#_chapitres:TOTAL_BOUCLE}|?{'last',''})]"></a>
-            </BOUCLE_auteur_actif>
-            </B_auteur_actif>
-                <BOUCLE_auteur_actif1(AUTEURS){id_article = #ID_ARTICLE}{0,1}>
-                <a href="#_chapitres:URL_RUBRIQUE" class="liste-link-single [(#NOM|=={#GET{var_nom_auteur}}|?{'auteur','verrouille'})] [(#_chapitres:COMPTEUR_BOUCLE|=={#_chapitres:TOTAL_BOUCLE}|?{'last',''})]"></a>
-                </BOUCLE_auteur_actif1>
-            <//B_auteur_actif>
+        <a href="" class="liste-link-single auteur"></a>
     </div>
     <div class="liste-link-spacer-5"></div>
         </BOUCLE_chapitres>

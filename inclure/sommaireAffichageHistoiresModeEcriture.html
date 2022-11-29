@@ -9,6 +9,7 @@
 #SET{compteur_histoire,0}
 
 <BOUCLE_sessions(RUBRIQUES){id_rubrique==#ENV{id_session_a_afficher}}>
+    rubrique parente : #ID_RUBRIQUE
     <BOUCLE_histoires(RUBRIQUES){id_parent}{par titre}>
         #SET{compteur_histoire,#GET{compteur_histoire}|plus{1}} <!-- [(#REM) Le compteur commence à 1 et on incrémente.] -->
 <div class="liste-colonnes">

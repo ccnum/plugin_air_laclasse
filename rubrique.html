@@ -32,9 +32,9 @@
         </div>
         <!-- RETOUR INDEX -->
         <div id="bouton-retour">
-            <BOUCLE_rubrique_parente(RUBRIQUES){id_rubrique}>
-            <a href="#URL_SITE_SPIP?var_mode=recalcul&session=#ID_PARENT"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
-            </BOUCLE_rubrique_parente>
+            <BOUCLE_rubrique_parente_1(RUBRIQUES){id_rubrique}>
+            <a href="#URL_SITE_SPIP?session=#ID_PARENT"><img src="#CHEMIN{img/global/bt-retour.png}" onmouseover="this.src='#CHEMIN{img/global/bt-retour-hover.png}';" onmouseout="this.src='#CHEMIN{img/global/bt-retour.png}';" width="54" height="54" /></a>
+            </BOUCLE_rubrique_parente_1>
         </div>
         <!-- NAVIGATION ANCRE-->
         <div id="ecriture-navigation">
@@ -50,7 +50,12 @@
                 <div class="content">
                     <div class="content-left-small">
                         <div id="titre_site">
-                            <a href="#URL_SITE_SPIP" title="Accueil"><strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong></a><a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
+                            <BOUCLE_rubrique_parente_2(RUBRIQUES){id_rubrique}>
+                            <a href="#URL_SITE_SPIP?session=#ID_PARENT" title="Accueil">
+                                <strong>[(#URL_SITE_SPIP|extraireSousDomaine)]</strong>
+                            </a>
+                            <a href="https://www.laclasse.com" title="https://www.laclasse.com">.laclasse.com</a>
+                            </BOUCLE_rubrique_parente_2>
                         </div>
                         <div id="ecriture-en-cours">
                             <!-- [(#REM) TODO réimplémenter la liste en haut à gauche : ancien squelette rubrique-bouton et à quoi ça sert ?-->

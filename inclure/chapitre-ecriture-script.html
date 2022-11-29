@@ -1,16 +1,10 @@
-<!--
-RUBRIQUE.HTML > CHAPITRE-ECRITURE-SCRIPT.HTML
-(interface d'ecriture du script)
-
- -->
-
 <!-- AUTEUR DE L'ARTICLE -->
 <BOUCLE_auteur_script(AUTEURS){id_article}{0,1}>
 #SET{var_auteur_article, #NOM}
 </BOUCLE_auteur_script>
 
 <div class="script-forum-fleche">
-    <img src="#CHEMIN{img/ecriture/fleche_script_ecrivain.png}" width="44" height="17" />
+    <img src="#CHEMIN{img/global/fleche_script_ecrivain.png}" width="44" height="17" />
 </div>
 <BOUCLE_article_verrouille_script(ARTICLES){id_article}>
 <div class="script-ecrivain script-ecrivain-edit">

@@ -2,7 +2,9 @@
     <!-- [(#REM) Le nombre de caractères à ne pas masquer est stocké dans la description de l'article. ]-->
     <!-- [(#REM) Ce nombre de caractères existe-t-il ? Si oui, mémorisons-le, sinon ce sera 100 par défaut. ]-->
     #SET{nombre_de_caracteres_a_afficher, 100}
+    [(#DESCRIPTIF|textebrut|!={''}) #SET{nombre_de_caracteres_a_afficher, [(#DESCRIPTIF|textebrut)]} ]
 
+    nb de caractères à afficher : #GET{nombre_de_caracteres_a_afficher}
 <div class="ecriture-chapitre">
     <div class="ecriture-chapitre-picto">
         <img src="#CHEMIN{img/global/picto-oeil.png}" width="50" height="50" />

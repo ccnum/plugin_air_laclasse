@@ -22,8 +22,8 @@
 
 <!-- TEXTE  -->
 <div class="texte_courant">
-    <span class="texte-masque"></span>
-    <span class="#EDIT{texte}">[(#TEXTE|masquerTexteChapitre{#GET{nombre_de_caracteres_a_afficher}})]</span>
+    <span class="texte-masque">[(#TEXTE|masquerTexteChapitre{#GET{nombre_de_caracteres_a_afficher}})]</span>
+    <span class="#EDIT{texte}">[(#TEXTE|recupererDerniersCaracteres{#GET{nombre_de_caracteres_a_afficher}})]</span>
 </div>
 </BOUCLE_article>
 

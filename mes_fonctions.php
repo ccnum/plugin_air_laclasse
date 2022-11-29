@@ -67,8 +67,7 @@ function masquerTexteChapitre(string $texteAMasquer='', int $derniersCaracteresA
         return remplacerCaracteres($texteAMasquer, 'X');
     }
     $partieAMasquer = substr($texteAMasquer, 0, strlen($texteAMasquer)-$derniersCaracteresAAfficher);
-    $partieAAfficher = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
-    return remplacerCaracteres($partieAMasquer, 'X').$partieAAfficher;
+    return remplacerCaracteres($partieAMasquer, 'X');
 }
 
 /**
@@ -97,6 +96,17 @@ function remplacerCaracteres(string $texteARemplacer='', string $signeDeRemplace
         '@','-','_','(',')','&','€','%','*','#','"','\'','“','”'
     );
     return str_replace($caracteresARemplacer,$signeDeRemplacement,$texteARemplacer);
+}
+
+/**
+ * Renvoie les X derniers caractères d'une chaîne.
+ * @param $texteComplet
+ * @param $nombreDeSignesAGarder
+ * @return string
+ */
+function recupererDerniersCaracteres($texteComplet='', $nombreDeSignesAGarder=200): string
+{
+    return substr($texteComplet, -1*$nombreDeSignesAGarder);
 }
 
 

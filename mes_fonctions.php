@@ -61,7 +61,7 @@ function enleverParenthesesTexte(string $texte=''): string
  * @param int $derniersCaracteresAAfficher
  * @return string
  */
-function masquerTexte(string $texteAMasquer='', int $derniersCaracteresAAfficher=200): string
+function masquerTexteChapitre(string $texteAMasquer='', int $derniersCaracteresAAfficher=200): string
 {
     if( $derniersCaracteresAAfficher>=strlen($texteAMasquer) || $derniersCaracteresAAfficher<=0 ){
         return remplacerCaracteres($texteAMasquer, 'X');

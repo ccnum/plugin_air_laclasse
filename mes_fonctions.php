@@ -68,7 +68,7 @@ function masquerTexte(string $texteAMasquer='', int $derniersCaracteresAAfficher
     }
     $partieAMasquer = substr($texteAMasquer, strlen($texteAMasquer)-$derniersCaracteresAAfficher);
     $partieAAfficher = substr($texteAMasquer, -1*$derniersCaracteresAAfficher);
-    return $partieAMasquer.$partieAAfficher;
+    return $partieAMasquer;
 }
 
 /**

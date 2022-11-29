@@ -91,8 +91,10 @@ function remplacerCaracteres(string $texteARemplacer='', string $signeDeRemplace
         'ô','ö','Ô','Ö',
         'ù','û','ü','Ù','Û','Ü',
         'ŷ','ÿ','Ŷ','Ÿ',
+        // Les chiffres
+        '0','1','2','3','4','5','6','7','8','9',
         // Ainsi que certains caractères spéciaux.
-        '@','-','_','(',')','&','€','%','*'
+        '@','-','_','(',')','&','€','%','*','#'
     );
     return str_replace($caracteresARemplacer,$signeDeRemplacement,$texteARemplacer);
 }

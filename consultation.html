@@ -6,9 +6,11 @@
 
 <BOUCLE_histoire(RUBRIQUES){id_rubrique=#ENV{histoire}}>
     <BOUCLE_prologue(ARTICLES){id_article=#_histoire:DESCRIPTIF|textebrut}{tout}>
+    <span class="titre">#TITRE</span>
     <span class="prologue chapitre">#TEXTE</span>
     </BOUCLE_prologue>
     <BOUCLE_chapitres(ARTICLES){id_rubrique=#ENV{histoire}}>
+    <span class="titre">#TITRE</span>
     <span class="chapitre">#TEXTE</span>
     <span class="auteur-chapitre">#SOUSTITRE</span>
     </BOUCLE_chapitres>

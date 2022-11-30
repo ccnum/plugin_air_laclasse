@@ -58,11 +58,12 @@ function enleverParenthesesTexte(string $texte=''): string
  *    partie, puis on concatène les deux parties que l'on renverra.
  *
  * @param string $texteAMasquer
- * @param int $derniersCaracteresAAfficher
+ * @param string $derniersCaracteresAAfficher
  * @return string
  */
-function masquerTexteChapitre(string $texteAMasquer='', int $derniersCaracteresAAfficher=200): string
+function masquerTexteChapitre(string $texteAMasquer='', string $derniersCaracteresAAfficher=''): string
 {
+    $derniersCaracteresAAfficher = intval($derniersCaracteresAAfficher),
     if( $derniersCaracteresAAfficher>=strlen($texteAMasquer) || $derniersCaracteresAAfficher<=0 ){
         return remplacerCaracteres($texteAMasquer, 'X');
     }

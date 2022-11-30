@@ -5,8 +5,10 @@
 <!-- Quant au prologue, on retrouvera son id dans la description de la rubrique de cette histoire -->
 
 <BOUCLE_histoire(RUBRIQUES){id_rubrique=#ENV{histoire}}>
-    le prologue a cet id : #DESCRIPTIF
     <BOUCLE_prologue(ARTICLES){id_article=#_histoire:DESCRIPTIF|textebrut}{tout}>
-        #TEXTE
+    <span class="prologue chapitre">#TEXTE</span>
     </BOUCLE_prologue>
+    <BOUCLE_chapitres(ARTICLES){id_rubrique=#ENV{histoire}>
+        #ID_ARTICLE
+    </BOUCLE_chapitres>
 </BOUCLE_histoire>

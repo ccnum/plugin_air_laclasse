@@ -10,8 +10,10 @@
 <BOUCLE_article_verrouille_script(ARTICLES){tout}{id_article=#ENV{id_chapitre}}>
 <div class="script-ecrivain script-ecrivain-edit">
     <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
-    <div style="clear: both; padding: 5px; margin-top: 10px;" class="script-texte #EDIT{descriptif}">#DESCRIPTIF</div>
-    <div style="clear: both; padding: 5px; margin-top: 10px;" class="script-soustitre #EDIT{soustitre}">#SOUSTITRE</div>
+    <div style="clear: both; padding: 5px; margin-top: 10px;" class="script-texte #EDIT{descriptif}">
+        <p>Laissez des indices pour la personne suivante :</p>#DESCRIPTIF</div>
+    <div style="clear: both; padding: 5px; margin-top: 10px;" class="script-soustitre #EDIT{soustitre}">
+        <p>Votre pseudo :</p>#SOUSTITRE</div>
     <br /><hr />
     <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
     <div style="clear: both; padding: 5px; margin-top: 10px;">

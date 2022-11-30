@@ -1,12 +1,11 @@
 <div id="liste-fin">
     <BOUCLE_session(RUBRIQUES){id_rubrique=#ENV{id_session_a_afficher}}>
-    #ID_RUBRIQUE
         <BOUCLE_rubriques_toutes(RUBRIQUES){id_parent}>
     <div class="liste-fin-rubrique">
         <div class="liste-fin-book">
             <!-- COUVERTURE LIVRE -->
             <a href="#URL_SITE_SPIP/?page=lecture&id_rubrique=#ID_RUBRIQUE&compteur=1">
-                [(#LOGO_RUBRIQUE|image_reduire{175,0})]
+                #LOGO_RUBRIQUE
             </a>
         </div>
     </div>

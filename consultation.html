@@ -6,7 +6,7 @@
 
 <BOUCLE_histoire(RUBRIQUES){id_rubrique=#ENV{histoire}}>
     le prologue a cet id : #DESCRIPTIF
-    <BOUCLE_prologue(ARTICLES){id_article=#_histoire:DESCRIPTIF>
+    <BOUCLE_prologue(ARTICLES){id_article=#_histoire:DESCRIPTIF}{tout}>
         #TEXTE
     </BOUCLE_prologue>
 </BOUCLE_histoire>

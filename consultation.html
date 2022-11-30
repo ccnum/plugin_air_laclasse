@@ -1,2 +1,9 @@
-toto
-#ENV{histoire}
+<!-- [(#REM) Cette page doit être appelée avec un paramètre "histoire" dans l'url et qui représente l'id de la ] -->
+<!-- [(#REM) rubrique de cette histoire. EX : https://petitfablab.laclasse.com/spip.php?page=consultation&histoire=5] -->
+
+<!-- Le paramètre histoire représente l'id de la rubrique contenant les chapitres. -->
+<!-- Quant au prologue, on retrouvera son id dans la description de la rubrique de cette histoire -->
+
+<BOUCLE_histoire(RUBRIQUES){id_rubrique=#ENV{histoire}}>
+    le prologue a cet id : #DESCRIPTION
+</BOUCLE_histoire>

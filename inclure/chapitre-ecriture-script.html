@@ -11,14 +11,14 @@
 <div class="script-ecrivain script-ecrivain-edit">
     <div class="script-titre">SCRIPT | #GET{var_auteur_article}</div>
     <div class="script-texte #EDIT{descriptif}">#DESCRIPTIF</div>
-    <div class="script-texte #EDIT{soustitre}">#SOUSTITRE</div>
+    <div class="script-soustitre #EDIT{soustitre}">#SOUSTITRE</div>
     <br /><hr />
     <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
     <div style="clear: both; padding: 5px; margin-top: 10px;">
         <!-- Ici se trouvait une interface pour ajouter/supprimer des documents -->
     </div>
     </BOUCLE_doc>
-    <div style="clear: both; padding: 5px; class="ajax">
+    <div style="clear: both; padding: 5px;" class="ajax">
     <!-- Ici se trouvait une interface pour ajouter des documents : la balise SPIP FORMULAIRE_JOINDRE_DOCUMENT -->
     </div>
 </div>

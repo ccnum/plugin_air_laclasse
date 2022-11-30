@@ -101,13 +101,13 @@ function remplacerCaracteres(string $texteARemplacer='', string $signeDeRemplace
 
 /**
  * Renvoie les X derniers caractères d'une chaîne.
- * @param $texteComplet
- * @param $nombreDeSignesAGarder
+ * @param string $texteComplet
+ * @param string $nombreDeSignesAGarder
  * @return string
  */
-function recupererDerniersCaracteres($texteComplet='', $nombreDeSignesAGarder=200): string
+function recupererDerniersCaracteres(string $texteComplet='', string $nombreDeSignesAGarder=''): string
 {
-    return substr($texteComplet, -1*$nombreDeSignesAGarder);
+    return substr($texteComplet, -1*intval($nombreDeSignesAGarder));
 }
 
 

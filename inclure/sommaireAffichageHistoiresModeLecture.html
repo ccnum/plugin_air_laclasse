@@ -8,6 +8,7 @@
                 #SET{logo, #LOGO_ARTICLE_RUBRIQUE|extraire_attribut{src}}
 
                 [(#GET{logo}|=={""}|oui)pas de logo]
+                [(#GET{logo}|!={""}|oui) logo trouvé]
             </a>
         </div>
     </div>

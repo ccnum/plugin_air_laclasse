@@ -47,13 +47,20 @@ RUBRIQUE.HTML > CHAPITRE-VISIBLE.HTML
         #TEXTE
         <BOUCLE_doc(DOCUMENTS){id_article}{mode?}>
         <div style="clear: both; padding: 5px;">
-            <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{pdf|mp3}|?{class="mediabox boxIframe"})]>
+            <a href="#URL_DOCUMENT">[(#LOGO_DOCUMENT|left||image_reduire{80,60})]</a>
+            <!-- mediabox
+             .script-texte img,#documents_portfolio a[type='image/jpeg'],#documents_portfolio a[type='image/gif']
+             -->
+            <!--
+            <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"  [(#TYPE_DOCUMENT|match{mp3}|?{class="mediabox boxIframe"})]>
                 [(#LOGO_DOCUMENT|left||image_reduire{80,60})]
+                <img src="[(#LOGO_DOCUMENT|extraire_attribut{src})]" onclick="window.open([(#LOGO_DOCUMENT|extraire_attribut{src})], '_blank').focus();">
             </a>
+            -->
             <?php
                     //phpinfo();
                     include_spip('inc/securiser_action');
-                    include_spip('inc/autoriser');                                  
+                    include_spip('inc/autoriser');
                     if ((isset($GLOBALS['auteur_session']['nom']))&&(autoriser('modifier', 'article', #ID_ARTICLE)))
                         {   $action="documenter";
                             $redirect="#SELF";

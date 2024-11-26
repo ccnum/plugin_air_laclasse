@@ -1,3 +1,5 @@
+**N'EST PLUS MAINTENU, VERSION A JOUR ICI : https://github.com/ccnum/ccn**
+
 Un [wiki d'installation et d'utilisation](https://github.com/ccnum/plugin_air_laclasse/wiki) le plus complet possible
 est disponible. Pensez à le maintenir à jour !
 
